@@ -1,0 +1,54 @@
+import { expect, test } from "@playwright/test";
+
+test("page renders without overflow and navigation works", async ({ page }, testInfo) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("doesn't depend on you");
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+
+  if (testInfo.project.name === "desktop") {
+    await page.getByRole("link", { name: "How It Works", exact: true }).click();
+    await expect(page).toHaveURL(/#how-it-works$/);
+  } else {
+    await page.getByRole("button", { name: "Toggle navigation menu" }).click();
+    await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeVisible();
+    await page.getByRole("link", { name: "Pricing" }).click();
+    await expect(page).toHaveURL(/#pricing$/);
+  }
+
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({ path: `test-results/${testInfo.project.name}-page.png`, fullPage: true });
+});
+
+test("early access validates and stores a submission", async ({ page }) => {
+  await page.goto("/");
+  const ctas = page.getByRole("button", { name: "Get Early Access" });
+  await ctas.first().click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+
+  await dialog.getByRole("button", { name: "Request Early Access" }).click();
+  await expect(dialog.getByLabel("First name")).toBeFocused();
+  await dialog.getByLabel("First name").fill("Alex");
+  await dialog.getByLabel("Work email").fill("alex@example.com");
+  await dialog.getByLabel("Business name").fill("Northstar Services");
+  await dialog.getByLabel("Industry").selectOption({ label: "Home services" });
+  await dialog.getByLabel("Number of employees").selectOption({ label: "4–10" });
+  await dialog.getByLabel("Are you currently hiring?").selectOption({ label: "Within 3 months" });
+  await dialog.getByLabel("What is hardest for you to hand off?").fill("Quoting unusual jobs and handling exceptions.");
+  await dialog.getByRole("button", { name: "Request Early Access" }).click();
+  await expect(page.getByTestId("submission-success")).toContainText("You're on the list");
+  const stored = await page.evaluate(() => localStorage.getItem("handoff-early-access"));
+  expect(stored).toContain("Northstar Services");
+});
+
+test("FAQ accordion opens and closes", async ({ page }) => {
+  await page.goto("/");
+  const question = page.getByRole("button", { name: "Do I have to document everything myself?" });
+  await question.click();
+  await expect(question).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByText("The goal is the opposite.")).toBeVisible();
+  await question.click();
+  await expect(question).toHaveAttribute("aria-expanded", "false");
+});
