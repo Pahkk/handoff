@@ -23,8 +23,8 @@ function isSubmission(value: unknown): value is Submission {
 }
 
 export async function POST(request: Request) {
-  const url = process.env.SUPABASE_URL;
-  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
   if (!url || !publishableKey) {
     return NextResponse.json({ error: "Early access is not configured." }, { status: 503 });
