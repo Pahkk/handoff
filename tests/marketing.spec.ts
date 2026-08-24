@@ -63,6 +63,20 @@ test("Google sign in opens an accessible auth flow", async ({ page }, testInfo) 
   const dialog = page.getByRole("dialog", { name: "Sign in or create an account" });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole("button", { name: "Continue with Google" })).toBeEnabled();
+  await expect(dialog.getByRole("link", { name: "Terms" })).toHaveAttribute("href", "/terms");
+  await expect(dialog.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy");
   await dialog.getByRole("button", { name: "Close sign in" }).click();
   await expect(dialog).not.toBeVisible();
+});
+
+test("public legal pages are linked and accessible", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Privacy", exact: true }).click();
+  await expect(page).toHaveURL(/\/privacy$/);
+  await expect(page.getByRole("heading", { name: "Privacy Policy", level: 1 })).toBeVisible();
+  await expect(page.getByText(/does not request access to your Gmail/)).toBeVisible();
+
+  await page.getByRole("link", { name: "Terms", exact: true }).click();
+  await expect(page).toHaveURL(/\/terms$/);
+  await expect(page.getByRole("heading", { name: "Terms of Service", level: 1 })).toBeVisible();
 });

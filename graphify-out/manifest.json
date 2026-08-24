@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "components/navigation.tsx": {
-    "mtime": 1787610177.5081236,
-    "ast_hash": "3c7998dd09df9bfff7819a21676659a5",
+    "mtime": 1787613032.0069978,
+    "ast_hash": "661841eb6919cdcd27656e473eb0a5d6",
     "semantic_hash": ""
   },
   "components/product-sections.tsx": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "components/ui.tsx": {
-    "mtime": 1787610053.0010607,
-    "ast_hash": "3d6490d0c20d38a3c05325240ca1d26e",
+    "mtime": 1787613111.183157,
+    "ast_hash": "469bceb9c8b80c8572ac468bc3687916",
     "semantic_hash": ""
   },
   "eslint.config.mjs": {
@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "tests/marketing.spec.ts": {
-    "mtime": 1787610053.1626666,
-    "ast_hash": "322fca610ce8ac241a36819333e220e5",
+    "mtime": 1787613095.9603195,
+    "ast_hash": "1c552b2a5fb4a6e2132eda74b232a8df",
     "semantic_hash": ""
   },
   "test-results/desktop-page.png": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "components/auth.tsx": {
-    "mtime": 1787610053.08166,
-    "ast_hash": "b39781a4d2a4ca85a952cda108892466",
+    "mtime": 1787613032.0476437,
+    "ast_hash": "65e64580d14d23b889b055fc4a69c13c",
     "semantic_hash": ""
   },
   "lib/supabase/client.ts": {
@@ -132,6 +132,21 @@
   "lib/supabase/server.ts": {
     "mtime": 1787608646.4571793,
     "ast_hash": "17087a15c0333cc4ba6a55c37d6b10e6",
+    "semantic_hash": ""
+  },
+  "app/privacy/page.tsx": {
+    "mtime": 1787613081.6665082,
+    "ast_hash": "fd28cac77debc2ef41f28cf7581b2ba8",
+    "semantic_hash": ""
+  },
+  "app/terms/page.tsx": {
+    "mtime": 1787613081.7319696,
+    "ast_hash": "2dd203c31fe58658ba0b2859f6647b12",
+    "semantic_hash": ""
+  },
+  "components/legal-document.tsx": {
+    "mtime": 1787613031.9257166,
+    "ast_hash": "464526d3d685e48aaced7a63c20bbc28",
     "semantic_hash": ""
   }
 }

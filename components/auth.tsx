@@ -101,7 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             </button>
             {error ? <p role="alert" className="mt-4 rounded-lg bg-[#fff0f1] px-3 py-2 text-center text-xs font-medium text-[#a83f49]">{error}</p> : null}
             <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-[#7d8795]"><ShieldCheck size={13} />Secure authentication powered by Supabase</div>
-            <p className="mt-5 text-center text-[10px] leading-5 text-[#929ba8]">By continuing, you agree to Opryn&apos;s Terms and Privacy Policy.</p>
+            <p className="mt-5 text-center text-[10px] leading-5 text-[#929ba8]">By continuing, you agree to Opryn&apos;s <a href="/terms" className="underline decoration-[#c2c9d3] underline-offset-2 hover:text-[#596577]">Terms</a> and <a href="/privacy" className="underline decoration-[#c2c9d3] underline-offset-2 hover:text-[#596577]">Privacy Policy</a>.</p>
           </div>
         </div>
       ) : null}

@@ -31,5 +31,5 @@ export function Navbar() {
 }
 
 export function Footer() {
-  return <footer className="border-t border-[#1f2b3d] bg-[#0d1729] py-8 text-white"><div className="container-shell flex flex-col items-center justify-between gap-5 sm:flex-row"><Logo inverse /><p className="text-xs text-[#8e99aa]">© 2026 Opryn, Inc. Built for owners building real teams.</p><a className="text-xs text-[#aeb8c6] hover:text-white" href="#top">Back to top</a></div></footer>;
+  return <footer className="border-t border-[#1f2b3d] bg-[#0d1729] py-8 text-white"><div className="container-shell flex flex-col items-center justify-between gap-5 sm:flex-row"><Logo inverse /><p className="text-xs text-[#8e99aa]">© 2026 Opryn. Built for owners building real teams.</p><nav className="flex items-center gap-5" aria-label="Footer navigation"><a className="text-xs text-[#aeb8c6] hover:text-white" href="/privacy">Privacy</a><a className="text-xs text-[#aeb8c6] hover:text-white" href="/terms">Terms</a><a className="text-xs text-[#aeb8c6] hover:text-white" href="#top">Back to top</a></nav></div></footer>;
 }
