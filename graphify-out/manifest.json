@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "components/early-access.tsx": {
-    "mtime": 1787606748.0511937,
-    "ast_hash": "25c90eb13ea986acac73cac2ae91678a",
+    "mtime": 1787608394.8847654,
+    "ast_hash": "962e0791fb7647a9ed9140cd0360ddda",
     "semantic_hash": ""
   },
   "components/hero.tsx": {
@@ -97,6 +97,21 @@
   "test-results/mobile-page.png": {
     "mtime": 1787607187.6189373,
     "ast_hash": "29d43e5f64373d48bd4fd856ca3d52eb",
+    "semantic_hash": ""
+  },
+  "app/api/early-access/route.ts": {
+    "mtime": 1787608394.8448095,
+    "ast_hash": "b446159ddb2590903a317a68819eb04e",
+    "semantic_hash": ""
+  },
+  "supabase/.temp/linked-project.json": {
+    "mtime": 1787608314.0934994,
+    "ast_hash": "4b0bbef7a5113f88d0db5e61a85138e7",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260824203000_create_early_access_submissions.sql": {
+    "mtime": 1787608394.7775614,
+    "ast_hash": "2424ef055d8b4220adc6c77834ab468f",
     "semantic_hash": ""
   }
 }

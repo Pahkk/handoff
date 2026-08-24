@@ -14,7 +14,18 @@ export function useEarlyAccess() {
 
 type Submission = Record<string, FormDataEntryValue> & { submittedAt: string };
 
-function saveSubmission(submission: Submission) {
+async function saveSubmission(submission: Submission) {
+  const response = await fetch("/api/early-access", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(submission),
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { error?: string } | null;
+    throw new Error(body?.error ?? "We couldn't save your request. Please try again.");
+  }
+
   const key = "handoff-early-access";
   const current = JSON.parse(localStorage.getItem(key) ?? "[]") as Submission[];
   localStorage.setItem(key, JSON.stringify([...current, submission]));
@@ -23,6 +34,8 @@ function saveSubmission(submission: Submission) {
 export function EarlyAccessProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -31,13 +44,21 @@ export function EarlyAccessProvider({ children }: { children: ReactNode }) {
     return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", close); };
   }, [open]);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
     const values = Object.fromEntries(new FormData(form).entries());
-    saveSubmission({ ...values, submittedAt: new Date().toISOString() });
-    setSubmitted(true);
+    setSubmitting(true);
+    setError("");
+    try {
+      await saveSubmission({ ...values, submittedAt: new Date().toISOString() });
+      setSubmitted(true);
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : "We couldn't save your request. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const close = () => { setOpen(false); window.setTimeout(() => setSubmitted(false), 250); };
@@ -72,7 +93,8 @@ export function EarlyAccessProvider({ children }: { children: ReactNode }) {
                 <label className="text-sm font-medium text-[#313c4d]">Are you currently hiring?<select name="hiring" required defaultValue="" className="mt-2 w-full rounded-[10px] border border-[#d8dee7] bg-white px-3 py-3 text-sm outline-none focus:border-[#3158d8] focus:ring-2 focus:ring-[#dfe6ff]"><option value="" disabled>Select one</option><option>Yes</option><option>Within 3 months</option><option>Within 6 months</option><option>Not currently</option></select></label>
                 <label className="text-sm font-medium text-[#313c4d] sm:col-span-2">What is hardest for you to hand off?<textarea name="hardestToHandOff" required rows={3} placeholder="The tasks, decisions, or questions that keep coming back to you..." className="mt-2 w-full resize-none rounded-[10px] border border-[#d8dee7] px-3 py-3 text-sm outline-none placeholder:text-[#9aa3b0] focus:border-[#3158d8] focus:ring-2 focus:ring-[#dfe6ff]" /></label>
                 <Field label="Phone number (optional)" name="phone" type="tel" autoComplete="tel" className="sm:col-span-2" />
-                <button className="button button-primary mt-2 sm:col-span-2" type="submit">Request Early Access</button>
+                {error && <p role="alert" className="rounded-lg bg-[#fff0f1] px-3 py-2 text-center text-xs font-medium text-[#a83f49] sm:col-span-2">{error}</p>}
+                <button className="button button-primary mt-2 sm:col-span-2 disabled:cursor-wait disabled:opacity-70" type="submit" disabled={submitting}>{submitting ? "Requesting Access…" : "Request Early Access"}</button>
                 <p className="text-center text-xs text-[#7b8492] sm:col-span-2">No credit card required. We&apos;ll only contact you about Handoff.</p>
               </form>
             )}

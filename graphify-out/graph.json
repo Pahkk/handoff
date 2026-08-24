@@ -4,6 +4,56 @@
   "graph": {},
   "nodes": [
     {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "early_access_route",
+      "community": 14,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "requiredFields",
+      "file_type": "code",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "early_access_route_requiredfields",
+      "community": 14,
+      "norm_label": "requiredfields"
+    },
+    {
+      "label": "Submission",
+      "file_type": "code",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "early_access_route_submission",
+      "community": 14,
+      "norm_label": "submission"
+    },
+    {
+      "label": "isSubmission()",
+      "file_type": "code",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "early_access_route_issubmission",
+      "community": 14,
+      "norm_label": "issubmission()"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "early_access_route_post",
+      "community": 14,
+      "norm_label": "post()"
+    },
+    {
       "label": "layout.tsx",
       "file_type": "code",
       "source_file": "app/layout.tsx",
@@ -80,7 +130,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_closing_sections",
-      "community": 0,
+      "community": 5,
       "norm_label": "closing-sections.tsx"
     },
     {
@@ -90,7 +140,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_closing_sections_audiences",
-      "community": 0,
+      "community": 5,
       "norm_label": "audiences"
     },
     {
@@ -100,7 +150,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_closing_sections_audience",
-      "community": 0,
+      "community": 5,
       "norm_label": "audience()"
     },
     {
@@ -110,7 +160,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_closing_sections_before",
-      "community": 0,
+      "community": 5,
       "norm_label": "before"
     },
     {
@@ -120,7 +170,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_closing_sections_after",
-      "community": 0,
+      "community": 5,
       "norm_label": "after"
     },
     {
@@ -130,7 +180,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "components_closing_sections_comparison",
-      "community": 0,
+      "community": 5,
       "norm_label": "comparison()"
     },
     {
@@ -140,7 +190,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "components_closing_sections_plans",
-      "community": 0,
+      "community": 5,
       "norm_label": "plans"
     },
     {
@@ -160,7 +210,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "components_closing_sections_faqs",
-      "community": 0,
+      "community": 5,
       "norm_label": "faqs"
     },
     {
@@ -170,7 +220,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "components_closing_sections_faq",
-      "community": 0,
+      "community": 5,
       "norm_label": "faq()"
     },
     {
@@ -247,7 +297,7 @@
       "label": "EarlyAccessProvider()",
       "file_type": "code",
       "source_file": "components/early-access.tsx",
-      "source_location": "L23",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "components_early_access_earlyaccessprovider",
       "community": 6,
@@ -257,7 +307,7 @@
       "label": "Field()",
       "file_type": "code",
       "source_file": "components/early-access.tsx",
-      "source_location": "L86",
+      "source_location": "L108",
       "_origin": "ast",
       "id": "components_early_access_field",
       "community": 6,
@@ -400,7 +450,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_story_sections",
-      "community": 5,
+      "community": 0,
       "norm_label": "story-sections.tsx"
     },
     {
@@ -410,7 +460,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "components_story_sections_interruptions",
-      "community": 5,
+      "community": 0,
       "norm_label": "interruptions"
     },
     {
@@ -420,7 +470,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_story_sections_painsection",
-      "community": 5,
+      "community": 0,
       "norm_label": "painsection()"
     },
     {
@@ -430,7 +480,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "components_story_sections_process",
-      "community": 5,
+      "community": 0,
       "norm_label": "process"
     },
     {
@@ -440,7 +490,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "components_story_sections_howitworks",
-      "community": 5,
+      "community": 0,
       "norm_label": "howitworks()"
     },
     {
@@ -450,7 +500,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "components_story_sections_step",
-      "community": 5,
+      "community": 0,
       "norm_label": "step()"
     },
     {
@@ -460,7 +510,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "components_story_sections_learningloop",
-      "community": 5,
+      "community": 0,
       "norm_label": "learningloop()"
     },
     {
@@ -480,7 +530,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "components_ui_logo",
-      "community": 3,
+      "community": 0,
       "norm_label": "logo()"
     },
     {
@@ -500,7 +550,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "components_ui_sectionintro",
-      "community": 5,
+      "community": 3,
       "norm_label": "sectionintro()"
     },
     {
@@ -510,7 +560,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "components_ui_checkitem",
-      "community": 0,
+      "community": 5,
       "norm_label": "checkitem()"
     },
     {
@@ -1085,6 +1135,57 @@
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "early_access_route",
+      "target": "early_access_route_issubmission",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "early_access_route",
+      "target": "early_access_route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "early_access_route",
+      "target": "early_access_route_requiredfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "early_access_route",
+      "target": "early_access_route_submission",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/early-access/route.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "early_access_route_post",
+      "target": "early_access_route_issubmission",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -2179,9 +2280,9 @@
       "source_file": "package.json",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_test_e2e",
-      "confidence_score": 1.0
+      "target": "package_scripts_test_e2e"
     },
     {
       "relation": "contains",
@@ -2259,9 +2360,9 @@
       "source_file": "package.json",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_playwright_test",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_playwright_test"
     },
     {
       "relation": "contains",
@@ -2524,5 +2625,6 @@
       "target": "tsconfig_paths"
     }
   ],
-  "hyperedges": []
+  "hyperedges": [],
+  "built_at_commit": "516cb29ad5617dda06ada0115a1870ae6bb3f04f"
 }
