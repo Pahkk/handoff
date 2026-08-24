@@ -6,7 +6,7 @@ const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://handoff-mu-five.vercel.app"),
+  metadataBase: new URL("https://opryn.app"),
   title: "Opryn — Build a Business That Doesn't Depend on You",
   description:
     "Opryn learns how you run your business, trains the people you hire, and answers the questions that used to interrupt you.",
