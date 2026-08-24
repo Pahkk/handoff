@@ -3,17 +3,17 @@ import type { ReactNode } from "react";
 
 export function Logo({ inverse = false }: { inverse?: boolean }) {
   return (
-    <a href="#top" className={`inline-flex items-center gap-2.5 font-semibold tracking-[-.03em] ${inverse ? "text-white" : "text-[#111b2e]"}`} aria-label="Handoff home">
+    <a href="#top" className={`inline-flex items-center gap-2.5 font-semibold tracking-[-.03em] ${inverse ? "text-white" : "text-[#111b2e]"}`} aria-label="Opryn home">
       <span className="relative grid size-8 place-items-center rounded-[10px] bg-[#3158d8] shadow-[0_5px_13px_rgba(49,88,216,.25)]">
         <span className="absolute h-3.5 w-[7px] -translate-x-[3px] rounded-full border-2 border-white" />
         <span className="absolute h-3.5 w-[7px] translate-x-[3px] rounded-full border-2 border-white" />
       </span>
-      <span className="text-[19px]">Handoff</span>
+      <span className="text-[19px]">Opryn</span>
     </a>
   );
 }
 
-export function AppWindow({ children, label = "Handoff" }: { children: ReactNode; label?: string }) {
+export function AppWindow({ children, label = "Opryn" }: { children: ReactNode; label?: string }) {
   return (
     <div className="app-window">
       <div className="window-bar">

@@ -89,19 +89,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           <div className="w-full max-w-[440px] rounded-[22px] border border-white/20 bg-white p-6 shadow-[0_35px_90px_rgba(8,15,30,.3)] sm:p-8">
             <div className="flex items-start justify-between gap-5">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[.13em] text-[#3158d8]">Welcome to Handoff</p>
+                <p className="text-xs font-bold uppercase tracking-[.13em] text-[#3158d8]">Welcome to Opryn</p>
                 <h2 id="auth-title" className="mt-2 text-[28px] font-semibold tracking-[-.04em]">Sign in or create an account</h2>
               </div>
               <button type="button" className="grid size-9 shrink-0 place-items-center rounded-full text-[#667184] hover:bg-[#f2f4f7]" onClick={() => setOpen(false)} aria-label="Close sign in"><X size={19} /></button>
             </div>
-            <p className="mt-4 text-sm leading-6 text-[#687487]">Use your Google account to save your progress and access Handoff securely.</p>
+            <p className="mt-4 text-sm leading-6 text-[#687487]">Use your Google account to save your progress and access Opryn securely.</p>
             <button type="button" onClick={continueWithGoogle} disabled={authenticating} className="mt-7 flex min-h-12 w-full items-center justify-center gap-3 rounded-xl border border-[#d7dde6] bg-white px-4 text-sm font-semibold text-[#263246] shadow-sm transition hover:border-[#b9c3d1] hover:bg-[#f9fafc] disabled:cursor-wait disabled:opacity-65">
               <GoogleMark />
               {authenticating ? "Connecting to Google…" : "Continue with Google"}
             </button>
             {error ? <p role="alert" className="mt-4 rounded-lg bg-[#fff0f1] px-3 py-2 text-center text-xs font-medium text-[#a83f49]">{error}</p> : null}
             <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-[#7d8795]"><ShieldCheck size={13} />Secure authentication powered by Supabase</div>
-            <p className="mt-5 text-center text-[10px] leading-5 text-[#929ba8]">By continuing, you agree to Handoff&apos;s Terms and Privacy Policy.</p>
+            <p className="mt-5 text-center text-[10px] leading-5 text-[#929ba8]">By continuing, you agree to Opryn&apos;s Terms and Privacy Policy.</p>
           </div>
         </div>
       ) : null}

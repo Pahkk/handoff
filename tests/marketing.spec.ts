@@ -39,7 +39,7 @@ test("early access validates and stores a submission", async ({ page }) => {
   await dialog.getByLabel("What is hardest for you to hand off?").fill("Quoting unusual jobs and handling exceptions.");
   await dialog.getByRole("button", { name: "Request Early Access" }).click();
   await expect(page.getByTestId("submission-success")).toContainText("You're on the list");
-  const stored = await page.evaluate(() => localStorage.getItem("handoff-early-access"));
+  const stored = await page.evaluate(() => localStorage.getItem("opryn-early-access"));
   expect(stored).toContain("Northstar Services");
 });
 

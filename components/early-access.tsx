@@ -26,7 +26,7 @@ async function saveSubmission(submission: Submission) {
     throw new Error(body?.error ?? "We couldn't save your request. Please try again.");
   }
 
-  const key = "handoff-early-access";
+  const key = "opryn-early-access";
   const current = JSON.parse(localStorage.getItem(key) ?? "[]") as Submission[];
   localStorage.setItem(key, JSON.stringify([...current, submission]));
 }
@@ -95,7 +95,7 @@ export function EarlyAccessProvider({ children }: { children: ReactNode }) {
                 <Field label="Phone number (optional)" name="phone" type="tel" autoComplete="tel" className="sm:col-span-2" />
                 {error && <p role="alert" className="rounded-lg bg-[#fff0f1] px-3 py-2 text-center text-xs font-medium text-[#a83f49] sm:col-span-2">{error}</p>}
                 <button className="button button-primary mt-2 sm:col-span-2 disabled:cursor-wait disabled:opacity-70" type="submit" disabled={submitting}>{submitting ? "Requesting Access…" : "Request Early Access"}</button>
-                <p className="text-center text-xs text-[#7b8492] sm:col-span-2">No credit card required. We&apos;ll only contact you about Handoff.</p>
+                <p className="text-center text-xs text-[#7b8492] sm:col-span-2">No credit card required. We&apos;ll only contact you about Opryn.</p>
               </form>
             )}
           </div>

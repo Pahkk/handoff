@@ -18,7 +18,7 @@ export function Hero() {
         <div>
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#d9e0ec] bg-white/80 px-3 py-1.5 text-xs font-semibold text-[#536075] shadow-sm backdrop-blur"><span className="size-1.5 rounded-full bg-[#3158d8]" />Your business shouldn&apos;t stop when you do.</div>
           <h1 className="display-title balance">Build a business that doesn&apos;t depend on you.</h1>
-          <p className="lead mt-7 max-w-[610px]">Handoff learns how you run your business, turns what you know into repeatable systems, and helps the people you hire work without constantly asking you what to do.</p>
+          <p className="lead mt-7 max-w-[610px]">Opryn learns how you run your business, turns what you know into repeatable systems, and helps the people you hire work without constantly asking you what to do.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row"><button type="button" className="button button-primary min-w-[154px]" onClick={openEarlyAccess}>Get Early Access <ArrowRight size={15} /></button><a className="button button-secondary min-w-[160px]" href="#how-it-works">See How It Works <ArrowDown size={15} /></a></div>
           <p className="mt-6 flex max-w-[500px] items-center gap-2 text-xs leading-5 text-[#788393]"><span className="size-1.5 shrink-0 rounded-full bg-[#42a583]" />Built for owners going from doing everything themselves to building a real team.</p>
         </div>
@@ -27,13 +27,13 @@ export function Hero() {
           <AppWindow label="Business health / Owner independence">
             <div className="grid min-h-[470px] md:grid-cols-[146px_1fr]">
               <aside className="hidden border-r border-[#e4e8ee] bg-[#fafbfc] p-4 md:block">
-                <div className="mb-5 flex items-center gap-2 text-[10px] font-bold text-[#26344c]"><span className="grid size-5 place-items-center rounded-md bg-[#3158d8] text-[8px] text-white">H</span> Handoff</div>
+                <div className="mb-5 flex items-center gap-2 text-[10px] font-bold text-[#26344c]"><span className="grid size-5 place-items-center rounded-md bg-[#3158d8] text-[8px] text-white">O</span> Opryn</div>
                 {['Overview','Knowledge','Processes','Roles','Questions'].map((item, i) => <div key={item} className={`mb-1 rounded-md px-2 py-2 text-[9px] ${i === 0 ? 'bg-[#edf2ff] font-semibold text-[#3158d8]' : 'text-[#7a8493]'}`}>{item}</div>)}
               </aside>
               <div className="p-5 sm:p-6">
                 <div className="mb-5 flex items-start justify-between"><div><p className="app-kicker">Owner independence</p><div className="mt-1 flex items-end gap-2"><span className="metric text-[42px] font-semibold leading-none">68</span><span className="mb-1 text-sm text-[#9aa3af]">/ 100</span></div></div><span className="tag"><TrendingUp size={11} /> +6 this month</span></div>
                 <div className="space-y-4">{areas.map(([name, value, tone]) => <div key={name}><div className="mb-1.5 flex justify-between text-[11px]"><span className="font-medium text-[#364153]">{name}</span><span className="font-semibold text-[#687385]">{value}% delegated</span></div><Progress value={value} tone={tone} /></div>)}</div>
-                <div className="mt-6 border-t border-[#e5e9ef] pt-5"><Insight><div><strong className="block text-[#26395d]">You answered 37 employee questions this month.</strong>Handoff could have answered 26.</div></Insight><div className="mt-3"><ProductButton>Fix knowledge gaps</ProductButton></div></div>
+                <div className="mt-6 border-t border-[#e5e9ef] pt-5"><Insight><div><strong className="block text-[#26395d]">You answered 37 employee questions this month.</strong>Opryn could have answered 26.</div></Insight><div className="mt-3"><ProductButton>Fix knowledge gaps</ProductButton></div></div>
               </div>
             </div>
           </AppWindow>
