@@ -3,6 +3,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useEarlyAccess } from "./early-access";
+import { AccountControls } from "./auth";
 import { Logo } from "./ui";
 
 const links = [
@@ -21,10 +22,10 @@ export function Navbar() {
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
           {links.map(([label, href]) => <a key={href} href={href} className="text-[13px] font-medium text-[#576274] transition-colors hover:text-[#111b2e]">{label}</a>)}
         </nav>
-        <div className="hidden items-center gap-2 lg:flex"><button className="button button-ghost" type="button">Sign In</button><button className="button button-primary" type="button" onClick={openEarlyAccess}>Get Early Access</button></div>
+        <div className="hidden items-center gap-2 lg:flex"><AccountControls /><button className="button button-primary" type="button" onClick={openEarlyAccess}>Get Early Access</button></div>
         <button type="button" className="grid size-10 place-items-center rounded-xl border border-[#dce2e9] bg-white lg:hidden" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="Toggle navigation menu">{menu ? <X size={19} /> : <Menu size={19} />}</button>
       </div>
-      {menu && <nav className="border-t border-[#e4e8ee] bg-white px-5 py-4 shadow-lg lg:hidden" aria-label="Mobile navigation"><div className="mx-auto flex max-w-[640px] flex-col">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setMenu(false)} className="border-b border-[#edf0f4] py-3.5 text-sm font-medium">{label}</a>)}<button className="button button-primary mt-4" onClick={() => { setMenu(false); openEarlyAccess(); }}>Get Early Access</button></div></nav>}
+      {menu && <nav className="border-t border-[#e4e8ee] bg-white px-5 py-4 shadow-lg lg:hidden" aria-label="Mobile navigation"><div className="mx-auto flex max-w-[640px] flex-col">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setMenu(false)} className="border-b border-[#edf0f4] py-3.5 text-sm font-medium">{label}</a>)}<AccountControls mobile /><button className="button button-primary mt-2" onClick={() => { setMenu(false); openEarlyAccess(); }}>Get Early Access</button></div></nav>}
     </header>
   );
 }

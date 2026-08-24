@@ -52,3 +52,17 @@ test("FAQ accordion opens and closes", async ({ page }) => {
   await question.click();
   await expect(question).toHaveAttribute("aria-expanded", "false");
 });
+
+test("Google sign in opens an accessible auth flow", async ({ page }, testInfo) => {
+  await page.goto("/");
+  if (testInfo.project.name === "mobile") {
+    await page.getByRole("button", { name: "Toggle navigation menu" }).click();
+  }
+
+  await page.getByRole("button", { name: "Sign In" }).click();
+  const dialog = page.getByRole("dialog", { name: "Sign in or create an account" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("button", { name: "Continue with Google" })).toBeEnabled();
+  await dialog.getByRole("button", { name: "Close sign in" }).click();
+  await expect(dialog).not.toBeVisible();
+});

@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   "app/page.tsx": {
-    "mtime": 1787606639.2170439,
-    "ast_hash": "3ee3b597ba593d9fb11901e1ca78fa06",
+    "mtime": 1787608646.6019595,
+    "ast_hash": "c958bf279c0c8b5d8ae552397aa7cb9a",
     "semantic_hash": ""
   },
   "components/closing-sections.tsx": {
@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "components/navigation.tsx": {
-    "mtime": 1787606748.0983682,
-    "ast_hash": "6fe829da8818a40cbf4002bd1ae5e850",
+    "mtime": 1787608646.6394556,
+    "ast_hash": "4f92bfadd7c9c5a9a58fd2a690841892",
     "semantic_hash": ""
   },
   "components/product-sections.tsx": {
@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787607086.2911537,
-    "ast_hash": "f9776e630ec931f552248365397ab763",
+    "mtime": 1787608566.575839,
+    "ast_hash": "46f982235b8d22e8173795699b4c956f",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "tests/marketing.spec.ts": {
-    "mtime": 1787607250.8577821,
-    "ast_hash": "14e60c50b1d9a943ac5ae0d5c003a88b",
+    "mtime": 1787608689.2500803,
+    "ast_hash": "4ef4b934eda291cb81eb5de92a4e5039",
     "semantic_hash": ""
   },
   "test-results/desktop-page.png": {
@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "app/api/early-access/route.ts": {
-    "mtime": 1787608394.8448095,
-    "ast_hash": "b446159ddb2590903a317a68819eb04e",
+    "mtime": 1787608646.7570024,
+    "ast_hash": "c9fe4cf7dde8424d814fb71688212c01",
     "semantic_hash": ""
   },
   "supabase/.temp/linked-project.json": {
@@ -112,6 +112,26 @@
   "supabase/migrations/20260824203000_create_early_access_submissions.sql": {
     "mtime": 1787608394.7775614,
     "ast_hash": "2424ef055d8b4220adc6c77834ab468f",
+    "semantic_hash": ""
+  },
+  "app/auth/callback/route.ts": {
+    "mtime": 1787608646.5227003,
+    "ast_hash": "adeecf4fbfc751b1eef4ce0e6b666454",
+    "semantic_hash": ""
+  },
+  "components/auth.tsx": {
+    "mtime": 1787608646.5620632,
+    "ast_hash": "51dc030abaa9539e093f3d3fca41a1dc",
+    "semantic_hash": ""
+  },
+  "lib/supabase/client.ts": {
+    "mtime": 1787608646.416217,
+    "ast_hash": "8807ce93034af4fca2fe117da4f0dc17",
+    "semantic_hash": ""
+  },
+  "lib/supabase/server.ts": {
+    "mtime": 1787608646.4571793,
+    "ast_hash": "17087a15c0333cc4ba6a55c37d6b10e6",
     "semantic_hash": ""
   }
 }
