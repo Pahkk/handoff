@@ -77,8 +77,8 @@ export default async function GettingStartedPage() {
             const started = recommendation.status === "started";
             const href =
               started && recommendation.process_id
-                ? `/app/processes/${recommendation.process_id}`
-                : `/app/processes/new?recommendation=${recommendation.id}`;
+                ? `/app/processes/${recommendation.process_id}?returnTo=${encodeURIComponent("/app/getting-started")}`
+                : `/app/processes/new?recommendation=${recommendation.id}&returnTo=${encodeURIComponent("/app/getting-started")}`;
             return (
               <article
                 key={recommendation.id}

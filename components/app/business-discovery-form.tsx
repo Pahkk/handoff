@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, LoaderCircle } from "lucide-react";
+import { showAppToast } from "@/lib/client-toast";
 
 export function BusinessDiscoveryForm() {
   const router = useRouter();
@@ -28,6 +29,10 @@ export function BusinessDiscoveryForm() {
       const body = await response.json();
       if (!response.ok)
         throw new Error(body.error ?? "Unable to build your starting plan.");
+      showAppToast(
+        "Starting plan created!",
+        "Opryn recommended the first processes to teach.",
+      );
       router.replace("/app/getting-started");
     } catch (caught) {
       setError(

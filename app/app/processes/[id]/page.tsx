@@ -4,14 +4,19 @@ import { ProcessReview } from "@/components/app/process-review";
 import { PageHeading } from "@/components/app/page-heading";
 import { TrainingButton } from "@/components/app/training-button";
 import { requireAppContext } from "@/lib/app-context";
+import { safeAppReturnPath } from "@/lib/return-path";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function ProcessDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ returnTo?: string }>;
 }) {
   const { id } = await params;
+  const { returnTo } = await searchParams;
+  const returnPath = safeAppReturnPath(returnTo, "/app/processes");
   const context = await requireAppContext();
   const supabase = await createClient();
   const { data: process, error: processError } = await supabase
@@ -134,6 +139,7 @@ export default async function ProcessDetailPage({
           description="Check every step and rule before this becomes trusted company knowledge."
         />
         <ProcessReview
+          returnTo={returnPath}
           initial={{
             id: process.id,
             title: process.title,

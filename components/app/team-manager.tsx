@@ -2,6 +2,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Check, Copy, LoaderCircle, Plus, Trash2, X } from "lucide-react";
+import { showAppToast } from "@/lib/client-toast";
 type Role = { id: string; name: string };
 type Member = {
   id: string;
@@ -53,6 +54,10 @@ export function TeamManager({
       return;
     }
     setInviteUrl(body.inviteUrl);
+    showAppToast(
+      "Invitation created!",
+      "Copy the secure link and send it to your employee.",
+    );
     router.refresh();
   }
   async function update(

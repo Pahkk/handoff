@@ -10,6 +10,7 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
+import { showAppToast } from "@/lib/client-toast";
 
 type Step = { id?: string; title: string; description: string };
 type Rule = {
@@ -36,7 +37,13 @@ type ProcessData = {
   clarifications: Clarification[];
 };
 
-export function ProcessReview({ initial }: { initial: ProcessData }) {
+export function ProcessReview({
+  initial,
+  returnTo,
+}: {
+  initial: ProcessData;
+  returnTo: string;
+}) {
   const router = useRouter();
   const [data, setData] = useState(initial);
   const [saving, setSaving] = useState<"save" | "approve" | null>(null);
@@ -83,9 +90,11 @@ export function ProcessReview({ initial }: { initial: ProcessData }) {
       setError(body.error ?? "Unable to approve.");
       return;
     }
-    setMessage("Process approved. Your team can now use it in Opryn.");
-    setData({ ...data, status: "approved" });
-    router.refresh();
+    showAppToast(
+      "Process approved!",
+      "Your team can now use it when they ask Opryn questions.",
+    );
+    router.replace(returnTo);
   }
   function move(index: number, direction: -1 | 1) {
     const target = index + direction;

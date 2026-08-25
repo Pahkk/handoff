@@ -1,15 +1,20 @@
 import { CaptureProcess } from "@/components/app/capture-process";
 import { PageHeading } from "@/components/app/page-heading";
 import { requireAdminContext } from "@/lib/app-context";
+import { safeAppReturnPath } from "@/lib/return-path";
 import { createClient } from "@/lib/supabase/server";
 export default async function NewProcessPage({
   searchParams,
 }: {
-  searchParams: Promise<{ recommendation?: string }>;
+  searchParams: Promise<{ recommendation?: string; returnTo?: string }>;
 }) {
   const context = await requireAdminContext();
   const supabase = await createClient();
-  const { recommendation: recommendationId } = await searchParams;
+  const { recommendation: recommendationId, returnTo } = await searchParams;
+  const returnPath = safeAppReturnPath(
+    returnTo,
+    recommendationId ? "/app/getting-started" : "/app/processes",
+  );
   const [{ data: roles }, { data: recommendation }] = await Promise.all([
     supabase
       .from("roles")
@@ -34,6 +39,7 @@ export default async function NewProcessPage({
       />
       <CaptureProcess
         roles={roles ?? []}
+        returnTo={returnPath}
         initial={
           recommendation
             ? {

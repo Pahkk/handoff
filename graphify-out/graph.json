@@ -180,7 +180,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "learn_route",
-      "community": 21,
+      "community": 3,
       "norm_label": "route.ts"
     },
     {
@@ -190,7 +190,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "learn_route_schema",
-      "community": 21,
+      "community": 3,
       "norm_label": "schema"
     },
     {
@@ -200,7 +200,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "learn_route_post",
-      "community": 21,
+      "community": 3,
       "norm_label": "post()"
     },
     {
@@ -250,7 +250,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "processes_route",
-      "community": 21,
+      "community": 3,
       "norm_label": "route.ts"
     },
     {
@@ -260,7 +260,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "processes_route_schema",
-      "community": 21,
+      "community": 3,
       "norm_label": "schema"
     },
     {
@@ -270,7 +270,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "processes_route_allowed",
-      "community": 21,
+      "community": 3,
       "norm_label": "allowed"
     },
     {
@@ -280,7 +280,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "processes_route_post",
-      "community": 21,
+      "community": 3,
       "norm_label": "post()"
     },
     {
@@ -710,7 +710,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout",
-      "community": 15,
+      "community": 16,
       "norm_label": "layout.tsx"
     },
     {
@@ -720,7 +720,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout_metadata",
-      "community": 15,
+      "community": 16,
       "norm_label": "metadata"
     },
     {
@@ -730,7 +730,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_layout_productlayout",
-      "community": 15,
+      "community": 16,
       "norm_label": "productlayout()"
     },
     {
@@ -837,7 +837,7 @@
       "label": "ProcessDetailPage()",
       "file_type": "code",
       "source_file": "app/app/processes/[id]/page.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "id_page_processdetailpage",
       "community": 15,
@@ -857,7 +857,7 @@
       "label": "NewProcessPage()",
       "file_type": "code",
       "source_file": "app/app/processes/new/page.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "new_page_newprocesspage",
       "community": 15,
@@ -1190,7 +1190,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "privacy_page",
-      "community": 0,
+      "community": 26,
       "norm_label": "page.tsx"
     },
     {
@@ -1200,7 +1200,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "privacy_page_metadata",
-      "community": 0,
+      "community": 26,
       "norm_label": "metadata"
     },
     {
@@ -1210,7 +1210,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "privacy_page_privacypage",
-      "community": 0,
+      "community": 26,
       "norm_label": "privacypage()"
     },
     {
@@ -1240,7 +1240,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "terms_page",
-      "community": 0,
+      "community": 26,
       "norm_label": "page.tsx"
     },
     {
@@ -1250,7 +1250,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "terms_page_metadata",
-      "community": 0,
+      "community": 26,
       "norm_label": "metadata"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "terms_page_termspage",
-      "community": 0,
+      "community": 26,
       "norm_label": "termspage()"
     },
     {
@@ -1270,37 +1270,37 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_shell",
-      "community": 5,
+      "community": 16,
       "norm_label": "app-shell.tsx"
     },
     {
       "label": "items",
       "file_type": "code",
       "source_file": "components/app/app-shell.tsx",
-      "source_location": "L23",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "app_app_shell_items",
-      "community": 5,
+      "community": 16,
       "norm_label": "items"
     },
     {
       "label": "Props",
       "file_type": "code",
       "source_file": "components/app/app-shell.tsx",
-      "source_location": "L44",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "app_app_shell_props",
-      "community": 5,
+      "community": 16,
       "norm_label": "props"
     },
     {
       "label": "AppShell()",
       "file_type": "code",
       "source_file": "components/app/app-shell.tsx",
-      "source_location": "L51",
+      "source_location": "L57",
       "_origin": "ast",
       "id": "app_app_shell_appshell",
-      "community": 5,
+      "community": 16,
       "norm_label": "appshell()"
     },
     {
@@ -1317,7 +1317,7 @@
       "label": "Message",
       "file_type": "code",
       "source_file": "components/app/ask-opryn.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "_origin": "ast",
       "id": "app_ask_opryn_message",
       "community": 23,
@@ -1327,7 +1327,7 @@
       "label": "prompts",
       "file_type": "code",
       "source_file": "components/app/ask-opryn.tsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "app_ask_opryn_prompts",
       "community": 23,
@@ -1337,7 +1337,7 @@
       "label": "AskOpryn()",
       "file_type": "code",
       "source_file": "components/app/ask-opryn.tsx",
-      "source_location": "L27",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "app_ask_opryn_askopryn",
       "community": 23,
@@ -1357,7 +1357,7 @@
       "label": "BusinessDiscoveryForm()",
       "file_type": "code",
       "source_file": "components/app/business-discovery-form.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "app_business_discovery_form_businessdiscoveryform",
       "community": 15,
@@ -1367,7 +1367,7 @@
       "label": "Question()",
       "file_type": "code",
       "source_file": "components/app/business-discovery-form.tsx",
-      "source_location": "L102",
+      "source_location": "L107",
       "_origin": "ast",
       "id": "app_business_discovery_form_question",
       "community": 15,
@@ -1380,77 +1380,77 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_capture_process",
-      "community": 5,
+      "community": 25,
       "norm_label": "capture-process.tsx"
     },
     {
       "label": "Role",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "app_capture_process_role",
-      "community": 5,
+      "community": 25,
       "norm_label": "role"
     },
     {
       "label": "InitialCapture",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "app_capture_process_initialcapture",
-      "community": 5,
+      "community": 25,
       "norm_label": "initialcapture"
     },
     {
       "label": "mediaStages",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "app_capture_process_mediastages",
-      "community": 5,
+      "community": 25,
       "norm_label": "mediastages"
     },
     {
       "label": "textStages",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "app_capture_process_textstages",
-      "community": 5,
+      "community": 25,
       "norm_label": "textstages"
     },
     {
       "label": "CaptureProcess()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L27",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "app_capture_process_captureprocess",
-      "community": 5,
+      "community": 25,
       "norm_label": "captureprocess()"
     },
     {
       "label": "ModeButton()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L270",
+      "source_location": "L285",
       "_origin": "ast",
       "id": "app_capture_process_modebutton",
-      "community": 5,
+      "community": 25,
       "norm_label": "modebutton()"
     },
     {
       "label": "Field()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L297",
+      "source_location": "L312",
       "_origin": "ast",
       "id": "app_capture_process_field",
-      "community": 5,
+      "community": 25,
       "norm_label": "field()"
     },
     {
@@ -1460,17 +1460,17 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_create_role",
-      "community": 15,
+      "community": 19,
       "norm_label": "create-role.tsx"
     },
     {
       "label": "CreateRole()",
       "file_type": "code",
       "source_file": "components/app/create-role.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "app_create_role_createrole",
-      "community": 15,
+      "community": 19,
       "norm_label": "createrole()"
     },
     {
@@ -1480,17 +1480,17 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_owner_answer",
-      "community": 15,
+      "community": 19,
       "norm_label": "owner-answer.tsx"
     },
     {
       "label": "OwnerAnswer()",
       "file_type": "code",
       "source_file": "components/app/owner-answer.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "_origin": "ast",
       "id": "app_owner_answer_owneranswer",
-      "community": 15,
+      "community": 19,
       "norm_label": "owneranswer()"
     },
     {
@@ -1537,7 +1537,7 @@
       "label": "Step",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "app_process_review_step",
       "community": 4,
@@ -1547,7 +1547,7 @@
       "label": "Rule",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "app_process_review_rule",
       "community": 4,
@@ -1557,7 +1557,7 @@
       "label": "Clarification",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "app_process_review_clarification",
       "community": 4,
@@ -1567,7 +1567,7 @@
       "label": "ProcessData",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L27",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "app_process_review_processdata",
       "community": 4,
@@ -1577,7 +1577,7 @@
       "label": "ProcessReview()",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L39",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "app_process_review_processreview",
       "community": 4,
@@ -1587,7 +1587,7 @@
       "label": "TextArea()",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L375",
+      "source_location": "L384",
       "_origin": "ast",
       "id": "app_process_review_textarea",
       "community": 4,
@@ -1597,7 +1597,7 @@
       "label": "IconButton()",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L396",
+      "source_location": "L405",
       "_origin": "ast",
       "id": "app_process_review_iconbutton",
       "community": 4,
@@ -1607,7 +1607,7 @@
       "label": "EditableList()",
       "file_type": "code",
       "source_file": "components/app/process-review.tsx",
-      "source_location": "L417",
+      "source_location": "L426",
       "_origin": "ast",
       "id": "app_process_review_editablelist",
       "community": 4,
@@ -1727,7 +1727,7 @@
       "label": "Role",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "app_team_manager_role",
       "community": 19,
@@ -1737,7 +1737,7 @@
       "label": "Member",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "_origin": "ast",
       "id": "app_team_manager_member",
       "community": 19,
@@ -1747,7 +1747,7 @@
       "label": "Invite",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "app_team_manager_invite",
       "community": 19,
@@ -1757,7 +1757,7 @@
       "label": "TeamManager()",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "app_team_manager_teammanager",
       "community": 19,
@@ -1790,7 +1790,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_auth",
-      "community": 5,
+      "community": 0,
       "norm_label": "auth.tsx"
     },
     {
@@ -1800,7 +1800,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_auth_authcontextvalue",
-      "community": 5,
+      "community": 0,
       "norm_label": "authcontextvalue"
     },
     {
@@ -1810,7 +1810,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_auth_authcontext",
-      "community": 5,
+      "community": 0,
       "norm_label": "authcontext"
     },
     {
@@ -1820,7 +1820,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_auth_useauth",
-      "community": 5,
+      "community": 0,
       "norm_label": "useauth()"
     },
     {
@@ -1830,7 +1830,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "components_auth_authprovider",
-      "community": 5,
+      "community": 0,
       "norm_label": "authprovider()"
     },
     {
@@ -1840,7 +1840,7 @@
       "source_location": "L189",
       "_origin": "ast",
       "id": "components_auth_accountcontrols",
-      "community": 5,
+      "community": 0,
       "norm_label": "accountcontrols()"
     },
     {
@@ -1850,7 +1850,7 @@
       "source_location": "L235",
       "_origin": "ast",
       "id": "components_auth_googlemark",
-      "community": 5,
+      "community": 0,
       "norm_label": "googlemark()"
     },
     {
@@ -2150,7 +2150,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_legal_document",
-      "community": 0,
+      "community": 26,
       "norm_label": "legal-document.tsx"
     },
     {
@@ -2160,7 +2160,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_legal_document_legaldocument",
-      "community": 0,
+      "community": 26,
       "norm_label": "legaldocument()"
     },
     {
@@ -2170,7 +2170,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "components_legal_document_legalsection",
-      "community": 0,
+      "community": 26,
       "norm_label": "legalsection()"
     },
     {
@@ -2430,7 +2430,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_ui_logo",
-      "community": 0,
+      "community": 26,
       "norm_label": "logo()"
     },
     {
@@ -2510,7 +2510,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ai_openai",
-      "community": 21,
+      "community": 3,
       "norm_label": "openai.ts"
     },
     {
@@ -2520,7 +2520,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ai_openai_getopenai",
-      "community": 21,
+      "community": 3,
       "norm_label": "getopenai()"
     },
     {
@@ -2530,7 +2530,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "ai_openai_humanizeaierror",
-      "community": 21,
+      "community": 3,
       "norm_label": "humanizeaierror()"
     },
     {
@@ -2540,7 +2540,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ai_schemas",
-      "community": 21,
+      "community": 3,
       "norm_label": "schemas.ts"
     },
     {
@@ -2550,7 +2550,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ai_schemas_extractedprocessschema",
-      "community": 21,
+      "community": 3,
       "norm_label": "extractedprocessschema"
     },
     {
@@ -2560,7 +2560,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "ai_schemas_companyanswerschema",
-      "community": 21,
+      "community": 3,
       "norm_label": "companyanswerschema"
     },
     {
@@ -2570,7 +2570,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "ai_schemas_suggestedruleschema",
-      "community": 21,
+      "community": 3,
       "norm_label": "suggestedruleschema"
     },
     {
@@ -2580,7 +2580,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "ai_schemas_processrecommendationsschema",
-      "community": 21,
+      "community": 3,
       "norm_label": "processrecommendationsschema"
     },
     {
@@ -2590,7 +2590,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "ai_schemas_extractedprocess",
-      "community": 21,
+      "community": 3,
       "norm_label": "extractedprocess"
     },
     {
@@ -2600,7 +2600,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "ai_schemas_processrecommendations",
-      "community": 21,
+      "community": 3,
       "norm_label": "processrecommendations"
     },
     {
@@ -2610,7 +2610,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ai_services",
-      "community": 21,
+      "community": 3,
       "norm_label": "services.ts"
     },
     {
@@ -2620,7 +2620,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "ai_services_transcribemedia",
-      "community": 21,
+      "community": 3,
       "norm_label": "transcribemedia()"
     },
     {
@@ -2630,7 +2630,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "ai_services_extractprocess",
-      "community": 21,
+      "community": 3,
       "norm_label": "extractprocess()"
     },
     {
@@ -2650,7 +2650,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "ai_services_retrievedknowledge",
-      "community": 21,
+      "community": 3,
       "norm_label": "retrievedknowledge"
     },
     {
@@ -2784,13 +2784,53 @@
       "norm_label": "requireadmincontext()"
     },
     {
+      "label": "client-toast.ts",
+      "file_type": "code",
+      "source_file": "lib/client-toast.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_client_toast",
+      "community": 16,
+      "norm_label": "client-toast.ts"
+    },
+    {
+      "label": "AppToastMessage",
+      "file_type": "code",
+      "source_file": "lib/client-toast.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "lib_client_toast_apptoastmessage",
+      "community": 16,
+      "norm_label": "apptoastmessage"
+    },
+    {
+      "label": "showAppToast()",
+      "file_type": "code",
+      "source_file": "lib/client-toast.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "lib_client_toast_showapptoast",
+      "community": 19,
+      "norm_label": "showapptoast()"
+    },
+    {
+      "label": "readAppToast()",
+      "file_type": "code",
+      "source_file": "lib/client-toast.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "lib_client_toast_readapptoast",
+      "community": 16,
+      "norm_label": "readapptoast()"
+    },
+    {
       "label": "processes.ts",
       "file_type": "code",
       "source_file": "lib/processes.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_processes",
-      "community": 21,
+      "community": 3,
       "norm_label": "processes.ts"
     },
     {
@@ -2800,7 +2840,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_processes_replaceextractedprocess",
-      "community": 21,
+      "community": 3,
       "norm_label": "replaceextractedprocess()"
     },
     {
@@ -2834,13 +2874,33 @@
       "norm_label": "preparerecommendations()"
     },
     {
+      "label": "return-path.ts",
+      "file_type": "code",
+      "source_file": "lib/return-path.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_return_path",
+      "community": 15,
+      "norm_label": "return-path.ts"
+    },
+    {
+      "label": "safeAppReturnPath()",
+      "file_type": "code",
+      "source_file": "lib/return-path.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_return_path_safeappreturnpath",
+      "community": 15,
+      "norm_label": "safeappreturnpath()"
+    },
+    {
       "label": "client.ts",
       "file_type": "code",
       "source_file": "lib/supabase/client.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "supabase_client",
-      "community": 5,
+      "community": 25,
       "norm_label": "client.ts"
     },
     {
@@ -2850,7 +2910,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "supabase_client_createclient",
-      "community": 5,
+      "community": 25,
       "norm_label": "createclient()"
     },
     {
@@ -6141,6 +6201,28 @@
       "source_file": "app/app/processes/[id]/page.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "source": "app_app_processes_id_page_tsx_id_page",
+      "target": "lib_return_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "app_app_processes_id_page_tsx_id_page",
+      "target": "lib_return_path_safeappreturnpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "app_app_processes_id_page_tsx_id_page",
       "target": "supabase_server"
@@ -6166,6 +6248,17 @@
       "weight": 1.0,
       "source": "id_page_processdetailpage",
       "target": "lib_app_context_requireappcontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/app/processes/[id]/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "id_page_processdetailpage",
+      "target": "lib_return_path_safeappreturnpath"
     },
     {
       "relation": "imports_from",
@@ -6234,6 +6327,28 @@
       "target": "lib_app_context_requireadmincontext"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/new/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "new_page",
+      "target": "lib_return_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/new/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "new_page",
+      "target": "lib_return_path_safeappreturnpath",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/app/processes/new/page.tsx",
@@ -6275,6 +6390,17 @@
       "weight": 1.0,
       "source": "new_page_newprocesspage",
       "target": "lib_app_context_requireadmincontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/app/processes/new/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "new_page_newprocesspage",
+      "target": "lib_return_path_safeappreturnpath"
     },
     {
       "relation": "calls",
@@ -7695,6 +7821,39 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "components/app/app-shell.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "app_app_shell",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/app-shell.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "app_app_shell",
+      "target": "lib_client_toast_apptoastmessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/app-shell.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "app_app_shell",
+      "target": "lib_client_toast_readapptoast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/app-shell.tsx",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -7743,6 +7902,28 @@
       "target": "app_ask_opryn_prompts"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/ask-opryn.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_ask_opryn",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/ask-opryn.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_ask_opryn",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/business-discovery-form.tsx",
@@ -7761,6 +7942,28 @@
       "confidence_score": 1.0,
       "source": "app_business_discovery_form",
       "target": "app_business_discovery_form_question"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/business-discovery-form.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_business_discovery_form",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/business-discovery-form.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_business_discovery_form",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7839,6 +8042,28 @@
       "source_file": "components/app/capture-process.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "source": "app_capture_process",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/capture-process.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_capture_process",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/capture-process.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "app_capture_process",
       "target": "supabase_client"
@@ -7865,6 +8090,28 @@
       "target": "app_create_role_createrole"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/create-role.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "app_create_role",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/create-role.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "app_create_role",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/owner-answer.tsx",
@@ -7873,6 +8120,28 @@
       "confidence_score": 1.0,
       "source": "app_owner_answer",
       "target": "app_owner_answer_owneranswer"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/owner-answer.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_owner_answer",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/owner-answer.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_owner_answer",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7973,6 +8242,28 @@
       "confidence_score": 1.0,
       "source": "app_process_review",
       "target": "app_process_review_textarea"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-review.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "app_process_review",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-review.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "app_process_review",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8093,6 +8384,39 @@
       "confidence_score": 1.0,
       "source": "app_team_manager",
       "target": "app_team_manager_teammanager"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "lib_client_toast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "app_team_manager_invite",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8810,9 +9134,9 @@
       "source_file": "components/onboarding-form.tsx",
       "source_location": "L305",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_onboarding_form",
-      "target": "components_onboarding_form_onboardingtransition",
-      "confidence_score": 1.0
+      "target": "components_onboarding_form_onboardingtransition"
     },
     {
       "relation": "contains",
@@ -9642,6 +9966,36 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "lib/client-toast.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "lib_client_toast",
+      "target": "lib_client_toast_apptoastmessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/client-toast.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "lib_client_toast",
+      "target": "lib_client_toast_readapptoast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/client-toast.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "lib_client_toast",
+      "target": "lib_client_toast_showapptoast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "lib/processes.ts",
       "source_location": "L5",
       "weight": 1.0,
@@ -9679,6 +10033,16 @@
       "confidence_score": 1.0,
       "source": "lib_recommendations_preparerecommendations",
       "target": "lib_recommendations_fallbackrecommendations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/return-path.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_return_path",
+      "target": "lib_return_path_safeappreturnpath",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10232,5 +10596,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d7134006dc8d8f21770728860006f4420339b680"
+  "built_at_commit": "59d7f16c0989595bdedf301c3bc70e1029e8014e"
 }

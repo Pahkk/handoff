@@ -3,6 +3,7 @@
 import { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FileText, LoaderCircle, Mic2, UploadCloud } from "lucide-react";
+import { showAppToast } from "@/lib/client-toast";
 import { createClient } from "@/lib/supabase/client";
 
 type Role = { id: string; name: string };
@@ -27,9 +28,11 @@ const textStages = [
 export function CaptureProcess({
   roles,
   initial,
+  returnTo,
 }: {
   roles: Role[];
   initial?: InitialCapture;
+  returnTo: string;
 }) {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -79,7 +82,13 @@ export function CaptureProcess({
         throw new Error(body.error ?? "Unable to create process.");
       if (body.ready) {
         setStage(textStages.length - 1);
-        router.replace(`/app/processes/${body.processId}`);
+        showAppToast(
+          "Process ready for review!",
+          "Check the steps and approve it before your team uses it.",
+        );
+        router.replace(
+          `/app/processes/${body.processId}?returnTo=${encodeURIComponent(returnTo)}`,
+        );
         return;
       }
       setStage(0);
@@ -102,7 +111,13 @@ export function CaptureProcess({
           learned.error ?? "Opryn could not learn this recording.",
         );
       setStage(3);
-      router.replace(`/app/processes/${body.processId}`);
+      showAppToast(
+        "Process ready for review!",
+        "Check the steps and approve it before your team uses it.",
+      );
+      router.replace(
+        `/app/processes/${body.processId}?returnTo=${encodeURIComponent(returnTo)}`,
+      );
     } catch (caught) {
       setError(
         caught instanceof Error ? caught.message : "Something went wrong.",

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, LoaderCircle } from "lucide-react";
+import { showAppToast } from "@/lib/client-toast";
 export function OwnerAnswer({ questionId }: { questionId: string }) {
   const router = useRouter();
   const [answer, setAnswer] = useState("");
@@ -43,6 +44,12 @@ export function OwnerAnswer({ questionId }: { questionId: string }) {
       setError(body.error ?? "Unable to finish.");
       return;
     }
+    showAppToast(
+      action === "approve" ? "Company rule approved!" : "Answer sent!",
+      action === "approve"
+        ? "Opryn can use it the next time this question comes up."
+        : "The employee question has been resolved.",
+    );
     router.refresh();
   }
   return (

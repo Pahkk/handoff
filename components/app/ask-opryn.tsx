@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
 import { ArrowUp, BookOpen, LoaderCircle, Send } from "lucide-react";
+import { showAppToast } from "@/lib/client-toast";
 type Message = {
   id: string;
   role: "user" | "opryn";
@@ -90,6 +91,10 @@ export function AskOpryn({ hasKnowledge }: { hasKnowledge: boolean }) {
       method: "POST",
     });
     if (!response.ok) return;
+    showAppToast(
+      "Question sent to the owner!",
+      "You’ll get an answer here after they respond.",
+    );
     setMessages((current) =>
       current.map((message) =>
         message.questionId === id ? { ...message, sent: true } : message,

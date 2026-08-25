@@ -2,6 +2,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, X } from "lucide-react";
+import { showAppToast } from "@/lib/client-toast";
 export function CreateRole() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -21,7 +22,12 @@ export function CreateRole() {
       });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error ?? "Unable to create role.");
-      router.replace(`/app/roles/${body.id}`);
+      showAppToast("Role created!", `${name.trim()} is ready to set up.`);
+      setOpen(false);
+      setName("");
+      setDescription("");
+      setSaving(false);
+      router.refresh();
     } catch (caught) {
       setError(
         caught instanceof Error ? caught.message : "Unable to create role.",
