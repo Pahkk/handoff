@@ -38,6 +38,12 @@ export function TeamManager({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [inviteUrl, setInviteUrl] = useState("");
+  const [updatingMemberId, setUpdatingMemberId] = useState<string | null>(null);
+  const [memberRoles, setMemberRoles] = useState<Record<string, string>>(() =>
+    Object.fromEntries(
+      members.map((member) => [member.id, member.role_id ?? ""]),
+    ),
+  );
   async function invite(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
@@ -64,16 +70,52 @@ export function TeamManager({
     memberId: string,
     nextRole: string,
     permission: string,
+    change: "role" | "access",
   ) {
-    await fetch(`/api/team/members/${memberId}`, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        roleId: nextRole || null,
-        permissionLevel: permission,
-      }),
-    });
-    router.refresh();
+    const previousRole = memberRoles[memberId] ?? "";
+    if (change === "role") {
+      setMemberRoles((current) => ({ ...current, [memberId]: nextRole }));
+    }
+    setUpdatingMemberId(memberId);
+    setError("");
+    try {
+      const response = await fetch(`/api/team/members/${memberId}`, {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          roleId: nextRole || null,
+          permissionLevel: permission,
+        }),
+      });
+      const body = await response.json();
+      if (!response.ok)
+        throw new Error(body.error ?? "Unable to update this team member.");
+      if (change === "role") {
+        showAppToast(
+          nextRole ? "Role assigned!" : "Role removed!",
+          nextRole
+            ? "This team member now has the selected job role."
+            : "This team member no longer has a job role.",
+        );
+      } else {
+        showAppToast("Access updated!", "The new permission is now active.");
+      }
+      router.refresh();
+    } catch (caught) {
+      if (change === "role") {
+        setMemberRoles((current) => ({
+          ...current,
+          [memberId]: previousRole,
+        }));
+      }
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "Unable to update this team member.",
+      );
+    } finally {
+      setUpdatingMemberId(null);
+    }
   }
   async function remove(id: string) {
     if (
@@ -96,12 +138,20 @@ export function TeamManager({
           Invite Employee
         </button>
       </div>
+      {error && !open ? (
+        <p
+          role="alert"
+          className="mb-4 rounded-xl bg-[#fff0f1] p-3 text-sm text-[#a83f49]"
+        >
+          {error}
+        </p>
+      ) : null}
       <div className="overflow-x-auto rounded-2xl border border-[#dfe5ed] bg-white">
         <table className="w-full min-w-[820px] text-left text-sm">
           <thead className="border-b border-[#e7ebf0] bg-[#fafbfd] text-[11px] uppercase tracking-[.08em] text-[#7b8798]">
             <tr>
               <th className="px-5 py-3.5">Name</th>
-              <th>Role</th>
+              <th>Assigned job role</th>
               <th>Training</th>
               <th>Access</th>
               <th>Joined</th>
@@ -123,20 +173,20 @@ export function TeamManager({
                 </td>
                 <td>
                   <select
-                    disabled={member.permission_level === "owner"}
-                    value={member.role_id ?? ""}
+                    aria-label={`Assigned role for ${member.profile?.full_name ?? member.profile?.email ?? "team member"}`}
+                    disabled={updatingMemberId === member.id}
+                    value={memberRoles[member.id] ?? ""}
                     onChange={(e) =>
                       void update(
                         member.id,
                         e.target.value,
-                        member.permission_level === "admin"
-                          ? "admin"
-                          : "employee",
+                        member.permission_level,
+                        "role",
                       )
                     }
-                    className="h-9 rounded-lg border border-[#dfe5ed] bg-white px-2 text-xs"
+                    className="h-10 min-w-36 rounded-lg border border-[#cfd8e4] bg-white px-2.5 text-xs font-medium disabled:cursor-wait disabled:opacity-60"
                   >
-                    <option value="">No role</option>
+                    <option value="">Assign a role…</option>
                     {roles.map((role) => (
                       <option key={role.id} value={role.id}>
                         {role.name}
@@ -163,8 +213,9 @@ export function TeamManager({
                     onChange={(e) =>
                       void update(
                         member.id,
-                        member.role_id ?? "",
+                        memberRoles[member.id] ?? "",
                         e.target.value,
+                        "access",
                       )
                     }
                     className="h-9 rounded-lg border border-[#dfe5ed] bg-white px-2 text-xs capitalize"

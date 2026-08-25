@@ -1,7 +1,7 @@
 # Graph Report - handoff  (2026-08-24)
 
 ## Corpus Check
-- 99 files · ~35,881 words
+- 99 files · ~36,223 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `59d7f16c`
+- Built from commit: `a72c1f25`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -115,7 +115,7 @@ Nodes (5): OnboardingForm(), steps, getOptionalAppContext, requireUser(), Onboar
 
 ### Community 23 - "Community 23"
 Cohesion: 0.50
-Nodes (3): AskOpryn(), Message, prompts
+Nodes (3): AskOpryn(), fallbackPrompts, Message
 
 ### Community 25 - "Community 25"
 Cohesion: 0.22

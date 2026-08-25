@@ -19,17 +19,26 @@ type Message = {
     content: string;
   }>;
 };
-const prompts = [
+const fallbackPrompts = [
   "How do I create a new customer?",
   "Can I give someone a discount?",
   "What should I do if an invoice is overdue?",
   "Who approves refunds?",
 ];
-export function AskOpryn({ hasKnowledge }: { hasKnowledge: boolean }) {
+export function AskOpryn({
+  hasKnowledge,
+  processes,
+}: {
+  hasKnowledge: boolean;
+  processes: Array<{ id: string; title: string }>;
+}) {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const prompts = processes.length
+    ? processes.map((process) => `What are the steps for “${process.title}”?`)
+    : fallbackPrompts;
   async function ask(event?: FormEvent, prompt?: string) {
     event?.preventDefault();
     const value = (prompt ?? question).trim();
@@ -116,17 +125,24 @@ export function AskOpryn({ hasKnowledge }: { hasKnowledge: boolean }) {
               Opryn answers from approved company knowledge and shows where the
               answer came from.
             </p>
-            {hasKnowledge ? (
-              <div className="mt-7 grid w-full max-w-xl gap-2 sm:grid-cols-2">
-                {prompts.map((prompt) => (
-                  <button
-                    key={prompt}
-                    onClick={() => void ask(undefined, prompt)}
-                    className="rounded-xl border border-[#e0e5ec] p-3 text-left text-sm text-[#516075] hover:border-[#9aace4] hover:bg-[#f7f9ff]"
-                  >
-                    {prompt}
-                  </button>
-                ))}
+            {hasKnowledge || processes.length ? (
+              <div className="mt-7 w-full max-w-xl">
+                {processes.length ? (
+                  <p className="mb-3 text-left text-xs font-semibold text-[#718095]">
+                    Ask about one of your company processes
+                  </p>
+                ) : null}
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {prompts.map((prompt) => (
+                    <button
+                      key={prompt}
+                      onClick={() => void ask(undefined, prompt)}
+                      className="rounded-xl border border-[#e0e5ec] p-3 text-left text-sm text-[#516075] hover:border-[#9aace4] hover:bg-[#f7f9ff]"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
               </div>
             ) : (
               <div className="mt-7 rounded-xl bg-[#fff8e9] p-4 text-sm text-[#81631e]">

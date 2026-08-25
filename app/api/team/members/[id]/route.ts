@@ -3,7 +3,7 @@ import { z } from "zod";
 import { apiError, getRequestContext } from "@/lib/api";
 const schema = z.object({
   roleId: z.string().uuid().nullable(),
-  permissionLevel: z.enum(["admin", "employee"]),
+  permissionLevel: z.enum(["owner", "admin", "employee"]),
 });
 export async function PATCH(
   request: Request,
@@ -20,22 +20,43 @@ export async function PATCH(
     );
   const { data: member } = await context.supabase
     .from("organization_members")
-    .select("user_id,permission_level")
+    .select("user_id,permission_level,role_id")
     .eq("id", id)
     .eq("organization_id", context.membership.organization_id)
     .maybeSingle();
-  if (!member || member.permission_level === "owner")
+  if (!member)
     return NextResponse.json(
-      { error: "The workspace owner cannot be changed here." },
+      { error: "Team member not found." },
+      { status: 404 },
+    );
+  const isOwner = member.permission_level === "owner";
+  const requestsOwner = parsed.data.permissionLevel === "owner";
+  if (isOwner !== requestsOwner)
+    return NextResponse.json(
+      { error: "The workspace owner's access level cannot be changed here." },
       { status: 400 },
     );
+  if (parsed.data.roleId) {
+    const { data: role } = await context.supabase
+      .from("roles")
+      .select("id")
+      .eq("id", parsed.data.roleId)
+      .eq("organization_id", context.membership.organization_id)
+      .maybeSingle();
+    if (!role)
+      return NextResponse.json(
+        { error: "Choose a role from this workspace." },
+        { status: 400 },
+      );
+  }
   const { error } = await context.supabase
     .from("organization_members")
     .update({
       role_id: parsed.data.roleId,
       permission_level: parsed.data.permissionLevel,
     })
-    .eq("id", id);
+    .eq("id", id)
+    .eq("organization_id", context.membership.organization_id);
   if (error) return apiError(error, "Unable to update this member.");
   if (parsed.data.roleId) {
     const { data: assignments } = await context.supabase

@@ -126,7 +126,7 @@ export default async function DashboardPage() {
           </Link>
         }
       />
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-3">
         <Metric
           icon={<FileText />}
           label="Approved Processes"
@@ -144,9 +144,9 @@ export default async function DashboardPage() {
           alert={Boolean(gaps.count)}
         />
       </div>
-      <div className="mt-5 grid gap-5 xl:grid-cols-[1.2fr_.8fr]">
-        <section className="rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
-          <div className="flex items-start justify-between">
+      <div className="mt-5 grid min-w-0 gap-5 2xl:grid-cols-[1.2fr_.8fr]">
+        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[.1em] text-[#718095]">
                 Employee Questions · This week
@@ -178,8 +178,8 @@ export default async function DashboardPage() {
             <Mini label="Asked owner" value={escalated.count ?? 0} />
           </div>
         </section>
-        <section className="rounded-2xl border border-[#dfe5ed] bg-[#111d34] p-5 text-white sm:p-6">
-          <div className="flex items-start justify-between">
+        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-[#111d34] p-5 text-white sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[.1em] text-[#aebbd2]">
                 Owner Independence
@@ -202,8 +202,8 @@ export default async function DashboardPage() {
           </p>
         </section>
       </div>
-      <div className="mt-5 grid gap-5 xl:grid-cols-2">
-        <section className="rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
+      <div className="mt-5 grid min-w-0 gap-5 2xl:grid-cols-2">
+        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold">Recent activity</h2>
           </div>
@@ -246,7 +246,7 @@ export default async function DashboardPage() {
             </div>
           )}
         </section>
-        <section className="rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
+        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold">Questions waiting for you</h2>
             <Link

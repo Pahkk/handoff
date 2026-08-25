@@ -11,7 +11,7 @@ export function PageHeading({
 }) {
   return (
     <header className="mb-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-      <div>
+      <div className="min-w-0">
         {eyebrow ? (
           <p className="mb-2 text-[11px] font-bold uppercase tracking-[.12em] text-[#3158d8]">
             {eyebrow}
@@ -26,7 +26,7 @@ export function PageHeading({
           </p>
         ) : null}
       </div>
-      {actions}
+      {actions ? <div className="shrink-0">{actions}</div> : null}
     </header>
   );
 }
