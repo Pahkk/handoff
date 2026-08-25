@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { FileText, Plus, Search } from "lucide-react";
 import { EmptyState, PageHeading } from "@/components/app/page-heading";
-import {
-  KnowledgeTree,
-  ProcessIdeas,
-} from "@/components/app/process-intelligence";
+import { ProcessIdeas } from "@/components/app/process-intelligence";
 import { requireAppContext } from "@/lib/app-context";
 import { createClient } from "@/lib/supabase/server";
 
@@ -89,33 +86,13 @@ export default async function ProcessesPage({
   const creators = new Map(
     (creatorsResult.data ?? []).map((profile) => [profile.id, profile]),
   );
-  const [
-    knowledgeProcessesResult,
-    knowledgeChunksResult,
-    knowledgeAssignmentsResult,
-    knowledgeRolesResult,
-    recommendationsResult,
-  ] = await Promise.all([
+  const [approvedProcessesResult, recommendationsResult] = await Promise.all([
     supabase
       .from("processes")
-      .select("id,title,summary")
+      .select("id,title")
       .eq("organization_id", context.organization.id)
       .eq("status", "approved")
       .order("updated_at", { ascending: false }),
-    supabase
-      .from("knowledge_chunks")
-      .select("id,content,source_type,process_id")
-      .eq("organization_id", context.organization.id)
-      .eq("approved", true)
-      .order("created_at"),
-    supabase
-      .from("process_role_assignments")
-      .select("process_id,role_id")
-      .eq("organization_id", context.organization.id),
-    supabase
-      .from("roles")
-      .select("id,name")
-      .eq("organization_id", context.organization.id),
     supabase
       .from("process_recommendations")
       .select("id,title,reason,suggested_prompt")
@@ -124,49 +101,14 @@ export default async function ProcessesPage({
       .order("priority")
       .limit(4),
   ]);
-  const knowledgeError = [
-    knowledgeProcessesResult.error,
-    knowledgeChunksResult.error,
-    knowledgeAssignmentsResult.error,
-    knowledgeRolesResult.error,
-    recommendationsResult.error,
-  ].find(Boolean);
-  if (knowledgeError) {
+  const intelligenceError =
+    approvedProcessesResult.error ?? recommendationsResult.error;
+  if (intelligenceError) {
     console.error("Unable to load process intelligence", {
-      code: knowledgeError.code,
+      code: intelligenceError.code,
     });
-    throw new Error("Unable to load company knowledge.");
+    throw new Error("Unable to load process recommendations.");
   }
-  const knowledgeRoleNames = new Map(
-    (knowledgeRolesResult.data ?? []).map((role) => [role.id, role.name]),
-  );
-  const knowledgeProcesses = [
-    ...(knowledgeProcessesResult.data ?? []).map((process) => ({
-      ...process,
-      chunks: (knowledgeChunksResult.data ?? []).filter(
-        (chunk) => chunk.process_id === process.id,
-      ),
-      roles: (knowledgeAssignmentsResult.data ?? [])
-        .filter((assignment) => assignment.process_id === process.id)
-        .map((assignment) => knowledgeRoleNames.get(assignment.role_id))
-        .filter((name): name is string => Boolean(name)),
-    })),
-    ...((knowledgeChunksResult.data ?? []).some((chunk) => !chunk.process_id)
-      ? [
-          {
-            id: "owner-guidance",
-            title: "Rules learned from owner answers",
-            summary:
-              "Reusable company knowledge captured when the owner answered a team question.",
-            href: "/app/knowledge-gaps",
-            roles: [] as string[],
-            chunks: (knowledgeChunksResult.data ?? []).filter(
-              (chunk) => !chunk.process_id,
-            ),
-          },
-        ]
-      : []),
-  ];
   return (
     <>
       <PageHeading
@@ -191,7 +133,7 @@ export default async function ProcessesPage({
       <ProcessIdeas
         organizationName={context.organization.name}
         recommendations={recommendationsResult.data ?? []}
-        processTitles={(knowledgeProcessesResult.data ?? []).map(
+        processTitles={(approvedProcessesResult.data ?? []).map(
           (process) => process.title,
         )}
       />
@@ -280,10 +222,6 @@ export default async function ProcessesPage({
           })}
         </div>
       )}
-      <KnowledgeTree
-        organizationName={context.organization.name}
-        processes={knowledgeProcesses}
-      />
     </>
   );
 }

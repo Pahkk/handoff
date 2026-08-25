@@ -46,8 +46,9 @@ export function AskOpryn({
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [promptPage, setPromptPage] = useState(0);
-  const [promptAnimation, setPromptAnimation] = useState(0);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [promptsVisible, setPromptsVisible] = useState(true);
+  const promptTimer = useRef<number | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const pages = Math.max(1, Math.ceil(prompts.length / 4));
   const visiblePrompts = Array.from({ length: 4 }, (_, index) =>
     prompts.length
@@ -58,11 +59,27 @@ export function AskOpryn({
   useEffect(() => {
     if (pages <= 1) return;
     const interval = window.setInterval(() => {
-      setPromptPage((current) => (current + 1) % pages);
-      setPromptAnimation((current) => current + 1);
+      setPromptsVisible(false);
+      promptTimer.current = window.setTimeout(() => {
+        setPromptPage((current) => (current + 1) % pages);
+        setPromptsVisible(true);
+      }, 280);
     }, 5000);
-    return () => window.clearInterval(interval);
+    return () => {
+      window.clearInterval(interval);
+      if (promptTimer.current) window.clearTimeout(promptTimer.current);
+    };
   }, [pages]);
+
+  function changePromptPage(index: number) {
+    if (index === promptPage) return;
+    if (promptTimer.current) window.clearTimeout(promptTimer.current);
+    setPromptsVisible(false);
+    promptTimer.current = window.setTimeout(() => {
+      setPromptPage(index);
+      setPromptsVisible(true);
+    }, 280);
+  }
 
   async function ask(event?: FormEvent, prompt?: string) {
     event?.preventDefault();
@@ -167,10 +184,7 @@ export function AskOpryn({
                     {Array.from({ length: pages }, (_, index) => (
                       <button
                         key={index}
-                        onClick={() => {
-                          setPromptPage(index);
-                          setPromptAnimation((current) => current + 1);
-                        }}
+                        onClick={() => changePromptPage(index)}
                         aria-label={`Show question set ${index + 1}`}
                         className={`h-1.5 rounded-full transition-all ${index === promptPage ? "w-5 bg-[#3158d8]" : "w-1.5 bg-[#ccd3de]"}`}
                       />
@@ -178,14 +192,14 @@ export function AskOpryn({
                   </div>
                 </div>
                 <div
-                  key={promptAnimation}
-                  className="grid animate-[prompt-swap_.45s_ease-out] gap-2 sm:grid-cols-2"
+                  aria-live="polite"
+                  className={`grid min-h-[292px] content-start gap-2 transition-all duration-300 ease-out sm:min-h-[138px] sm:grid-cols-2 ${promptsVisible ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}
                 >
                   {visiblePrompts.map((prompt) => (
                     <button
                       key={`${prompt.category}-${prompt.text}`}
                       onClick={() => void ask(undefined, prompt.text)}
-                      className="group rounded-xl border border-[#e0e5ec] bg-white p-3.5 text-left transition hover:-translate-y-0.5 hover:border-[#9aace4] hover:bg-[#f7f9ff] hover:shadow-sm"
+                      className="group min-h-[67px] rounded-xl border border-[#e0e5ec] bg-white p-3.5 text-left transition hover:-translate-y-0.5 hover:border-[#9aace4] hover:bg-[#f7f9ff] hover:shadow-sm"
                     >
                       <span className="text-[10px] font-bold uppercase tracking-[.09em] text-[#8290a4]">
                         {prompt.category}
@@ -240,7 +254,7 @@ export function AskOpryn({
                     Checking company knowledge
                   </p>
                   <p className="mt-0.5 text-xs">
-                    Finding the most relevant approved sources…
+                    Finding the most relevant approved sources
                   </p>
                 </div>
               </div>
@@ -253,19 +267,13 @@ export function AskOpryn({
         className="border-t border-[#e2e7ed] bg-white p-3 sm:p-4"
       >
         <div className="mx-auto flex max-w-4xl items-end gap-2 rounded-xl border border-[#cfd7e2] bg-white p-2 shadow-[0_4px_18px_rgba(24,39,75,.04)] focus-within:border-[#718ee7] focus-within:ring-4 focus-within:ring-[#3158d8]/10">
-          <textarea
+          <input
             ref={inputRef}
+            type="text"
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault();
-                void ask();
-              }
-            }}
-            rows={1}
-            placeholder="Ask about a process, policy, role, or decision…"
-            className="max-h-32 min-h-10 flex-1 resize-none bg-transparent px-2 py-2 text-sm outline-none"
+            placeholder="Ask about a process, policy, role, or decision"
+            className="h-10 min-w-0 flex-1 bg-transparent px-2 text-sm outline-none"
           />
           <button
             disabled={!question.trim() || loading}

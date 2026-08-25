@@ -47,12 +47,14 @@ export function TeamManager({
   roles,
   members,
   invites,
+  invitedCount,
   currentUserId,
 }: {
   organizationName: string;
   roles: Role[];
   members: Member[];
   invites: Invite[];
+  invitedCount: number;
   currentUserId: string;
 }) {
   const router = useRouter();
@@ -280,6 +282,7 @@ export function TeamManager({
         roles={roles}
         members={rankedMembers}
         invites={invites}
+        invitedCount={invitedCount}
       />
 
       <section className="rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
@@ -557,11 +560,13 @@ function TeamTree({
   roles,
   members,
   invites,
+  invitedCount,
 }: {
   organizationName: string;
   roles: Role[];
   members: RankedMember[];
   invites: Invite[];
+  invitedCount: number;
 }) {
   const branches = [
     {
@@ -623,7 +628,8 @@ function TeamTree({
             </span>
             <p className="mt-3 font-semibold">{organizationName}</p>
             <p className="mt-1 text-xs text-[#6c7890]">
-              {members.length} active · {invites.length} invited
+              {Math.max(0, members.length - 1)} teammates · {invitedCount}{" "}
+              {invitedCount === 1 ? "invitation" : "invitations"} sent
             </p>
           </div>
           <div className="mx-auto h-8 w-px bg-[#b9c6dc]" />

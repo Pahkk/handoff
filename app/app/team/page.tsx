@@ -11,6 +11,7 @@ export default async function TeamPage() {
     { data: invites },
     { data: training },
     { data: processAssignments },
+    { count: invitedCount },
   ] = await Promise.all([
     supabase
       .from("roles")
@@ -38,6 +39,11 @@ export default async function TeamPage() {
       .from("process_role_assignments")
       .select("role_id")
       .eq("organization_id", context.organization.id),
+    supabase
+      .from("organization_invites")
+      .select("id", { count: "exact", head: true })
+      .eq("organization_id", context.organization.id)
+      .neq("status", "revoked"),
   ]);
   const shaped = (members ?? []).map((member) => {
     const raw = member.profiles as unknown;
@@ -80,6 +86,7 @@ export default async function TeamPage() {
         }))}
         members={shaped}
         invites={shapedInvites}
+        invitedCount={invitedCount ?? 0}
         currentUserId={context.user.id}
       />
     </>

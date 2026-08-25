@@ -71,7 +71,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes app-toast-in { from { opacity: 0; transform: translate3d(0, -16px, 0) scale(.96); } to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
 @keyframes app-toast-progress { from { transform: scaleX(1); } to { transform: scaleX(0); } }
-@keyframes prompt-swap { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .app-success-toast { animation: app-toast-in .42s cubic-bezier(.2,.8,.2,1) both; }
 .app-success-toast-progress { animation: app-toast-progress 4.4s linear both; }
 

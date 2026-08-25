@@ -29,6 +29,11 @@ type KnowledgeProcess = {
   roles: string[];
   chunks: KnowledgeChunk[];
 };
+type KnowledgeGap = {
+  id: string;
+  question: string;
+  person: string;
+};
 
 export function ProcessIdeas({
   organizationName,
@@ -52,7 +57,7 @@ export function ProcessIdeas({
       <div className="rounded-2xl border border-[#dce4f2] bg-[linear-gradient(135deg,#f5f8ff,#fff)] p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.1em] text-[#3158d8]">
+            <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.1em] text-[#177257]">
               <Lightbulb className="size-4" /> Recommended next
             </p>
             <h2 className="mt-2 text-lg font-semibold">
@@ -131,9 +136,11 @@ export function ProcessIdeas({
 export function KnowledgeTree({
   organizationName,
   processes,
+  gaps = [],
 }: {
   organizationName: string;
   processes: KnowledgeProcess[];
+  gaps?: KnowledgeGap[];
 }) {
   const totalChunks = processes.reduce(
     (total, process) => total + process.chunks.length,
@@ -157,9 +164,10 @@ export function KnowledgeTree({
         <div className="flex gap-2 text-center">
           <TreeMetric label="Processes" value={processes.length} />
           <TreeMetric label="Knowledge" value={totalChunks} />
+          <TreeMetric label="Gaps" value={gaps.length} />
         </div>
       </div>
-      {!processes.length ? (
+      {!processes.length && !gaps.length ? (
         <div className="p-7 text-center sm:p-10">
           <span className="mx-auto grid size-11 place-items-center rounded-xl bg-[#edf2ff] text-[#3158d8]">
             <Network className="size-5" />
@@ -190,6 +198,7 @@ export function KnowledgeTree({
                 <div className="absolute left-0 top-1/2 hidden h-px w-full bg-[#c5d0e1] sm:block" />
               </div>
               <div className="space-y-4">
+                {gaps.length ? <KnowledgeGapBranch gaps={gaps} /> : null}
                 {processes.map((process) => (
                   <ProcessBranch key={process.id} process={process} />
                 ))}
@@ -199,6 +208,45 @@ export function KnowledgeTree({
         </div>
       )}
     </section>
+  );
+}
+
+function KnowledgeGapBranch({ gaps }: { gaps: KnowledgeGap[] }) {
+  return (
+    <article className="relative rounded-2xl border border-dashed border-[#d5a6a9] bg-[#fff8f8] p-4 before:absolute before:right-full before:top-1/2 before:hidden before:h-px before:w-12 before:bg-[#c5d0e1] sm:before:block">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-[#fff0f1] text-[#ae4d55]">
+            <CircleHelp className="size-4" />
+          </span>
+          <div>
+            <h3 className="text-sm font-semibold">Knowledge gaps</h3>
+            <p className="mt-1 text-[11px] text-[#7c6b70]">
+              Questions waiting for an approved owner answer
+            </p>
+          </div>
+        </div>
+        <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-semibold text-[#a04e55] shadow-sm">
+          {gaps.length} open
+        </span>
+      </div>
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        {gaps.slice(0, 6).map((gap) => (
+          <Link
+            key={gap.id}
+            href={`#gap-${gap.id}`}
+            className="rounded-xl border border-[#eed9db] bg-white p-3 text-left transition hover:border-[#d5a6a9]"
+          >
+            <p className="line-clamp-2 text-[11px] font-semibold leading-4 text-[#59484d]">
+              {gap.question}
+            </p>
+            <p className="mt-1.5 text-[9px] uppercase tracking-[.07em] text-[#9b7d83]">
+              Asked by {gap.person}
+            </p>
+          </Link>
+        ))}
+      </div>
+    </article>
   );
 }
 

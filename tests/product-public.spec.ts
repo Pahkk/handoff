@@ -8,6 +8,9 @@ test("protected product routes send signed-out users to login", async ({
   await expect(
     page.getByRole("heading", { name: "Welcome back" }),
   ).toBeVisible();
+
+  await page.goto("/app/training");
+  await expect(page).toHaveURL(/\/login$/);
 });
 
 test("email auth pages are complete and responsive", async ({ page }) => {
@@ -118,4 +121,13 @@ test("product APIs reject unauthenticated requests without leaking details", asy
     expect(body.error).toBe("Please sign in again.");
     expect(JSON.stringify(body)).not.toContain("stack");
   }
+
+  const training = await request.put("/api/training/assignments", {
+    data: {
+      processId: "00000000-0000-4000-8000-000000000000",
+      userIds: [],
+    },
+  });
+  expect(training.status()).toBe(401);
+  expect(await training.json()).toEqual({ error: "Please sign in again." });
 });

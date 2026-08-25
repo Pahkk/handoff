@@ -90,7 +90,9 @@ export default async function GettingStartedPage() {
                   >
                     {started ? <CheckCircle2 className="size-5" /> : index + 1}
                   </span>
-                  <span className="rounded-full bg-[#f1f3f6] px-2.5 py-1 text-[11px] font-semibold text-[#667184]">
+                  <span
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${started ? "bg-[#edf2ff] text-[#3158d8]" : "bg-[#eaf7f1] text-[#177257]"}`}
+                  >
                     {started
                       ? "Started"
                       : index === 0
@@ -119,7 +121,9 @@ export default async function GettingStartedPage() {
         </div>
       )}
       {recommendations?.length ? (
-        <p className="mt-5 text-sm text-[#718095]">
+        <p
+          className={`mt-5 text-sm ${remaining ? "font-medium text-[#177257]" : "text-[#718095]"}`}
+        >
           {remaining
             ? `${remaining} recommended ${remaining === 1 ? "process" : "processes"} left to start.`
             : "You have started every process in your initial plan."}
