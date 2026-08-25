@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
-import { ArrowUp, BookOpen, LoaderCircle, Send, Sparkles } from "lucide-react";
+import { ArrowUp, BookOpen, LoaderCircle, Send } from "lucide-react";
 type Message = {
   id: string;
   role: "user" | "opryn";
@@ -102,7 +102,7 @@ export function AskOpryn({ hasKnowledge }: { hasKnowledge: boolean }) {
         {!messages.length ? (
           <div className="flex min-h-[440px] flex-col items-center justify-center text-center">
             <span className="grid size-12 place-items-center rounded-2xl bg-[#3158d8] text-white shadow-[0_12px_30px_rgba(49,88,216,.22)]">
-              <Sparkles className="size-5" />
+              <BookOpen className="size-5" />
             </span>
             <h2 className="mt-5 text-2xl font-semibold tracking-[-.035em]">
               Ask anything about how your company works.

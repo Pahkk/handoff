@@ -5,7 +5,6 @@ import {
   CircleHelp,
   FileText,
   MessageCircleQuestion,
-  Sparkles,
 } from "lucide-react";
 import { EmptyState, PageHeading } from "@/components/app/page-heading";
 import { requireAppContext } from "@/lib/app-context";
@@ -122,7 +121,7 @@ export default async function DashboardPage() {
             href="/app/processes/new"
             className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#3158d8] px-4 text-sm font-semibold text-white"
           >
-            <Sparkles className="size-4" />
+            <FileText className="size-4" />
             Teach Opryn
           </Link>
         }
