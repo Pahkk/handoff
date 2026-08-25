@@ -42,6 +42,7 @@ export default async function ProcessDetailPage({
     clarificationsResult,
     mediaResult,
     assignmentsResult,
+    rolesResult,
   ] = await Promise.all([
     supabase
       .from("process_steps")
@@ -73,9 +74,13 @@ export default async function ProcessDetailPage({
       .limit(1),
     supabase
       .from("process_role_assignments")
-      .select("roles(name)")
+      .select("role_id")
       .eq("organization_id", context.organization.id)
       .eq("process_id", id),
+    supabase
+      .from("roles")
+      .select("id,name")
+      .eq("organization_id", context.organization.id),
   ]);
 
   const relatedError = [
@@ -85,6 +90,7 @@ export default async function ProcessDetailPage({
     clarificationsResult.error,
     mediaResult.error,
     assignmentsResult.error,
+    rolesResult.error,
   ].find(Boolean);
   if (relatedError) {
     console.error("Unable to load process details", {
@@ -129,14 +135,11 @@ export default async function ProcessDetailPage({
     email: string;
   } | null;
   const media = mediaResult.data?.[0];
+  const roleNames = new Map(
+    (rolesResult.data ?? []).map((role) => [role.id, role.name]),
+  );
   const assignedRoles = (assignmentsResult.data ?? [])
-    .map((assignment) => {
-      const raw = assignment.roles as unknown;
-      const role = (Array.isArray(raw) ? raw[0] : raw) as {
-        name: string;
-      } | null;
-      return role?.name;
-    })
+    .map((assignment) => roleNames.get(assignment.role_id))
     .filter((name): name is string => Boolean(name));
   const processGuide = (
     <ProcessDetailGuide

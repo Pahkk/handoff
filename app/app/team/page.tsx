@@ -27,7 +27,7 @@ export default async function TeamPage() {
       .order("joined_at"),
     supabase
       .from("organization_invites")
-      .select("id,email,status,expires_at,roles(name)")
+      .select("id,email,status,expires_at,role_id")
       .eq("organization_id", context.organization.id)
       .eq("status", "pending")
       .order("created_at", { ascending: false }),
@@ -63,13 +63,13 @@ export default async function TeamPage() {
       },
     };
   });
-  const shapedInvites = (invites ?? []).map((invite) => {
-    const raw = invite.roles as unknown;
-    return {
-      ...invite,
-      role: (Array.isArray(raw) ? raw[0] : raw) as { name: string } | null,
-    };
-  });
+  const roleNames = new Map((roles ?? []).map((role) => [role.id, role.name]));
+  const shapedInvites = (invites ?? []).map((invite) => ({
+    ...invite,
+    role: invite.role_id
+      ? { name: roleNames.get(invite.role_id) ?? "Assigned role" }
+      : null,
+  }));
   return (
     <>
       <PageHeading

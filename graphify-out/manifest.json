@@ -245,13 +245,13 @@
     "semantic_hash": ""
   },
   "app/app/page.tsx": {
-    "mtime": 1787620949.1023476,
-    "ast_hash": "952096c553c13bc6685d0ec22479ae70",
+    "mtime": 1787701738.969882,
+    "ast_hash": "357a82abccc5b06a216946b4dcd9ba2b",
     "semantic_hash": ""
   },
   "app/app/processes/[id]/page.tsx": {
-    "mtime": 1787698699.7297482,
-    "ast_hash": "f125dcbf1566e436fb75e9fa81eecad2",
+    "mtime": 1787701693.7850728,
+    "ast_hash": "2206455288af7f1debf29bbece6a0724",
     "semantic_hash": ""
   },
   "app/app/processes/new/page.tsx": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "app/app/team/page.tsx": {
-    "mtime": 1787700740.219776,
-    "ast_hash": "2fbb0684e30d2afef53c22aafe570b79",
+    "mtime": 1787701712.8633268,
+    "ast_hash": "0da6f9dd99e675ece85f7b89b7df76c7",
     "semantic_hash": ""
   },
   "app/auth/reset-password/page.tsx": {

@@ -897,7 +897,7 @@
       "label": "Metric()",
       "file_type": "code",
       "source_file": "app/app/page.tsx",
-      "source_location": "L374",
+      "source_location": "L383",
       "_origin": "ast",
       "id": "app_page_metric",
       "community": 15,
@@ -907,7 +907,7 @@
       "label": "Mini()",
       "file_type": "code",
       "source_file": "app/app/page.tsx",
-      "source_location": "L397",
+      "source_location": "L406",
       "_origin": "ast",
       "id": "app_page_mini",
       "community": 15,
@@ -917,7 +917,7 @@
       "label": "ScoreRow()",
       "file_type": "code",
       "source_file": "app/app/page.tsx",
-      "source_location": "L405",
+      "source_location": "L414",
       "_origin": "ast",
       "id": "app_page_scorerow",
       "community": 15,
@@ -927,7 +927,7 @@
       "label": "greeting()",
       "file_type": "code",
       "source_file": "app/app/page.tsx",
-      "source_location": "L421",
+      "source_location": "L430",
       "_origin": "ast",
       "id": "app_page_greeting",
       "community": 15,
@@ -6349,9 +6349,9 @@
       "source_file": "app/api/training/assignments/route.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "assignments_route",
-      "target": "assignments_route_put",
-      "confidence_score": 1.0
+      "target": "assignments_route_put"
     },
     {
       "relation": "contains",
@@ -6359,9 +6359,9 @@
       "source_file": "app/api/training/assignments/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "assignments_route",
-      "target": "assignments_route_schema",
-      "confidence_score": 1.0
+      "target": "assignments_route_schema"
     },
     {
       "relation": "imports_from",
@@ -6370,9 +6370,9 @@
       "source_file": "app/api/training/assignments/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "assignments_route",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -6381,9 +6381,9 @@
       "source_file": "app/api/training/assignments/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "assignments_route",
-      "target": "lib_api_apierror",
-      "confidence_score": 1.0
+      "target": "lib_api_apierror"
     },
     {
       "relation": "imports",
@@ -6392,9 +6392,9 @@
       "source_file": "app/api/training/assignments/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "assignments_route",
-      "target": "lib_api_getrequestcontext",
-      "confidence_score": 1.0
+      "target": "lib_api_getrequestcontext"
     },
     {
       "relation": "calls",
@@ -6827,9 +6827,9 @@
       "source_file": "app/app/knowledge-gaps/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "knowledge_gaps_page",
-      "target": "app_process_intelligence",
-      "confidence_score": 1.0
+      "target": "app_process_intelligence"
     },
     {
       "relation": "imports",
@@ -6838,9 +6838,9 @@
       "source_file": "app/app/knowledge-gaps/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "knowledge_gaps_page",
-      "target": "app_process_intelligence_knowledgetree",
-      "confidence_score": 1.0
+      "target": "app_process_intelligence_knowledgetree"
     },
     {
       "relation": "contains",
@@ -6848,9 +6848,9 @@
       "source_file": "app/app/knowledge-gaps/page.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "knowledge_gaps_page",
-      "target": "knowledge_gaps_page_knowledgegraphpage",
-      "confidence_score": 1.0
+      "target": "knowledge_gaps_page_knowledgegraphpage"
     },
     {
       "relation": "imports_from",
@@ -8215,9 +8215,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "app_page_heading",
-      "confidence_score": 1.0
+      "target": "app_page_heading"
     },
     {
       "relation": "imports",
@@ -8226,9 +8226,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "app_page_heading_pageheading",
-      "confidence_score": 1.0
+      "target": "app_page_heading_pageheading"
     },
     {
       "relation": "imports_from",
@@ -8237,9 +8237,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "app_training_manager",
-      "confidence_score": 1.0
+      "target": "app_training_manager"
     },
     {
       "relation": "imports",
@@ -8248,9 +8248,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "app_training_manager_trainingmanager",
-      "confidence_score": 1.0
+      "target": "app_training_manager_trainingmanager"
     },
     {
       "relation": "imports_from",
@@ -8259,9 +8259,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "lib_app_context",
-      "confidence_score": 1.0
+      "target": "lib_app_context"
     },
     {
       "relation": "imports",
@@ -8270,9 +8270,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "lib_app_context_requireadmincontext",
-      "confidence_score": 1.0
+      "target": "lib_app_context_requireadmincontext"
     },
     {
       "relation": "imports_from",
@@ -8281,9 +8281,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "supabase_server",
-      "confidence_score": 1.0
+      "target": "supabase_server"
     },
     {
       "relation": "imports",
@@ -8292,9 +8292,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "supabase_server_createclient",
-      "confidence_score": 1.0
+      "target": "supabase_server_createclient"
     },
     {
       "relation": "contains",
@@ -8302,9 +8302,9 @@
       "source_file": "app/app/training/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "training_page",
-      "target": "training_page_trainingpage",
-      "confidence_score": 1.0
+      "target": "training_page_trainingpage"
     },
     {
       "relation": "calls",
@@ -9495,9 +9495,9 @@
       "source_file": "components/app/process-intelligence.tsx",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_process_intelligence",
-      "target": "app_process_intelligence_knowledgegap",
-      "confidence_score": 1.0
+      "target": "app_process_intelligence_knowledgegap"
     },
     {
       "relation": "contains",
@@ -9505,9 +9505,9 @@
       "source_file": "components/app/process-intelligence.tsx",
       "source_location": "L214",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_process_intelligence",
-      "target": "app_process_intelligence_knowledgegapbranch",
-      "confidence_score": 1.0
+      "target": "app_process_intelligence_knowledgegapbranch"
     },
     {
       "relation": "contains",
@@ -9963,9 +9963,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "app_training_manager_assignment",
-      "confidence_score": 1.0
+      "target": "app_training_manager_assignment"
     },
     {
       "relation": "contains",
@@ -9973,9 +9973,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "app_training_manager_person",
-      "confidence_score": 1.0
+      "target": "app_training_manager_person"
     },
     {
       "relation": "contains",
@@ -9983,9 +9983,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "app_training_manager_process",
-      "confidence_score": 1.0
+      "target": "app_training_manager_process"
     },
     {
       "relation": "contains",
@@ -9993,9 +9993,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L318",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "app_training_manager_sameids",
-      "confidence_score": 1.0
+      "target": "app_training_manager_sameids"
     },
     {
       "relation": "contains",
@@ -10003,9 +10003,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "app_training_manager_trainingmanager",
-      "confidence_score": 1.0
+      "target": "app_training_manager_trainingmanager"
     },
     {
       "relation": "contains",
@@ -10013,9 +10013,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L292",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "app_training_manager_trainingmetric",
-      "confidence_score": 1.0
+      "target": "app_training_manager_trainingmetric"
     },
     {
       "relation": "imports_from",
@@ -10024,9 +10024,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "lib_client_toast",
-      "confidence_score": 1.0
+      "target": "lib_client_toast"
     },
     {
       "relation": "imports",
@@ -10035,9 +10035,9 @@
       "source_file": "components/app/training-manager.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_training_manager",
-      "target": "lib_client_toast_showapptoast",
-      "confidence_score": 1.0
+      "target": "lib_client_toast_showapptoast"
     },
     {
       "relation": "contains",
@@ -12560,5 +12560,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5668ebdb1d8c9e8a248600ff835b272fdc293e9b"
+  "built_at_commit": "84b8f6c54f86b52ae400d65bc8ac70f5de02e896"
 }

@@ -297,10 +297,23 @@ async function EmployeeHome({
 }) {
   const { data: assignments } = await supabase
     .from("training_assignments")
-    .select("id,status,processes(id,title,summary)")
+    .select("id,status,process_id")
     .eq("organization_id", context.organization.id)
     .eq("user_id", context.user.id)
     .order("created_at");
+  const processIds = (assignments ?? []).map(
+    (assignment) => assignment.process_id,
+  );
+  const { data: assignedProcesses } = processIds.length
+    ? await supabase
+        .from("processes")
+        .select("id,title,summary")
+        .eq("organization_id", context.organization.id)
+        .in("id", processIds)
+    : { data: [] };
+  const processesById = new Map(
+    (assignedProcesses ?? []).map((process) => [process.id, process]),
+  );
   return (
     <>
       <PageHeading
@@ -335,11 +348,7 @@ async function EmployeeHome({
         ) : (
           <div className="mt-5 divide-y divide-[#edf0f4]">
             {assignments.map((assignment) => {
-              const raw = assignment.processes as unknown;
-              const process = (Array.isArray(raw) ? raw[0] : raw) as {
-                id: string;
-                title: string;
-              } | null;
+              const process = processesById.get(assignment.process_id);
               return process ? (
                 <Link
                   key={assignment.id}
