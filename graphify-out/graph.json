@@ -580,7 +580,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ask_page",
-      "community": 15,
+      "community": 4,
       "norm_label": "page.tsx"
     },
     {
@@ -590,7 +590,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ask_page_askpage",
-      "community": 15,
+      "community": 4,
       "norm_label": "askpage()"
     },
     {
@@ -640,7 +640,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout",
-      "community": 15,
+      "community": 4,
       "norm_label": "layout.tsx"
     },
     {
@@ -650,7 +650,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout_metadata",
-      "community": 15,
+      "community": 4,
       "norm_label": "metadata"
     },
     {
@@ -660,7 +660,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_layout_productlayout",
-      "community": 15,
+      "community": 4,
       "norm_label": "productlayout()"
     },
     {
@@ -690,7 +690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_page_tsx_app_page",
-      "community": 15,
+      "community": 4,
       "norm_label": "page.tsx"
     },
     {
@@ -700,7 +700,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "app_page_dashboardpage",
-      "community": 15,
+      "community": 4,
       "norm_label": "dashboardpage()"
     },
     {
@@ -710,7 +710,7 @@
       "source_location": "L288",
       "_origin": "ast",
       "id": "app_page_employeehome",
-      "community": 15,
+      "community": 4,
       "norm_label": "employeehome()"
     },
     {
@@ -720,7 +720,7 @@
       "source_location": "L375",
       "_origin": "ast",
       "id": "app_page_metric",
-      "community": 15,
+      "community": 4,
       "norm_label": "metric()"
     },
     {
@@ -730,7 +730,7 @@
       "source_location": "L398",
       "_origin": "ast",
       "id": "app_page_mini",
-      "community": 15,
+      "community": 4,
       "norm_label": "mini()"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L406",
       "_origin": "ast",
       "id": "app_page_scorerow",
-      "community": 15,
+      "community": 4,
       "norm_label": "scorerow()"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L422",
       "_origin": "ast",
       "id": "app_page_greeting",
-      "community": 15,
+      "community": 4,
       "norm_label": "greeting()"
     },
     {
@@ -1060,7 +1060,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "onboarding_page",
-      "community": 15,
+      "community": 4,
       "norm_label": "page.tsx"
     },
     {
@@ -1070,7 +1070,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "onboarding_page_onboardingpage",
-      "community": 15,
+      "community": 4,
       "norm_label": "onboardingpage()"
     },
     {
@@ -1220,7 +1220,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_ask_opryn",
-      "community": 15,
+      "community": 4,
       "norm_label": "ask-opryn.tsx"
     },
     {
@@ -1230,7 +1230,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_ask_opryn_message",
-      "community": 15,
+      "community": 4,
       "norm_label": "message"
     },
     {
@@ -1240,7 +1240,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_ask_opryn_prompts",
-      "community": 15,
+      "community": 4,
       "norm_label": "prompts"
     },
     {
@@ -1250,7 +1250,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_ask_opryn_askopryn",
-      "community": 15,
+      "community": 4,
       "norm_label": "askopryn()"
     },
     {
@@ -1274,30 +1274,40 @@
       "norm_label": "role"
     },
     {
-      "label": "stages",
+      "label": "mediaStages",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "app_capture_process_stages",
+      "id": "app_capture_process_mediastages",
       "community": 5,
-      "norm_label": "stages"
+      "norm_label": "mediastages"
+    },
+    {
+      "label": "textStages",
+      "file_type": "code",
+      "source_file": "components/app/capture-process.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "app_capture_process_textstages",
+      "community": 5,
+      "norm_label": "textstages"
     },
     {
       "label": "CaptureProcess()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L16",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "app_capture_process_captureprocess",
-      "community": 15,
+      "community": 5,
       "norm_label": "captureprocess()"
     },
     {
       "label": "ModeButton()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L234",
+      "source_location": "L247",
       "_origin": "ast",
       "id": "app_capture_process_modebutton",
       "community": 5,
@@ -1307,7 +1317,7 @@
       "label": "Field()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L261",
+      "source_location": "L274",
       "_origin": "ast",
       "id": "app_capture_process_field",
       "community": 5,
@@ -1650,7 +1660,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_auth",
-      "community": 5,
+      "community": 0,
       "norm_label": "auth.tsx"
     },
     {
@@ -1660,7 +1670,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_auth_authcontextvalue",
-      "community": 5,
+      "community": 0,
       "norm_label": "authcontextvalue"
     },
     {
@@ -1670,7 +1680,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_auth_authcontext",
-      "community": 5,
+      "community": 0,
       "norm_label": "authcontext"
     },
     {
@@ -1680,7 +1690,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_auth_useauth",
-      "community": 5,
+      "community": 0,
       "norm_label": "useauth()"
     },
     {
@@ -1690,7 +1700,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "components_auth_authprovider",
-      "community": 5,
+      "community": 0,
       "norm_label": "authprovider()"
     },
     {
@@ -1700,7 +1710,7 @@
       "source_location": "L189",
       "_origin": "ast",
       "id": "components_auth_accountcontrols",
-      "community": 5,
+      "community": 0,
       "norm_label": "accountcontrols()"
     },
     {
@@ -1710,7 +1720,7 @@
       "source_location": "L235",
       "_origin": "ast",
       "id": "components_auth_googlemark",
-      "community": 5,
+      "community": 0,
       "norm_label": "googlemark()"
     },
     {
@@ -2080,7 +2090,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_onboarding_form",
-      "community": 15,
+      "community": 4,
       "norm_label": "onboarding-form.tsx"
     },
     {
@@ -2090,7 +2100,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_onboarding_form_onboardingform",
-      "community": 15,
+      "community": 4,
       "norm_label": "onboardingform()"
     },
     {
@@ -2100,7 +2110,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "components_onboarding_form_field",
-      "community": 15,
+      "community": 4,
       "norm_label": "field()"
     },
     {
@@ -2250,7 +2260,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_ui_logo",
-      "community": 0,
+      "community": 16,
       "norm_label": "logo()"
     },
     {
@@ -2510,7 +2520,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_app_context",
-      "community": 15,
+      "community": 4,
       "norm_label": "app-context.ts"
     },
     {
@@ -2520,7 +2530,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_app_context_permissionlevel",
-      "community": 15,
+      "community": 4,
       "norm_label": "permissionlevel"
     },
     {
@@ -2530,7 +2540,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "lib_app_context_appcontext",
-      "community": 15,
+      "community": 4,
       "norm_label": "appcontext"
     },
     {
@@ -2540,7 +2550,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "lib_app_context_getoptionalappcontext",
-      "community": 15,
+      "community": 4,
       "norm_label": "getoptionalappcontext"
     },
     {
@@ -2550,7 +2560,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "lib_app_context_requireuser",
-      "community": 15,
+      "community": 4,
       "norm_label": "requireuser()"
     },
     {
@@ -2560,7 +2570,7 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "lib_app_context_requireappcontext",
-      "community": 15,
+      "community": 4,
       "norm_label": "requireappcontext()"
     },
     {
@@ -7037,6 +7047,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/capture-process.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "app_capture_process",
+      "target": "app_capture_process_mediastages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/capture-process.tsx",
       "source_location": "L35",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -7057,11 +7077,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L9",
+      "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "app_capture_process",
-      "target": "app_capture_process_stages"
+      "target": "app_capture_process_textstages",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -8871,9 +8891,9 @@
       "source_file": "package.json",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_format",
-      "confidence_score": 1.0
+      "target": "package_scripts_format"
     },
     {
       "relation": "contains",
@@ -8881,9 +8901,9 @@
       "source_file": "package.json",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_format_check",
-      "confidence_score": 1.0
+      "target": "package_scripts_format_check"
     },
     {
       "relation": "contains",
@@ -9041,9 +9061,9 @@
       "source_file": "package.json",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_prettier",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_prettier"
     },
     {
       "relation": "contains",
@@ -9307,5 +9327,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "627a9075a4df86517d39ff72440972e6204402c2"
+  "built_at_commit": "f8e1ec1e9ca2138f5a42522dc50e44d5a74a1049"
 }

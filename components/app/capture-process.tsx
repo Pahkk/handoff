@@ -6,9 +6,14 @@ import { FileText, LoaderCircle, Mic2, UploadCloud } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 type Role = { id: string; name: string };
-const stages = [
+const mediaStages = [
   "Uploading recording",
-  "Transcribing",
+  "Transcribing recording",
+  "Finding steps and rules",
+  "Preparing your process",
+];
+const textStages = [
+  "Reading your explanation",
   "Finding steps and rules",
   "Preparing your process",
 ];
@@ -27,6 +32,14 @@ export function CaptureProcess({ roles }: { roles: Role[] }) {
   const [working, setWorking] = useState(false);
   const [stage, setStage] = useState(0);
   const [error, setError] = useState("");
+  const stages = mode === "media" ? mediaStages : textStages;
+
+  function changeMode(nextMode: "media" | "text") {
+    setMode(nextMode);
+    setError("");
+    if (nextMode === "text") setFile(null);
+  }
+
   async function submit(event: FormEvent) {
     event.preventDefault();
     setError("");
@@ -42,17 +55,18 @@ export function CaptureProcess({ roles }: { roles: Role[] }) {
           ...form,
           roleId: form.roleId || null,
           inputType: mode,
-          file: file
-            ? { name: file.name, type: file.type, size: file.size }
-            : undefined,
+          file:
+            mode === "media" && file
+              ? { name: file.name, type: file.type, size: file.size }
+              : undefined,
         }),
       });
       const body = await response.json();
       if (!response.ok)
         throw new Error(body.error ?? "Unable to create process.");
       if (body.ready) {
-        router.push(`/app/processes/${body.processId}`);
-        router.refresh();
+        setStage(textStages.length - 1);
+        router.replace(`/app/processes/${body.processId}`);
         return;
       }
       setStage(0);
@@ -75,8 +89,7 @@ export function CaptureProcess({ roles }: { roles: Role[] }) {
           learned.error ?? "Opryn could not learn this recording.",
         );
       setStage(3);
-      router.push(`/app/processes/${body.processId}`);
-      router.refresh();
+      router.replace(`/app/processes/${body.processId}`);
     } catch (caught) {
       setError(
         caught instanceof Error ? caught.message : "Something went wrong.",
@@ -158,14 +171,14 @@ export function CaptureProcess({ roles }: { roles: Role[] }) {
         <div className="mt-4 grid grid-cols-2 gap-3">
           <ModeButton
             active={mode === "media"}
-            onClick={() => setMode("media")}
+            onClick={() => changeMode("media")}
             icon={<UploadCloud className="size-5" />}
             title="Upload recording"
             note="Video or audio"
           />
           <ModeButton
             active={mode === "text"}
-            onClick={() => setMode("text")}
+            onClick={() => changeMode("text")}
             icon={<FileText className="size-5" />}
             title="Explain with text"
             note="Type it naturally"

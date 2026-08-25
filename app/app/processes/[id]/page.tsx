@@ -14,15 +14,72 @@ export default async function ProcessDetailPage({
   const { id } = await params;
   const context = await requireAppContext();
   const supabase = await createClient();
-  const { data: process } = await supabase
+  const { data: process, error: processError } = await supabase
     .from("processes")
-    .select(
-      "*, profiles!processes_created_by_fkey(full_name, email), process_steps(*), process_rules(*), process_exceptions(*), clarification_questions(*), process_role_assignments(roles(id,name)), media_uploads(id,original_name,storage_path,status,mime_type)",
-    )
+    .select("*")
     .eq("id", id)
     .eq("organization_id", context.organization.id)
     .maybeSingle();
+  if (processError) {
+    console.error("Unable to load process", {
+      processId: id,
+      code: processError.code,
+    });
+    throw new Error("Unable to load this process.");
+  }
   if (!process) notFound();
+
+  const [
+    stepsResult,
+    rulesResult,
+    exceptionsResult,
+    clarificationsResult,
+    mediaResult,
+  ] = await Promise.all([
+    supabase
+      .from("process_steps")
+      .select("id, step_order, title, description")
+      .eq("organization_id", context.organization.id)
+      .eq("process_id", id)
+      .order("step_order"),
+    supabase
+      .from("process_rules")
+      .select("id, title, text, confidence, status")
+      .eq("organization_id", context.organization.id)
+      .eq("process_id", id),
+    supabase
+      .from("process_exceptions")
+      .select("text")
+      .eq("organization_id", context.organization.id)
+      .eq("process_id", id),
+    supabase
+      .from("clarification_questions")
+      .select("id, question, answer, suggested_rule")
+      .eq("organization_id", context.organization.id)
+      .eq("process_id", id),
+    supabase
+      .from("media_uploads")
+      .select("id, original_name, storage_path, status, mime_type")
+      .eq("organization_id", context.organization.id)
+      .eq("process_id", id)
+      .order("created_at", { ascending: false })
+      .limit(1),
+  ]);
+
+  const relatedError = [
+    stepsResult.error,
+    rulesResult.error,
+    exceptionsResult.error,
+    clarificationsResult.error,
+    mediaResult.error,
+  ].find(Boolean);
+  if (relatedError) {
+    console.error("Unable to load process details", {
+      processId: id,
+      code: relatedError.code,
+    });
+    throw new Error("Unable to load this process.");
+  }
   type StepRow = {
     id: string;
     step_order: number;
@@ -43,18 +100,22 @@ export default async function ProcessDetailPage({
     answer: string | null;
     suggested_rule: string | null;
   };
-  const steps = ([...(process.process_steps ?? [])] as StepRow[]).sort(
+  const steps = ([...(stepsResult.data ?? [])] as StepRow[]).sort(
     (a, b) => a.step_order - b.step_order,
   );
-  const rules = (process.process_rules ?? ([] as RuleRow[])).filter(
+  const rules = (rulesResult.data ?? ([] as RuleRow[])).filter(
     (rule: RuleRow) => context.isAdmin || rule.status === "approved",
   ) as RuleRow[];
-  const creatorRaw = process.profiles as unknown;
-  const creator = (Array.isArray(creatorRaw) ? creatorRaw[0] : creatorRaw) as {
+  const { data: creator } = await supabase
+    .from("profiles")
+    .select("full_name, email")
+    .eq("id", process.created_by)
+    .maybeSingle();
+  const typedCreator = creator as {
     full_name: string | null;
     email: string;
   } | null;
-  const media = process.media_uploads?.[0];
+  const media = mediaResult.data?.[0];
   let mediaUrl: string | null = null;
   if (media?.storage_path) {
     const { data } = await supabase.storage
@@ -90,11 +151,11 @@ export default async function ProcessDetailPage({
               text: rule.text,
               confidence: rule.confidence,
             })),
-            exceptions: (
-              process.process_exceptions ?? ([] as ExceptionRow[])
-            ).map((item: ExceptionRow) => ({ text: item.text })),
+            exceptions: (exceptionsResult.data ?? ([] as ExceptionRow[])).map(
+              (item: ExceptionRow) => ({ text: item.text }),
+            ),
             clarifications: (
-              process.clarification_questions ?? ([] as ClarificationRow[])
+              clarificationsResult.data ?? ([] as ClarificationRow[])
             ).map((item: ClarificationRow) => ({
               id: item.id,
               question: item.question,
@@ -127,7 +188,7 @@ export default async function ProcessDetailPage({
       <div className="mb-6 flex flex-wrap gap-3 text-xs text-[#6e7a8d]">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5">
           <UserRound className="size-3.5" />
-          {creator?.full_name ?? creator?.email ?? "Company owner"}
+          {typedCreator?.full_name ?? typedCreator?.email ?? "Company owner"}
         </span>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5">
           <Calendar className="size-3.5" />

@@ -1,16 +1,16 @@
 # Graph Report - handoff  (2026-08-24)
 
 ## Corpus Check
-- 88 files · ~30,077 words
+- 90 files · ~30,883 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 324 nodes · 573 edges · 19 communities (17 shown, 2 thin omitted)
+- 325 nodes · 574 edges · 19 communities (17 shown, 2 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `627a9075`
+- Built from commit: `f8e1ec1e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -41,10 +41,10 @@
 10. `embedKnowledge()` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ProcessDetailPage()` --calls--> `requireAppContext()`  [INFERRED]
-  app/app/processes/[id]/page.tsx → lib/app-context.ts
 - `ProductLayout()` --calls--> `requireAppContext()`  [INFERRED]
   app/app/layout.tsx → lib/app-context.ts
+- `ProcessDetailPage()` --calls--> `requireAppContext()`  [INFERRED]
+  app/app/processes/[id]/page.tsx → lib/app-context.ts
 - `RolePage()` --calls--> `requireAdminContext()`  [INFERRED]
   app/app/roles/[id]/page.tsx → lib/app-context.ts
 - `POST()` --calls--> `createClient()`  [EXTRACTED]
@@ -58,8 +58,8 @@
 ## Communities (19 total, 2 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.08
-Nodes (36): after, Audience(), audiences, before, Comparison(), FAQ(), faqs, FinalCTA() (+28 more)
+Cohesion: 0.07
+Nodes (40): AccountControls(), AuthContext, AuthContextValue, AuthProvider(), useAuth(), after, Audience(), audiences (+32 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.10
@@ -74,12 +74,12 @@ Cohesion: 0.07
 Nodes (45): getOpenAI(), companyAnswerSchema, ExtractedProcess, extractedProcessSchema, suggestedRuleSchema, answerCompanyQuestion(), embedKnowledge(), extractProcess() (+37 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.18
-Nodes (7): Clarification, ProcessData, ProcessReview(), Rule, Step, TrainingButton(), ProcessDetailPage()
+Cohesion: 0.08
+Nodes (23): metadata, AskOpryn(), Message, prompts, ProductLayout(), DashboardPage(), EmployeeHome(), greeting() (+15 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.09
-Nodes (13): AppShell(), items, Props, Role, stages, AuthForm(), Mode, AccountControls() (+5 more)
+Cohesion: 0.10
+Nodes (10): AppShell(), items, Props, CaptureProcess(), mediaStages, Role, textStages, AuthForm() (+2 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.40
@@ -90,15 +90,15 @@ Cohesion: 0.50
 Nodes (4): isSubmission(), POST(), requiredFields, Submission
 
 ### Community 15 - "Community 15"
-Cohesion: 0.06
-Nodes (45): POST(), schema, metadata, AskOpryn(), Message, prompts, CaptureProcess(), CreateRole() (+37 more)
+Cohesion: 0.08
+Nodes (28): POST(), schema, CreateRole(), OwnerAnswer(), EmptyState(), PageHeading(), Props, RoleEditor() (+20 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.33
-Nodes (4): LegalDocument(), LegalSection(), metadata, metadata
+Cohesion: 0.29
+Nodes (5): LegalDocument(), LegalSection(), Logo(), metadata, metadata
 
 ## Knowledge Gaps
-- **104 isolated node(s):** `schema`, `requiredFields`, `Submission`, `schema`, `schema` (+99 more)
+- **105 isolated node(s):** `schema`, `requiredFields`, `Submission`, `schema`, `schema` (+100 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -107,6 +107,8 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `createClient()` connect `Community 15` to `Community 3`, `Community 4`?**
   _High betweenness centrality (0.246) - this node is a cross-community bridge._
+- **Why does `createClient()` connect `Community 5` to `Community 0`?**
+  _High betweenness centrality (0.143) - this node is a cross-community bridge._
 - **Why does `getRequestContext()` connect `Community 3` to `Community 15`?**
   _High betweenness centrality (0.138) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `getRequestContext()` (e.g. with `DELETE()` and `PATCH()`) actually correct?**
@@ -116,6 +118,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 3 inferred relationships involving `requireAppContext()` (e.g. with `ProductLayout()` and `DashboardPage()`) actually correct?**
   _`requireAppContext()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `schema`, `requiredFields`, `Submission` to the rest of the system?**
-  _104 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.07568027210884354 - nodes in this community are weakly interconnected._
+  _105 weakly-connected nodes found - possible documentation gaps or missing edges._
