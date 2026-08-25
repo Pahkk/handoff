@@ -18,7 +18,9 @@ function isSubmission(value: unknown): value is Submission {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Record<string, unknown>;
   return requiredFields.every(
-    (field) => typeof candidate[field] === "string" && candidate[field].trim().length > 0,
+    (field) =>
+      typeof candidate[field] === "string" &&
+      candidate[field].trim().length > 0,
   );
 }
 
@@ -27,7 +29,10 @@ export async function POST(request: Request) {
   const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
   if (!url || !publishableKey) {
-    return NextResponse.json({ error: "Early access is not configured." }, { status: 503 });
+    return NextResponse.json(
+      { error: "Early access is not configured." },
+      { status: 503 },
+    );
   }
 
   let submission: unknown;
@@ -38,7 +43,10 @@ export async function POST(request: Request) {
   }
 
   if (!isSubmission(submission)) {
-    return NextResponse.json({ error: "Please complete every required field." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Please complete every required field." },
+      { status: 400 },
+    );
   }
 
   const response = await fetch(`${url}/rest/v1/early_access_submissions`, {
@@ -64,7 +72,10 @@ export async function POST(request: Request) {
 
   if (!response.ok) {
     console.error("Supabase early-access insert failed", response.status);
-    return NextResponse.json({ error: "We couldn't save your request. Please try again." }, { status: 502 });
+    return NextResponse.json(
+      { error: "We couldn't save your request. Please try again." },
+      { status: 502 },
+    );
   }
 
   return new NextResponse(null, { status: 204 });

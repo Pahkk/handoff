@@ -13,8 +13,12 @@ export async function createClient() {
           return cookieStore.getAll();
         },
         setAll(cookiesToSet) {
-          for (const { name, value, options } of cookiesToSet) {
-            cookieStore.set(name, value, options);
+          try {
+            for (const { name, value, options } of cookiesToSet)
+              cookieStore.set(name, value, options);
+          } catch {
+            // Server Components cannot always persist refreshed cookies. Route
+            // handlers and auth callbacks can, and remain the source of truth.
           }
         },
       },

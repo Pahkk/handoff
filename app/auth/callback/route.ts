@@ -4,8 +4,11 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const requestedNext = requestUrl.searchParams.get("next") ?? "/";
-  const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/";
+  const requestedNext = requestUrl.searchParams.get("next") ?? "/app";
+  const next =
+    requestedNext.startsWith("/") && !requestedNext.startsWith("//")
+      ? requestedNext
+      : "/";
 
   if (code) {
     const supabase = await createClient();
@@ -13,5 +16,7 @@ export async function GET(request: Request) {
     if (!error) return NextResponse.redirect(new URL(next, requestUrl.origin));
   }
 
-  return NextResponse.redirect(new URL("/?auth=error", requestUrl.origin));
+  return NextResponse.redirect(
+    new URL("/login?error=Unable%20to%20complete%20sign-in", requestUrl.origin),
+  );
 }
