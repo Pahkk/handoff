@@ -443,5 +443,15 @@
     "mtime": 1787615978.0742993,
     "ast_hash": "6b16e24234a1f3fac9f78a1dfeefce98",
     "semantic_hash": ""
+  },
+  "supabase/migrations/20260825001000_backfill_auth_profiles.sql": {
+    "mtime": 1787616359.4612699,
+    "ast_hash": "252231d530eb905a6a2ee6b42b3b6990",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260825001100_verify_legacy_profile_repair.sql": {
+    "mtime": 1787616386.1907697,
+    "ast_hash": "1bc6af07f5496c2bc5214a65ea2b1ff0",
+    "semantic_hash": ""
   }
 }
