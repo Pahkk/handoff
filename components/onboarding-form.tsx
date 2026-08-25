@@ -1,11 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
   Building2,
+  Check,
   ClipboardCheck,
   LoaderCircle,
   Target,
@@ -18,9 +18,9 @@ const steps = [
 ];
 
 export function OnboardingForm({ firstName }: { firstName: string }) {
-  const router = useRouter();
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "",
@@ -73,7 +73,10 @@ export function OnboardingForm({ firstName }: { firstName: string }) {
       const body = await response.json();
       if (!response.ok)
         throw new Error(body.error ?? "Unable to create your workspace.");
-      router.replace("/app/getting-started");
+      setReady(true);
+      window.setTimeout(() => {
+        window.location.replace("/app/getting-started");
+      }, 900);
     } catch (caught) {
       setError(
         caught instanceof Error
@@ -83,6 +86,8 @@ export function OnboardingForm({ firstName }: { firstName: string }) {
       setLoading(false);
     }
   }
+
+  if (loading) return <OnboardingTransition ready={ready} />;
 
   return (
     <main className="min-h-screen bg-[#f7f9fc] px-4 py-8 sm:py-12">
@@ -293,6 +298,65 @@ export function OnboardingForm({ firstName }: { firstName: string }) {
           Your answers stay inside your private company workspace.
         </p>
       </div>
+    </main>
+  );
+}
+
+function OnboardingTransition({ ready }: { ready: boolean }) {
+  const stages = [
+    "Creating your private workspace",
+    "Learning what matters in your business",
+    "Choosing the first processes to capture",
+  ];
+  return (
+    <main className="grid min-h-screen place-items-center bg-[#f7f9fc] px-4 py-10">
+      <section
+        aria-live="polite"
+        className="w-full max-w-[560px] rounded-[24px] border border-[#dfe5ed] bg-white p-7 text-center shadow-[0_24px_70px_rgba(24,39,75,.08)] sm:p-10"
+      >
+        <div className="relative mx-auto grid size-20 place-items-center">
+          {!ready ? (
+            <span className="absolute inset-0 animate-ping rounded-full bg-[#dfe7ff] opacity-70" />
+          ) : null}
+          <span
+            className={`relative grid size-16 place-items-center rounded-full ${ready ? "bg-[#eaf7f1] text-[#177257]" : "bg-[#edf2ff] text-[#3158d8]"}`}
+          >
+            {ready ? (
+              <Check className="size-7" strokeWidth={2.5} />
+            ) : (
+              <LoaderCircle className="size-7 animate-spin" />
+            )}
+          </span>
+        </div>
+        <p className="mt-6 text-xs font-bold uppercase tracking-[.12em] text-[#3158d8]">
+          {ready ? "Ready to begin" : "Setting up Opryn"}
+        </p>
+        <h1 className="mt-2 text-3xl font-semibold tracking-[-.04em]">
+          {ready
+            ? "Your starting plan is ready."
+            : "Building your starting plan…"}
+        </h1>
+        <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[#687487]">
+          {ready
+            ? "Taking you to the work Opryn recommends teaching first."
+            : "Opryn is turning your answers into a practical plan for delegating your first pieces of work."}
+        </p>
+        <div className="mt-7 space-y-2 text-left">
+          {stages.map((label, index) => (
+            <div
+              key={label}
+              className="flex items-center gap-3 rounded-xl border border-[#e4e9f0] bg-[#fafbfd] px-4 py-3 text-sm text-[#53627a]"
+            >
+              <span
+                className={`grid size-6 shrink-0 place-items-center rounded-full text-xs font-bold ${ready ? "bg-[#eaf7f1] text-[#177257]" : index === 0 ? "bg-[#edf2ff] text-[#3158d8]" : "bg-[#f0f2f5] text-[#8b95a4]"}`}
+              >
+                {ready ? "✓" : index + 1}
+              </span>
+              {label}
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

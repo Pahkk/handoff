@@ -30,8 +30,8 @@
     "semantic_hash": ""
   },
   "components/product-sections.tsx": {
-    "mtime": 1787610122.3670292,
-    "ast_hash": "37b0d04f206e9662b5c4d67be258a31d",
+    "mtime": 1787620065.8188949,
+    "ast_hash": "05efa4fa0669fbc8d605cd6c3e1d8c4f",
     "semantic_hash": ""
   },
   "components/story-sections.tsx": {
@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "components/app/role-editor.tsx": {
-    "mtime": 1787618683.576483,
-    "ast_hash": "584c4011a08f623139c14eb7ab04350f",
+    "mtime": 1787620012.5391722,
+    "ast_hash": "cd3ad36990b7aefdd000c3d246478db2",
     "semantic_hash": ""
   },
   "components/app/settings-form.tsx": {
@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "components/onboarding-form.tsx": {
-    "mtime": 1787619127.2647634,
-    "ast_hash": "1002a3223c1413939963e068e385ecb7",
+    "mtime": 1787620082.249854,
+    "ast_hash": "49a04f7ea4c478295f987ddd4441171a",
     "semantic_hash": ""
   },
   "lib/ai/openai.ts": {

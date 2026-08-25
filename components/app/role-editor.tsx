@@ -104,24 +104,9 @@ export function RoleEditor({ role, processes, assigned }: Props) {
       </section>
       <div className="grid gap-5 xl:grid-cols-3">
         <Responsibility
-          title="Every Morning"
-          items={data.responsibilities.every_morning}
-          add={() => add("every_morning")}
-          update={(i, v) => update("every_morning", i, v)}
-          remove={(i) =>
-            setData({
-              ...data,
-              responsibilities: {
-                ...data.responsibilities,
-                every_morning: data.responsibilities.every_morning.filter(
-                  (_, x) => x !== i,
-                ),
-              },
-            })
-          }
-        />
-        <Responsibility
-          title="Every Customer"
+          title="Core Responsibilities"
+          note="The main work this person owns as part of their job."
+          placeholder="Example: Answer new customer calls"
           items={data.responsibilities.every_customer}
           add={() => add("every_customer")}
           update={(i, v) => update("every_customer", i, v)}
@@ -138,7 +123,28 @@ export function RoleEditor({ role, processes, assigned }: Props) {
           }
         />
         <Responsibility
-          title="Requires Approval"
+          title="Recurring Tasks"
+          note="Work they repeat on a schedule—daily, weekly, or monthly."
+          placeholder="Example: Review today's appointments"
+          items={data.responsibilities.every_morning}
+          add={() => add("every_morning")}
+          update={(i, v) => update("every_morning", i, v)}
+          remove={(i) =>
+            setData({
+              ...data,
+              responsibilities: {
+                ...data.responsibilities,
+                every_morning: data.responsibilities.every_morning.filter(
+                  (_, x) => x !== i,
+                ),
+              },
+            })
+          }
+        />
+        <Responsibility
+          title="Approval Boundaries"
+          note="Decisions this person must send to an owner or manager."
+          placeholder="Example: Refund over $250"
           items={data.responsibilities.requires_approval}
           add={() => add("requires_approval")}
           update={(i, v) => update("requires_approval", i, v)}
@@ -211,12 +217,16 @@ export function RoleEditor({ role, processes, assigned }: Props) {
 }
 function Responsibility({
   title,
+  note,
+  placeholder,
   items,
   add,
   update,
   remove,
 }: {
   title: string;
+  note: string;
+  placeholder: string;
   items: string[];
   add: () => void;
   update: (index: number, value: string) => void;
@@ -224,8 +234,11 @@ function Responsibility({
 }) {
   return (
     <section className="rounded-2xl border border-[#dfe5ed] bg-white p-5">
-      <div className="flex justify-between">
-        <h2 className="font-semibold">{title}</h2>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="font-semibold">{title}</h2>
+          <p className="mt-1 text-xs leading-5 text-[#7a8698]">{note}</p>
+        </div>
         <button
           onClick={add}
           className="grid size-7 place-items-center rounded-lg bg-[#f0f3f7]"
@@ -240,6 +253,7 @@ function Responsibility({
             <input
               value={item}
               onChange={(e) => update(index, e.target.value)}
+              placeholder={placeholder}
               className="h-9 min-w-0 flex-1 rounded-lg border border-[#dfe5ed] px-2.5 text-xs"
             />
             <button
@@ -252,7 +266,9 @@ function Responsibility({
           </div>
         ))}
         {!items.length ? (
-          <p className="text-xs text-[#8a95a5]">Nothing added yet.</p>
+          <p className="rounded-lg bg-[#f7f9fc] px-3 py-2 text-xs leading-5 text-[#8a95a5]">
+            Nothing added yet. Use + to add one.
+          </p>
         ) : null}
       </div>
     </section>
