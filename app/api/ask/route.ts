@@ -46,7 +46,10 @@ export async function POST(request: Request) {
       : {
           can_answer: false,
           confidence: 0,
+          headline: "",
           answer: "",
+          steps: [],
+          important_note: "",
           cited_source_ids: [],
         };
     const answerThreshold = settings?.confidence_threshold ?? 0.72;
@@ -106,7 +109,17 @@ export async function POST(request: Request) {
       .insert({
         organization_id: membership.organization_id,
         question_id: question.id,
-        answer: answer.answer,
+        answer: [
+          answer.answer,
+          answer.steps.length
+            ? answer.steps
+                .map((step, index) => `${index + 1}. ${step}`)
+                .join("\n")
+            : "",
+          answer.important_note,
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
         answered_by: null,
         answer_type: "opryn",
       });
@@ -125,7 +138,10 @@ export async function POST(request: Request) {
     return NextResponse.json({
       type: "answer",
       questionId: question.id,
+      headline: answer.headline,
       answer: answer.answer,
+      steps: answer.steps,
+      importantNote: answer.important_note,
       sources: cited.map((item) => ({
         id: item.id,
         label: sourceLabel(item.source_type, item.content),

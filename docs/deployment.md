@@ -23,3 +23,17 @@ embedding vectors rather than generated text.
 Never prefix these variables with `NEXT_PUBLIC_`. After changing a production
 model variable, redeploy the application so every server function uses the new
 configuration.
+
+## Team invitation emails
+
+Opryn sends employee invitations through Supabase Auth magic links. Add these
+URLs to Supabase Authentication → URL Configuration → Redirect URLs:
+
+```text
+https://www.opryn.app/invite/**
+http://localhost:3000/invite/**
+```
+
+For reliable production delivery, configure custom SMTP in Supabase. If email
+delivery is unavailable or rate limited, Opryn still returns a one-time secure
+link that an owner can copy and send manually.

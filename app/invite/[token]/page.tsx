@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Users } from "lucide-react";
 import { InviteAccept } from "@/components/invite-accept";
+import { InviteSessionBridge } from "@/components/invite-session-bridge";
 import { createClient } from "@/lib/supabase/server";
 export default async function InvitePage({
   params,
@@ -14,6 +15,7 @@ export default async function InvitePage({
   return (
     <main className="grid min-h-screen place-items-center bg-[#f7f9fc] p-4">
       <section className="w-full max-w-md rounded-2xl border border-[#dfe5ed] bg-white p-7 text-center shadow-xl">
+        <InviteSessionBridge />
         <span className="mx-auto grid size-12 place-items-center rounded-xl bg-[#edf2ff] text-[#3158d8]">
           <Users className="size-5" />
         </span>

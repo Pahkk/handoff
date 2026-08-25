@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Calendar, CheckCircle2, PlayCircle, UserRound } from "lucide-react";
 import { ProcessReview } from "@/components/app/process-review";
+import { ProcessDetailGuide } from "@/components/app/process-intelligence";
 import { PageHeading } from "@/components/app/page-heading";
 import { TrainingButton } from "@/components/app/training-button";
 import { requireAppContext } from "@/lib/app-context";
@@ -40,6 +41,7 @@ export default async function ProcessDetailPage({
     exceptionsResult,
     clarificationsResult,
     mediaResult,
+    assignmentsResult,
   ] = await Promise.all([
     supabase
       .from("process_steps")
@@ -69,6 +71,11 @@ export default async function ProcessDetailPage({
       .eq("process_id", id)
       .order("created_at", { ascending: false })
       .limit(1),
+    supabase
+      .from("process_role_assignments")
+      .select("roles(name)")
+      .eq("organization_id", context.organization.id)
+      .eq("process_id", id),
   ]);
 
   const relatedError = [
@@ -77,6 +84,7 @@ export default async function ProcessDetailPage({
     exceptionsResult.error,
     clarificationsResult.error,
     mediaResult.error,
+    assignmentsResult.error,
   ].find(Boolean);
   if (relatedError) {
     console.error("Unable to load process details", {
@@ -121,6 +129,28 @@ export default async function ProcessDetailPage({
     email: string;
   } | null;
   const media = mediaResult.data?.[0];
+  const assignedRoles = (assignmentsResult.data ?? [])
+    .map((assignment) => {
+      const raw = assignment.roles as unknown;
+      const role = (Array.isArray(raw) ? raw[0] : raw) as {
+        name: string;
+      } | null;
+      return role?.name;
+    })
+    .filter((name): name is string => Boolean(name));
+  const processGuide = (
+    <ProcessDetailGuide
+      processId={id}
+      title={process.title}
+      roles={assignedRoles}
+      counts={{
+        steps: steps.length,
+        rules: rules.length,
+        exceptions: exceptionsResult.data?.length ?? 0,
+        questions: clarificationsResult.data?.length ?? 0,
+      }}
+    />
+  );
   let mediaUrl: string | null = null;
   if (media?.storage_path) {
     const { data } = await supabase.storage
@@ -138,6 +168,7 @@ export default async function ProcessDetailPage({
           title={process.title}
           description="Check every step and rule before this becomes trusted company knowledge."
         />
+        {processGuide}
         <ProcessReview
           returnTo={returnPath}
           initial={{
@@ -191,6 +222,7 @@ export default async function ProcessDetailPage({
           ) : undefined
         }
       />
+      {processGuide}
       <div className="mb-6 flex flex-wrap gap-3 text-xs text-[#6e7a8d]">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5">
           <UserRound className="size-3.5" />

@@ -37,7 +37,7 @@
       "label": "sourceLabel()",
       "file_type": "code",
       "source_file": "app/api/ask/route.ts",
-      "source_location": "L143",
+      "source_location": "L159",
       "_origin": "ast",
       "id": "ask_route_sourcelabel",
       "community": 3,
@@ -130,7 +130,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "onboarding_route",
-      "community": 21,
+      "community": 4,
       "norm_label": "route.ts"
     },
     {
@@ -140,7 +140,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "onboarding_route_schema",
-      "community": 21,
+      "community": 4,
       "norm_label": "schema"
     },
     {
@@ -150,7 +150,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "onboarding_route_post",
-      "community": 21,
+      "community": 4,
       "norm_label": "post()"
     },
     {
@@ -410,7 +410,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "recommendations_route",
-      "community": 21,
+      "community": 4,
       "norm_label": "route.ts"
     },
     {
@@ -420,7 +420,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "recommendations_route_schema",
-      "community": 21,
+      "community": 4,
       "norm_label": "schema"
     },
     {
@@ -430,7 +430,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "recommendations_route_post",
-      "community": 21,
+      "community": 4,
       "norm_label": "post()"
     },
     {
@@ -557,21 +557,51 @@
       "label": "schema",
       "file_type": "code",
       "source_file": "app/api/team/invites/route.ts",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "invites_route_schema",
       "community": 3,
       "norm_label": "schema"
     },
     {
+      "label": "inviteActionSchema",
+      "file_type": "code",
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "invites_route_inviteactionschema",
+      "community": 3,
+      "norm_label": "inviteactionschema"
+    },
+    {
       "label": "POST()",
       "file_type": "code",
       "source_file": "app/api/team/invites/route.ts",
-      "source_location": "L9",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "invites_route_post",
       "community": 3,
       "norm_label": "post()"
+    },
+    {
+      "label": "PATCH()",
+      "file_type": "code",
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L100",
+      "_origin": "ast",
+      "id": "invites_route_patch",
+      "community": 3,
+      "norm_label": "patch()"
+    },
+    {
+      "label": "DELETE()",
+      "file_type": "code",
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L150",
+      "_origin": "ast",
+      "id": "invites_route_delete",
+      "community": 3,
+      "norm_label": "delete()"
     },
     {
       "label": "route.ts",
@@ -607,7 +637,7 @@
       "label": "DELETE()",
       "file_type": "code",
       "source_file": "app/api/team/members/[id]/route.ts",
-      "source_location": "L80",
+      "source_location": "L92",
       "_origin": "ast",
       "id": "app_api_team_members_id_route_ts_id_route_delete",
       "community": 3,
@@ -664,6 +694,16 @@
       "norm_label": "askpage()"
     },
     {
+      "label": "buildPrompts()",
+      "file_type": "code",
+      "source_file": "app/app/ask/page.tsx",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "ask_page_buildprompts",
+      "community": 15,
+      "norm_label": "buildprompts()"
+    },
+    {
       "label": "error.tsx",
       "file_type": "code",
       "source_file": "app/app/error.tsx",
@@ -690,7 +730,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "learn_page",
-      "community": 19,
+      "community": 15,
       "norm_label": "page.tsx"
     },
     {
@@ -700,7 +740,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "learn_page_learnbusinesspage",
-      "community": 19,
+      "community": 15,
       "norm_label": "learnbusinesspage()"
     },
     {
@@ -877,7 +917,7 @@
       "label": "ProcessDetailPage()",
       "file_type": "code",
       "source_file": "app/app/processes/[id]/page.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "id_page_processdetailpage",
       "community": 15,
@@ -917,7 +957,7 @@
       "label": "ProcessesPage()",
       "file_type": "code",
       "source_file": "app/app/processes/page.tsx",
-      "source_location": "L7",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "processes_page_processespage",
       "community": 15,
@@ -927,7 +967,7 @@
       "label": "countBy()",
       "file_type": "code",
       "source_file": "app/app/processes/page.tsx",
-      "source_location": "L198",
+      "source_location": "L291",
       "_origin": "ast",
       "id": "processes_page_countby",
       "community": 15,
@@ -937,7 +977,7 @@
       "label": "Status()",
       "file_type": "code",
       "source_file": "app/app/processes/page.tsx",
-      "source_location": "L210",
+      "source_location": "L303",
       "_origin": "ast",
       "id": "processes_page_status",
       "community": 15,
@@ -1100,17 +1140,17 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "token_page",
-      "community": 15,
+      "community": 5,
       "norm_label": "page.tsx"
     },
     {
       "label": "InvitePage()",
       "file_type": "code",
       "source_file": "app/invite/[token]/page.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "token_page_invitepage",
-      "community": 15,
+      "community": 5,
       "norm_label": "invitepage()"
     },
     {
@@ -1354,34 +1394,44 @@
       "norm_label": "ask-opryn.tsx"
     },
     {
+      "label": "Prompt",
+      "file_type": "code",
+      "source_file": "components/app/ask-opryn.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "app_ask_opryn_prompt",
+      "community": 19,
+      "norm_label": "prompt"
+    },
+    {
       "label": "Message",
       "file_type": "code",
       "source_file": "components/app/ask-opryn.tsx",
-      "source_location": "L7",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "app_ask_opryn_message",
       "community": 19,
       "norm_label": "message"
     },
     {
-      "label": "fallbackPrompts",
-      "file_type": "code",
-      "source_file": "components/app/ask-opryn.tsx",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "app_ask_opryn_fallbackprompts",
-      "community": 19,
-      "norm_label": "fallbackprompts"
-    },
-    {
       "label": "AskOpryn()",
       "file_type": "code",
       "source_file": "components/app/ask-opryn.tsx",
-      "source_location": "L28",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "app_ask_opryn_askopryn",
       "community": 19,
       "norm_label": "askopryn()"
+    },
+    {
+      "label": "AnswerCard()",
+      "file_type": "code",
+      "source_file": "components/app/ask-opryn.tsx",
+      "source_location": "L287",
+      "_origin": "ast",
+      "id": "app_ask_opryn_answercard",
+      "community": 19,
+      "norm_label": "answercard()"
     },
     {
       "label": "business-discovery-form.tsx",
@@ -1552,6 +1602,116 @@
       "id": "app_page_heading_emptystate",
       "community": 15,
       "norm_label": "emptystate()"
+    },
+    {
+      "label": "process-intelligence.tsx",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_process_intelligence",
+      "community": 21,
+      "norm_label": "process-intelligence.tsx"
+    },
+    {
+      "label": "Recommendation",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "app_process_intelligence_recommendation",
+      "community": 21,
+      "norm_label": "recommendation"
+    },
+    {
+      "label": "KnowledgeChunk",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "app_process_intelligence_knowledgechunk",
+      "community": 21,
+      "norm_label": "knowledgechunk"
+    },
+    {
+      "label": "KnowledgeProcess",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "app_process_intelligence_knowledgeprocess",
+      "community": 21,
+      "norm_label": "knowledgeprocess"
+    },
+    {
+      "label": "ProcessIdeas()",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "app_process_intelligence_processideas",
+      "community": 21,
+      "norm_label": "processideas()"
+    },
+    {
+      "label": "KnowledgeTree()",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L131",
+      "_origin": "ast",
+      "id": "app_process_intelligence_knowledgetree",
+      "community": 21,
+      "norm_label": "knowledgetree()"
+    },
+    {
+      "label": "ProcessDetailGuide()",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L205",
+      "_origin": "ast",
+      "id": "app_process_intelligence_processdetailguide",
+      "community": 21,
+      "norm_label": "processdetailguide()"
+    },
+    {
+      "label": "ProcessBranch()",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L288",
+      "_origin": "ast",
+      "id": "app_process_intelligence_processbranch",
+      "community": 21,
+      "norm_label": "processbranch()"
+    },
+    {
+      "label": "groupChunks()",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L357",
+      "_origin": "ast",
+      "id": "app_process_intelligence_groupchunks",
+      "community": 21,
+      "norm_label": "groupchunks()"
+    },
+    {
+      "label": "TreeMetric()",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L380",
+      "_origin": "ast",
+      "id": "app_process_intelligence_treemetric",
+      "community": 21,
+      "norm_label": "treemetric()"
+    },
+    {
+      "label": "CoverageMetric()",
+      "file_type": "code",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L391",
+      "_origin": "ast",
+      "id": "app_process_intelligence_coveragemetric",
+      "community": 21,
+      "norm_label": "coveragemetric()"
     },
     {
       "label": "process-review.tsx",
@@ -1757,7 +1917,7 @@
       "label": "Role",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L6",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "app_team_manager_role",
       "community": 19,
@@ -1767,17 +1927,27 @@
       "label": "Member",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L7",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "app_team_manager_member",
       "community": 19,
       "norm_label": "member"
     },
     {
+      "label": "RankedMember",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "app_team_manager_rankedmember",
+      "community": 19,
+      "norm_label": "rankedmember"
+    },
+    {
       "label": "Invite",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L16",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "app_team_manager_invite",
       "community": 19,
@@ -1787,11 +1957,81 @@
       "label": "TeamManager()",
       "file_type": "code",
       "source_file": "components/app/team-manager.tsx",
-      "source_location": "L23",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "app_team_manager_teammanager",
       "community": 19,
       "norm_label": "teammanager()"
+    },
+    {
+      "label": "TeamTree()",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L555",
+      "_origin": "ast",
+      "id": "app_team_manager_teamtree",
+      "community": 19,
+      "norm_label": "teamtree()"
+    },
+    {
+      "label": "MemberNode()",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L711",
+      "_origin": "ast",
+      "id": "app_team_manager_membernode",
+      "community": 19,
+      "norm_label": "membernode()"
+    },
+    {
+      "label": "Avatar()",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L745",
+      "_origin": "ast",
+      "id": "app_team_manager_avatar",
+      "community": 19,
+      "norm_label": "avatar()"
+    },
+    {
+      "label": "Legend()",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L760",
+      "_origin": "ast",
+      "id": "app_team_manager_legend",
+      "community": 19,
+      "norm_label": "legend()"
+    },
+    {
+      "label": "memberName()",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L768",
+      "_origin": "ast",
+      "id": "app_team_manager_membername",
+      "community": 19,
+      "norm_label": "membername()"
+    },
+    {
+      "label": "accessRank()",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L772",
+      "_origin": "ast",
+      "id": "app_team_manager_accessrank",
+      "community": 19,
+      "norm_label": "accessrank()"
+    },
+    {
+      "label": "trainingPercent()",
+      "file_type": "code",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L776",
+      "_origin": "ast",
+      "id": "app_team_manager_trainingpercent",
+      "community": 19,
+      "norm_label": "trainingpercent()"
     },
     {
       "label": "training-button.tsx",
@@ -2160,7 +2400,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_invite_accept",
-      "community": 15,
+      "community": 5,
       "norm_label": "invite-accept.tsx"
     },
     {
@@ -2170,8 +2410,28 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_invite_accept_inviteaccept",
-      "community": 15,
+      "community": 5,
       "norm_label": "inviteaccept()"
+    },
+    {
+      "label": "invite-session-bridge.tsx",
+      "file_type": "code",
+      "source_file": "components/invite-session-bridge.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_invite_session_bridge",
+      "community": 5,
+      "norm_label": "invite-session-bridge.tsx"
+    },
+    {
+      "label": "InviteSessionBridge()",
+      "file_type": "code",
+      "source_file": "components/invite-session-bridge.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "components_invite_session_bridge_invitesessionbridge",
+      "community": 5,
+      "norm_label": "invitesessionbridge()"
     },
     {
       "label": "legal-document.tsx",
@@ -2710,7 +2970,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ai_openai_getopenai",
-      "community": 3,
+      "community": 4,
       "norm_label": "getopenai()"
     },
     {
@@ -2747,7 +3007,7 @@
       "label": "suggestedRuleSchema",
       "file_type": "code",
       "source_file": "lib/ai/schemas.ts",
-      "source_location": "L37",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "ai_schemas_suggestedruleschema",
       "community": 4,
@@ -2757,7 +3017,7 @@
       "label": "processRecommendationsSchema",
       "file_type": "code",
       "source_file": "lib/ai/schemas.ts",
-      "source_location": "L42",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "ai_schemas_processrecommendationsschema",
       "community": 4,
@@ -2767,7 +3027,7 @@
       "label": "ExtractedProcess",
       "file_type": "code",
       "source_file": "lib/ai/schemas.ts",
-      "source_location": "L56",
+      "source_location": "L59",
       "_origin": "ast",
       "id": "ai_schemas_extractedprocess",
       "community": 4,
@@ -2777,7 +3037,7 @@
       "label": "ProcessRecommendations",
       "file_type": "code",
       "source_file": "lib/ai/schemas.ts",
-      "source_location": "L57",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "ai_schemas_processrecommendations",
       "community": 4,
@@ -2840,7 +3100,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "ai_services_retrievedknowledge",
-      "community": 4,
+      "community": 3,
       "norm_label": "retrievedknowledge"
     },
     {
@@ -2870,7 +3130,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "ai_services_recommendprocesses",
-      "community": 21,
+      "community": 4,
       "norm_label": "recommendprocesses()"
     },
     {
@@ -3024,6 +3284,26 @@
       "norm_label": "readapptoast()"
     },
     {
+      "label": "invitations.ts",
+      "file_type": "code",
+      "source_file": "lib/invitations.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_invitations",
+      "community": 3,
+      "norm_label": "invitations.ts"
+    },
+    {
+      "label": "deliverWorkspaceInvite()",
+      "file_type": "code",
+      "source_file": "lib/invitations.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "lib_invitations_deliverworkspaceinvite",
+      "community": 3,
+      "norm_label": "deliverworkspaceinvite()"
+    },
+    {
       "label": "processes.ts",
       "file_type": "code",
       "source_file": "lib/processes.ts",
@@ -3050,7 +3330,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_recommendations",
-      "community": 21,
+      "community": 4,
       "norm_label": "recommendations.ts"
     },
     {
@@ -3060,7 +3340,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "lib_recommendations_fallbackrecommendations",
-      "community": 21,
+      "community": 4,
       "norm_label": "fallbackrecommendations()"
     },
     {
@@ -3070,7 +3350,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "lib_recommendations_preparerecommendations",
-      "community": 21,
+      "community": 4,
       "norm_label": "preparerecommendations()"
     },
     {
@@ -3792,6 +4072,16 @@
       "id": "docs_deployment_opryn_deployment_configuration",
       "community": 16,
       "norm_label": "opryn deployment configuration"
+    },
+    {
+      "label": "Team invitation emails",
+      "file_type": "document",
+      "source_file": "docs/deployment.md",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "docs_deployment_team_invitation_emails",
+      "community": 16,
+      "norm_label": "team invitation emails"
     }
   ],
   "links": [
@@ -4296,9 +4586,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_config",
-      "confidence_score": 1.0
+      "target": "ai_config"
     },
     {
       "relation": "imports",
@@ -4307,9 +4597,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_config_openai_models",
-      "confidence_score": 1.0
+      "target": "ai_config_openai_models"
     },
     {
       "relation": "imports_from",
@@ -4318,9 +4608,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_media",
-      "confidence_score": 1.0
+      "target": "ai_media"
     },
     {
       "relation": "imports",
@@ -4329,9 +4619,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_media_preparetranscriptionaudio",
-      "confidence_score": 1.0
+      "target": "ai_media_preparetranscriptionaudio"
     },
     {
       "relation": "imports",
@@ -4340,9 +4630,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_media_types_video_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_video_mime_types"
     },
     {
       "relation": "imports",
@@ -4351,9 +4641,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_media_unsupportedrecordingerror",
-      "confidence_score": 1.0
+      "target": "ai_media_unsupportedrecordingerror"
     },
     {
       "relation": "imports_from",
@@ -4373,9 +4663,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_services_extractprocessfromtranscript",
-      "confidence_score": 1.0
+      "target": "ai_services_extractprocessfromtranscript"
     },
     {
       "relation": "imports",
@@ -4384,9 +4674,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_services_transcribeaudio",
-      "confidence_score": 1.0
+      "target": "ai_services_transcribeaudio"
     },
     {
       "relation": "contains",
@@ -4404,9 +4694,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L237",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "learn_route_processingerrorresponse",
-      "confidence_score": 1.0
+      "target": "learn_route_processingerrorresponse"
     },
     {
       "relation": "contains",
@@ -4414,9 +4704,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "learn_route_processingstage",
-      "confidence_score": 1.0
+      "target": "learn_route_processingstage"
     },
     {
       "relation": "contains",
@@ -4424,9 +4714,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L272",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "learn_route_safeerrordetails",
-      "confidence_score": 1.0
+      "target": "learn_route_safeerrordetails"
     },
     {
       "relation": "contains",
@@ -4434,9 +4724,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L266",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "learn_route_safestorederror",
-      "confidence_score": 1.0
+      "target": "learn_route_safestorederror"
     },
     {
       "relation": "contains",
@@ -4454,9 +4744,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L223",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "learn_route_updatemediastatus",
-      "confidence_score": 1.0
+      "target": "learn_route_updatemediastatus"
     },
     {
       "relation": "imports_from",
@@ -4553,9 +4843,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route_post",
-      "target": "learn_route_processingerrorresponse",
-      "confidence_score": 1.0
+      "target": "learn_route_processingerrorresponse"
     },
     {
       "relation": "calls",
@@ -4564,9 +4854,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L215",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route_post",
-      "target": "learn_route_safestorederror",
-      "confidence_score": 1.0
+      "target": "learn_route_safestorederror"
     },
     {
       "relation": "calls",
@@ -4575,9 +4865,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route_post",
-      "target": "learn_route_updatemediastatus",
-      "confidence_score": 1.0
+      "target": "learn_route_updatemediastatus"
     },
     {
       "relation": "calls",
@@ -4619,9 +4909,9 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L246",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "learn_route_processingerrorresponse",
-      "target": "learn_route_safeerrordetails",
-      "confidence_score": 1.0
+      "target": "learn_route_safeerrordetails"
     },
     {
       "relation": "contains",
@@ -4737,9 +5027,9 @@
       "source_file": "app/api/processes/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "processes_route",
-      "target": "ai_config",
-      "confidence_score": 1.0
+      "target": "ai_config"
     },
     {
       "relation": "imports",
@@ -4748,9 +5038,9 @@
       "source_file": "app/api/processes/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "processes_route",
-      "target": "ai_config_openai_models",
-      "confidence_score": 1.0
+      "target": "ai_config_openai_models"
     },
     {
       "relation": "imports_from",
@@ -4759,9 +5049,9 @@
       "source_file": "app/api/processes/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "processes_route",
-      "target": "ai_media_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types"
     },
     {
       "relation": "imports",
@@ -4770,9 +5060,9 @@
       "source_file": "app/api/processes/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "processes_route",
-      "target": "ai_media_types_allowed_media_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_allowed_media_mime_types"
     },
     {
       "relation": "imports_from",
@@ -4792,9 +5082,9 @@
       "source_file": "app/api/processes/route.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "processes_route",
-      "target": "ai_services_extractprocessfromtranscript",
-      "confidence_score": 1.0
+      "target": "ai_services_extractprocessfromtranscript"
     },
     {
       "relation": "imports_from",
@@ -5608,6 +5898,36 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L150",
+      "weight": 1.0,
+      "source": "invites_route",
+      "target": "invites_route_delete",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "invites_route",
+      "target": "invites_route_inviteactionschema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L100",
+      "weight": 1.0,
+      "source": "invites_route",
+      "target": "invites_route_patch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/team/invites/route.ts",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5647,6 +5967,28 @@
       "target": "lib_api_getrequestcontext"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "invites_route",
+      "target": "lib_invitations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "invites_route",
+      "target": "lib_invitations_deliverworkspaceinvite",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -5655,6 +5997,50 @@
       "source_location": "L6",
       "weight": 1.0,
       "source": "invites_route_post",
+      "target": "lib_api_getrequestcontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "invites_route_post",
+      "target": "lib_invitations_deliverworkspaceinvite"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "source": "invites_route_patch",
+      "target": "lib_api_getrequestcontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "invites_route_patch",
+      "target": "lib_invitations_deliverworkspaceinvite"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/team/invites/route.ts",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "invites_route_delete",
       "target": "lib_api_getrequestcontext"
     },
     {
@@ -5872,6 +6258,16 @@
       "target": "ask_page_askpage"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/ask/page.tsx",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "ask_page",
+      "target": "ask_page_buildprompts",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -5914,6 +6310,17 @@
       "confidence_score": 1.0,
       "source": "ask_page",
       "target": "supabase_server_createclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/ask/page.tsx",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "ask_page_askpage",
+      "target": "ask_page_buildprompts",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6578,6 +6985,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/app/processes/[id]/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "app_app_processes_id_page_tsx_id_page",
+      "target": "app_process_intelligence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/[id]/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "app_app_processes_id_page_tsx_id_page",
+      "target": "app_process_intelligence_processdetailguide",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/[id]/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -6900,6 +7329,39 @@
       "confidence_score": 1.0,
       "source": "processes_page",
       "target": "app_page_heading_pageheading"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "processes_page",
+      "target": "app_process_intelligence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "processes_page",
+      "target": "app_process_intelligence_knowledgetree",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "processes_page",
+      "target": "app_process_intelligence_processideas",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7643,6 +8105,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/invite/[token]/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "token_page",
+      "target": "components_invite_session_bridge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/invite/[token]/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "token_page",
+      "target": "components_invite_session_bridge_invitesessionbridge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/invite/[token]/page.tsx",
       "source_location": "L1",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -8330,6 +8814,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/ask-opryn.tsx",
+      "source_location": "L287",
+      "weight": 1.0,
+      "source": "app_ask_opryn",
+      "target": "app_ask_opryn_answercard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/ask-opryn.tsx",
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -8340,21 +8834,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/ask-opryn.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_ask_opryn",
-      "target": "app_ask_opryn_fallbackprompts"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "components/app/ask-opryn.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "app_ask_opryn",
       "target": "app_ask_opryn_message"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/ask-opryn.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "app_ask_opryn",
+      "target": "app_ask_opryn_prompt",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -8611,6 +9105,117 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L391",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_coveragemetric",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L357",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_groupchunks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_knowledgechunk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_knowledgeprocess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_knowledgetree",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L288",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_processbranch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L205",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_processdetailguide",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_processideas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_recommendation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L380",
+      "weight": 1.0,
+      "source": "app_process_intelligence",
+      "target": "app_process_intelligence_treemetric",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/process-intelligence.tsx",
+      "source_location": "L289",
+      "weight": 1.0,
+      "source": "app_process_intelligence_processbranch",
+      "target": "app_process_intelligence_groupchunks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "components/app/process-review.tsx",
       "source_location": "L9",
       "weight": 1.0,
@@ -8794,6 +9399,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/team-manager.tsx",
+      "source_location": "L772",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_accessrank",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L745",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_avatar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -8804,11 +9429,51 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/app/team-manager.tsx",
+      "source_location": "L760",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_legend",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "app_team_manager",
       "target": "app_team_manager_member"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L768",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_membername",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L711",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_membernode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_rankedmember",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8829,6 +9494,26 @@
       "confidence_score": 1.0,
       "source": "app_team_manager",
       "target": "app_team_manager_teammanager"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L555",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_teamtree",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L776",
+      "weight": 1.0,
+      "source": "app_team_manager",
+      "target": "app_team_manager_trainingpercent",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -8862,6 +9547,28 @@
       "confidence_score": 1.0,
       "source": "app_team_manager_invite",
       "target": "lib_client_toast_showapptoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L712",
+      "weight": 1.0,
+      "source": "app_team_manager_membernode",
+      "target": "app_team_manager_membername",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "components/app/team-manager.tsx",
+      "source_location": "L713",
+      "weight": 1.0,
+      "source": "app_team_manager_membernode",
+      "target": "app_team_manager_trainingpercent",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9462,6 +10169,38 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "components/invite-session-bridge.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "components_invite_session_bridge",
+      "target": "components_invite_session_bridge_invitesessionbridge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/invite-session-bridge.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_invite_session_bridge",
+      "target": "supabase_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/invite-session-bridge.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_invite_session_bridge",
+      "target": "supabase_client_createclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "components/legal-document.tsx",
       "source_location": "L6",
       "weight": 1.0,
@@ -9876,9 +10615,9 @@
       "source_file": "lib/ai/config.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_config",
-      "target": "ai_config_configuredmodel",
-      "confidence_score": 1.0
+      "target": "ai_config_configuredmodel"
     },
     {
       "relation": "contains",
@@ -9886,9 +10625,9 @@
       "source_file": "lib/ai/config.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_config",
-      "target": "ai_config_openai_models",
-      "confidence_score": 1.0
+      "target": "ai_config_openai_models"
     },
     {
       "relation": "contains",
@@ -9896,9 +10635,9 @@
       "source_file": "lib/ai/config.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_config",
-      "target": "ai_config_openai_text_reasoning",
-      "confidence_score": 1.0
+      "target": "ai_config_openai_text_reasoning"
     },
     {
       "relation": "imports_from",
@@ -9907,9 +10646,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_config",
-      "confidence_score": 1.0
+      "target": "ai_config"
     },
     {
       "relation": "imports",
@@ -9918,9 +10657,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_config_openai_models",
-      "confidence_score": 1.0
+      "target": "ai_config_openai_models"
     },
     {
       "relation": "imports",
@@ -9929,9 +10668,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_config_openai_text_reasoning",
-      "confidence_score": 1.0
+      "target": "ai_config_openai_text_reasoning"
     },
     {
       "relation": "re_exports",
@@ -9940,9 +10679,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types"
     },
     {
       "relation": "contains",
@@ -9950,9 +10689,9 @@
       "source_file": "lib/ai/media-types.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media_types",
-      "target": "ai_media_types_allowed_media_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_allowed_media_mime_types"
     },
     {
       "relation": "contains",
@@ -9960,9 +10699,9 @@
       "source_file": "lib/ai/media-types.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media_types",
-      "target": "ai_media_types_audio_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_audio_mime_types"
     },
     {
       "relation": "contains",
@@ -9970,9 +10709,9 @@
       "source_file": "lib/ai/media-types.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media_types",
-      "target": "ai_media_types_video_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_video_mime_types"
     },
     {
       "relation": "imports",
@@ -9981,9 +10720,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_types_audio_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_audio_mime_types"
     },
     {
       "relation": "re_exports",
@@ -9992,9 +10731,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_types_video_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_video_mime_types"
     },
     {
       "relation": "imports",
@@ -10003,9 +10742,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_types_allowed_media_mime_types",
-      "confidence_score": 1.0
+      "target": "ai_media_types_allowed_media_mime_types"
     },
     {
       "relation": "contains",
@@ -10013,9 +10752,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_inputextensions",
-      "confidence_score": 1.0
+      "target": "ai_media_inputextensions"
     },
     {
       "relation": "contains",
@@ -10023,9 +10762,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_preparedaudio",
-      "confidence_score": 1.0
+      "target": "ai_media_preparedaudio"
     },
     {
       "relation": "contains",
@@ -10033,9 +10772,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_preparetranscriptionaudio",
-      "confidence_score": 1.0
+      "target": "ai_media_preparetranscriptionaudio"
     },
     {
       "relation": "contains",
@@ -10043,9 +10782,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_runffmpeg",
-      "confidence_score": 1.0
+      "target": "ai_media_runffmpeg"
     },
     {
       "relation": "contains",
@@ -10053,9 +10792,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L103",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_safefilename",
-      "confidence_score": 1.0
+      "target": "ai_media_safefilename"
     },
     {
       "relation": "contains",
@@ -10063,9 +10802,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media",
-      "target": "ai_media_unsupportedrecordingerror",
-      "confidence_score": 1.0
+      "target": "ai_media_unsupportedrecordingerror"
     },
     {
       "relation": "method",
@@ -10073,9 +10812,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media_unsupportedrecordingerror",
-      "target": "ai_media_unsupportedrecordingerror_constructor",
-      "confidence_score": 1.0
+      "target": "ai_media_unsupportedrecordingerror_constructor"
     },
     {
       "relation": "calls",
@@ -10084,9 +10823,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media_preparetranscriptionaudio",
-      "target": "ai_media_runffmpeg",
-      "confidence_score": 1.0
+      "target": "ai_media_runffmpeg"
     },
     {
       "relation": "calls",
@@ -10095,9 +10834,9 @@
       "source_file": "lib/ai/media.ts",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_media_preparetranscriptionaudio",
-      "target": "ai_media_safefilename",
-      "confidence_score": 1.0
+      "target": "ai_media_safefilename"
     },
     {
       "relation": "contains",
@@ -10384,9 +11123,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_services_aitrace",
-      "confidence_score": 1.0
+      "target": "ai_services_aitrace"
     },
     {
       "relation": "contains",
@@ -10414,9 +11153,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_services_extractprocessfromtranscript",
-      "confidence_score": 1.0
+      "target": "ai_services_extractprocessfromtranscript"
     },
     {
       "relation": "contains",
@@ -10424,9 +11163,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_services_logai",
-      "confidence_score": 1.0
+      "target": "ai_services_logai"
     },
     {
       "relation": "contains",
@@ -10464,9 +11203,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_services_transcribeaudio",
-      "confidence_score": 1.0
+      "target": "ai_services_transcribeaudio"
     },
     {
       "relation": "calls",
@@ -10475,9 +11214,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services_transcribeaudio",
-      "target": "ai_services_logai",
-      "confidence_score": 1.0
+      "target": "ai_services_logai"
     },
     {
       "relation": "calls",
@@ -10486,9 +11225,9 @@
       "source_file": "lib/ai/services.ts",
       "source_location": "L53",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ai_services_extractprocessfromtranscript",
-      "target": "ai_services_logai",
-      "confidence_score": 1.0
+      "target": "ai_services_logai"
     },
     {
       "relation": "contains",
@@ -10702,6 +11441,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "lib/invitations.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "lib_invitations",
+      "target": "lib_invitations_deliverworkspaceinvite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "lib/processes.ts",
       "source_location": "L5",
       "weight": 1.0,
@@ -10786,9 +11535,9 @@
       "source_file": "package.json",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package",
-      "target": "package_allowscripts",
-      "confidence_score": 1.0
+      "target": "package_allowscripts"
     },
     {
       "relation": "contains",
@@ -10936,9 +11685,9 @@
       "source_file": "package.json",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_dependencies",
-      "target": "package_dependencies_ffmpeg_static",
-      "confidence_score": 1.0
+      "target": "package_dependencies_ffmpeg_static"
     },
     {
       "relation": "contains",
@@ -11126,9 +11875,9 @@
       "source_file": "package.json",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_allowscripts",
-      "target": "package_allowscripts_ffmpeg_static_5_3_0",
-      "confidence_score": 1.0
+      "target": "package_allowscripts_ffmpeg_static_5_3_0"
     },
     {
       "relation": "contains",
@@ -11336,11 +12085,21 @@
       "source_file": "docs/deployment.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_deployment",
-      "target": "docs_deployment_opryn_deployment_configuration",
+      "target": "docs_deployment_opryn_deployment_configuration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/deployment.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "docs_deployment_opryn_deployment_configuration",
+      "target": "docs_deployment_team_invitation_emails",
       "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1f3f42067f9e6834869d48fe265d404f16be1f8c"
+  "built_at_commit": "95a38ac1aa73af5c32515463eb4f57c42c8a4859"
 }

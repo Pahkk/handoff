@@ -108,4 +108,14 @@ test("product APIs reject unauthenticated requests without leaking details", asy
     expect(body.error).toBe("Please sign in again.");
     expect(JSON.stringify(body)).not.toContain("stack");
   }
+
+  for (const method of ["patch", "delete"] as const) {
+    const response = await request[method]("/api/team/invites", {
+      data: { inviteId: "00000000-0000-4000-8000-000000000000" },
+    });
+    expect(response.status()).toBe(401);
+    const body = await response.json();
+    expect(body.error).toBe("Please sign in again.");
+    expect(JSON.stringify(body)).not.toContain("stack");
+  }
 });

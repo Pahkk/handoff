@@ -2,10 +2,13 @@ import { createHash, randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getRequestContext } from "@/lib/api";
+import { deliverWorkspaceInvite } from "@/lib/invitations";
 const schema = z.object({
   email: z.string().trim().email().max(320),
   roleId: z.string().uuid().nullable().optional(),
 });
+const inviteActionSchema = z.object({ inviteId: z.string().uuid() });
+
 export async function POST(request: Request) {
   const context = await getRequestContext({ admin: true });
   if ("error" in context) return context.error;
@@ -15,14 +18,58 @@ export async function POST(request: Request) {
       { error: "Enter a valid work email." },
       { status: 400 },
     );
+  const organizationId = context.membership.organization_id;
+  if (parsed.data.roleId) {
+    const { data: role } = await context.supabase
+      .from("roles")
+      .select("id")
+      .eq("id", parsed.data.roleId)
+      .eq("organization_id", organizationId)
+      .maybeSingle();
+    if (!role)
+      return NextResponse.json(
+        { error: "Choose a role from this workspace." },
+        { status: 400 },
+      );
+  }
+  const email = parsed.data.email.toLowerCase();
+  const { data: existingProfile } = await context.supabase
+    .from("profiles")
+    .select("id")
+    .eq("email", email)
+    .maybeSingle();
+  if (existingProfile) {
+    const { data: existingMember } = await context.supabase
+      .from("organization_members")
+      .select("id")
+      .eq("organization_id", organizationId)
+      .eq("user_id", existingProfile.id)
+      .maybeSingle();
+    if (existingMember)
+      return NextResponse.json(
+        { error: "This person is already on your team." },
+        { status: 409 },
+      );
+  }
   const token = randomBytes(32).toString("base64url");
   const tokenHash = createHash("sha256").update(token).digest("hex");
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+  const { error: revokeError } = await context.supabase
+    .from("organization_invites")
+    .update({ status: "revoked" })
+    .eq("organization_id", organizationId)
+    .eq("email", email)
+    .eq("status", "pending");
+  if (revokeError)
+    return NextResponse.json(
+      { error: "Unable to replace the existing invitation." },
+      { status: 400 },
+    );
   const { data, error } = await context.supabase
     .from("organization_invites")
     .insert({
-      organization_id: context.membership.organization_id,
-      email: parsed.data.email.toLowerCase(),
+      organization_id: organizationId,
+      email,
       role_id: parsed.data.roleId || null,
       permission_level: "employee",
       token_hash: tokenHash,
@@ -41,8 +88,86 @@ export async function POST(request: Request) {
       },
       { status: 400 },
     );
+  const inviteUrl = `${new URL(request.url).origin}/invite/${token}`;
+  const delivery = await deliverWorkspaceInvite({ email, inviteUrl });
   return NextResponse.json({
     ...data,
-    inviteUrl: `${new URL(request.url).origin}/invite/${token}`,
+    inviteUrl,
+    delivered: delivery.delivered,
   });
+}
+
+export async function PATCH(request: Request) {
+  const context = await getRequestContext({ admin: true });
+  if ("error" in context) return context.error;
+  const parsed = inviteActionSchema.safeParse(
+    await request.json().catch(() => null),
+  );
+  if (!parsed.success)
+    return NextResponse.json(
+      { error: "Invitation not found." },
+      { status: 400 },
+    );
+  const organizationId = context.membership.organization_id;
+  const { data: invite } = await context.supabase
+    .from("organization_invites")
+    .select("id,email,status")
+    .eq("id", parsed.data.inviteId)
+    .eq("organization_id", organizationId)
+    .maybeSingle();
+  if (!invite || invite.status !== "pending")
+    return NextResponse.json(
+      { error: "This invitation is no longer pending." },
+      { status: 404 },
+    );
+  const token = randomBytes(32).toString("base64url");
+  const tokenHash = createHash("sha256").update(token).digest("hex");
+  const expiresAt = new Date(
+    Date.now() + 7 * 24 * 60 * 60 * 1000,
+  ).toISOString();
+  const { error } = await context.supabase
+    .from("organization_invites")
+    .update({ token_hash: tokenHash, expires_at: expiresAt })
+    .eq("id", invite.id)
+    .eq("organization_id", organizationId);
+  if (error)
+    return NextResponse.json(
+      { error: "Unable to renew this invitation." },
+      { status: 400 },
+    );
+  const inviteUrl = `${new URL(request.url).origin}/invite/${token}`;
+  const delivery = await deliverWorkspaceInvite({
+    email: invite.email,
+    inviteUrl,
+  });
+  return NextResponse.json({
+    inviteUrl,
+    expiresAt,
+    delivered: delivery.delivered,
+  });
+}
+
+export async function DELETE(request: Request) {
+  const context = await getRequestContext({ admin: true });
+  if ("error" in context) return context.error;
+  const parsed = inviteActionSchema.safeParse(
+    await request.json().catch(() => null),
+  );
+  if (!parsed.success)
+    return NextResponse.json(
+      { error: "Invitation not found." },
+      { status: 400 },
+    );
+  const { error } = await context.supabase
+    .from("organization_invites")
+    .update({ status: "revoked" })
+    .eq("id", parsed.data.inviteId)
+    .eq("organization_id", context.membership.organization_id)
+    .eq("status", "pending");
+  return error
+    ? NextResponse.json(
+        { error: "Unable to cancel this invitation." },
+        { status: 400 },
+      )
+    : NextResponse.json({ ok: true });
 }

@@ -30,7 +30,10 @@ export const extractedProcessSchema = z.object({
 export const companyAnswerSchema = z.object({
   can_answer: z.boolean(),
   confidence: z.number().min(0).max(1),
+  headline: z.string().max(160),
   answer: z.string().max(10000),
+  steps: z.array(z.string().min(1).max(1000)).max(8),
+  important_note: z.string().max(2000),
   cited_source_ids: z.array(z.string().uuid()).max(15),
 });
 

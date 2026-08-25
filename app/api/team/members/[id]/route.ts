@@ -49,15 +49,27 @@ export async function PATCH(
         { status: 400 },
       );
   }
-  const { error } = await context.supabase
+  const { data: updated, error } = await context.supabase
     .from("organization_members")
     .update({
       role_id: parsed.data.roleId,
       permission_level: parsed.data.permissionLevel,
     })
     .eq("id", id)
-    .eq("organization_id", context.membership.organization_id);
+    .eq("organization_id", context.membership.organization_id)
+    .select("id,role_id,permission_level")
+    .maybeSingle();
   if (error) return apiError(error, "Unable to update this member.");
+  if (!updated)
+    return NextResponse.json(
+      {
+        error:
+          member.permission_level === "owner"
+            ? "The workspace owner cannot be assigned an employee job role."
+            : "This role change could not be saved.",
+      },
+      { status: 409 },
+    );
   if (parsed.data.roleId) {
     const { data: assignments } = await context.supabase
       .from("process_role_assignments")
@@ -75,7 +87,7 @@ export async function PATCH(
         { onConflict: "user_id,process_id", ignoreDuplicates: true },
       );
   }
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, member: updated });
 }
 export async function DELETE(
   _: Request,

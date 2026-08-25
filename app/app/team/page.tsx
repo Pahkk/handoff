@@ -10,10 +10,11 @@ export default async function TeamPage() {
     { data: members },
     { data: invites },
     { data: training },
+    { data: processAssignments },
   ] = await Promise.all([
     supabase
       .from("roles")
-      .select("id,name")
+      .select("id,name,description")
       .eq("organization_id", context.organization.id)
       .order("name"),
     supabase
@@ -32,6 +33,10 @@ export default async function TeamPage() {
     supabase
       .from("training_assignments")
       .select("user_id,status")
+      .eq("organization_id", context.organization.id),
+    supabase
+      .from("process_role_assignments")
+      .select("role_id")
       .eq("organization_id", context.organization.id),
   ]);
   const shaped = (members ?? []).map((member) => {
@@ -66,7 +71,13 @@ export default async function TeamPage() {
         description="Invite employees, assign their role, and see onboarding progress."
       />
       <TeamManager
-        roles={roles ?? []}
+        organizationName={context.organization.name}
+        roles={(roles ?? []).map((role) => ({
+          ...role,
+          processCount: (processAssignments ?? []).filter(
+            (assignment) => assignment.role_id === role.id,
+          ).length,
+        }))}
         members={shaped}
         invites={shapedInvites}
         currentUserId={context.user.id}
