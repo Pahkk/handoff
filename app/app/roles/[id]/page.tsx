@@ -11,26 +11,37 @@ export default async function RolePage({
   const { id } = await params;
   const context = await requireAdminContext();
   const supabase = await createClient();
-  const [{ data: role }, { data: processes }, { data: assigned }] =
-    await Promise.all([
-      supabase
-        .from("roles")
-        .select("id,name,description,responsibilities")
-        .eq("id", id)
-        .eq("organization_id", context.organization.id)
-        .maybeSingle(),
-      supabase
-        .from("processes")
-        .select("id,title")
-        .eq("organization_id", context.organization.id)
-        .eq("status", "approved")
-        .order("title"),
-      supabase
-        .from("process_role_assignments")
-        .select("process_id")
-        .eq("organization_id", context.organization.id)
-        .eq("role_id", id),
-    ]);
+  const [roleResult, processesResult, assignedResult] = await Promise.all([
+    supabase
+      .from("roles")
+      .select("id,name,description,responsibilities")
+      .eq("id", id)
+      .eq("organization_id", context.organization.id)
+      .maybeSingle(),
+    supabase
+      .from("processes")
+      .select("id,title")
+      .eq("organization_id", context.organization.id)
+      .eq("status", "approved")
+      .order("title"),
+    supabase
+      .from("process_role_assignments")
+      .select("process_id")
+      .eq("organization_id", context.organization.id)
+      .eq("role_id", id),
+  ]);
+  const loadError = [
+    roleResult.error,
+    processesResult.error,
+    assignedResult.error,
+  ].find(Boolean);
+  if (loadError) {
+    console.error("Unable to load role", { roleId: id, code: loadError.code });
+    throw new Error("Unable to load this role.");
+  }
+  const role = roleResult.data;
+  const processes = processesResult.data;
+  const assigned = assignedResult.data;
   if (!role) notFound();
   const raw = (role.responsibilities ?? {}) as Record<string, unknown>;
   const responsibilities = {

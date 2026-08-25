@@ -26,7 +26,7 @@ export async function PATCH(
     );
   const { supabase, membership } = context;
   try {
-    const { error } = await supabase
+    const { data: savedRole, error } = await supabase
       .from("roles")
       .update({
         name: parsed.data.name,
@@ -34,13 +34,18 @@ export async function PATCH(
         responsibilities: parsed.data.responsibilities,
       })
       .eq("id", id)
-      .eq("organization_id", membership.organization_id);
+      .eq("organization_id", membership.organization_id)
+      .select("id")
+      .maybeSingle();
     if (error) throw error;
-    await supabase
+    if (!savedRole)
+      return NextResponse.json({ error: "Role not found." }, { status: 404 });
+    const { error: deleteError } = await supabase
       .from("process_role_assignments")
       .delete()
       .eq("role_id", id)
       .eq("organization_id", membership.organization_id);
+    if (deleteError) throw deleteError;
     if (parsed.data.processIds.length) {
       const { error: assignmentError } = await supabase
         .from("process_role_assignments")
@@ -58,18 +63,22 @@ export async function PATCH(
       .select("user_id")
       .eq("organization_id", membership.organization_id)
       .eq("role_id", id);
-    if (members?.length && parsed.data.processIds.length)
-      await supabase.from("training_assignments").upsert(
-        members.flatMap((member) =>
-          parsed.data.processIds.map((processId) => ({
-            organization_id: membership.organization_id,
-            user_id: member.user_id,
-            process_id: processId,
-            status: "assigned",
-          })),
-        ),
-        { onConflict: "user_id,process_id", ignoreDuplicates: true },
-      );
+    if (members?.length && parsed.data.processIds.length) {
+      const { error: trainingError } = await supabase
+        .from("training_assignments")
+        .upsert(
+          members.flatMap((member) =>
+            parsed.data.processIds.map((processId) => ({
+              organization_id: membership.organization_id,
+              user_id: member.user_id,
+              process_id: processId,
+              status: "assigned",
+            })),
+          ),
+          { onConflict: "user_id,process_id", ignoreDuplicates: true },
+        );
+      if (trainingError) throw trainingError;
+    }
     return NextResponse.json({ ok: true });
   } catch (error) {
     return apiError(error, "Unable to save this role.");

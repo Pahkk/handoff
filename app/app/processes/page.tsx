@@ -14,15 +14,77 @@ export default async function ProcessesPage({
   const supabase = await createClient();
   let query = supabase
     .from("processes")
-    .select(
-      "id, title, description, summary, status, updated_at, created_by, process_steps(count), process_role_assignments(roles(name)), profiles!processes_created_by_fkey(full_name, email)",
-    )
+    .select("id, title, description, summary, status, updated_at, created_by")
     .eq("organization_id", context.organization.id)
     .order("updated_at", { ascending: false });
   if (filters.q) query = query.ilike("title", `%${filters.q.slice(0, 100)}%`);
   if (["draft", "needs_review", "approved"].includes(filters.status ?? ""))
     query = query.eq("status", filters.status!);
-  const { data: processes } = await query;
+  const { data: processes, error: processesError } = await query;
+  if (processesError) {
+    console.error("Unable to load processes", { code: processesError.code });
+    throw new Error("Unable to load processes.");
+  }
+  const processIds = (processes ?? []).map((process) => process.id);
+  const creatorIds = [
+    ...new Set((processes ?? []).map((process) => process.created_by)),
+  ];
+  const [stepsResult, assignmentsResult, rolesResult, creatorsResult] =
+    processIds.length
+      ? await Promise.all([
+          supabase
+            .from("process_steps")
+            .select("process_id")
+            .eq("organization_id", context.organization.id)
+            .in("process_id", processIds),
+          supabase
+            .from("process_role_assignments")
+            .select("process_id,role_id")
+            .eq("organization_id", context.organization.id)
+            .in("process_id", processIds),
+          supabase
+            .from("roles")
+            .select("id,name")
+            .eq("organization_id", context.organization.id),
+          supabase
+            .from("profiles")
+            .select("id,full_name,email")
+            .in("id", creatorIds),
+        ])
+      : [
+          { data: [], error: null },
+          { data: [], error: null },
+          { data: [], error: null },
+          { data: [], error: null },
+        ];
+  const relatedError = [
+    stepsResult.error,
+    assignmentsResult.error,
+    rolesResult.error,
+    creatorsResult.error,
+  ].find(Boolean);
+  if (relatedError) {
+    console.error("Unable to load process details", {
+      code: relatedError.code,
+    });
+    throw new Error("Unable to load processes.");
+  }
+  const stepCounts = countBy(stepsResult.data ?? [], "process_id");
+  const roleNames = new Map(
+    (rolesResult.data ?? []).map((role) => [role.id, role.name]),
+  );
+  const processRoles = new Map<string, string[]>();
+  for (const assignment of assignmentsResult.data ?? []) {
+    const name = roleNames.get(assignment.role_id);
+    if (!name) continue;
+    processRoles.set(assignment.process_id, [
+      ...(processRoles.get(assignment.process_id) ?? []),
+      name,
+    ]);
+  }
+  const creators = new Map(
+    (creatorsResult.data ?? []).map((profile) => [profile.id, profile]),
+  );
   return (
     <>
       <PageHeading
@@ -95,20 +157,8 @@ export default async function ProcessesPage({
       ) : (
         <div className="grid gap-4 xl:grid-cols-2">
           {processes.map((process) => {
-            const creatorRaw = process.profiles as unknown;
-            const creator = (
-              Array.isArray(creatorRaw) ? creatorRaw[0] : creatorRaw
-            ) as { full_name: string | null; email: string } | null;
-            const roles = (
-              process.process_role_assignments as unknown as Array<{
-                roles: { name: string } | { name: string }[] | null;
-              }>
-            ).flatMap((item) => {
-              const role = Array.isArray(item.roles)
-                ? item.roles[0]
-                : item.roles;
-              return role ? [role.name] : [];
-            });
+            const creator = creators.get(process.created_by);
+            const roles = processRoles.get(process.id) ?? [];
             return (
               <Link
                 key={process.id}
@@ -130,7 +180,7 @@ export default async function ProcessesPage({
                     "Waiting for process details."}
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[#edf0f4] pt-4 text-xs text-[#7a8698]">
-                  <span>{process.process_steps?.[0]?.count ?? 0} steps</span>
+                  <span>{stepCounts.get(process.id) ?? 0} steps</span>
                   <span>{roles.length ? roles.join(", ") : "All roles"}</span>
                   <span className="ml-auto">
                     {creator?.full_name ?? creator?.email ?? "Owner"}
@@ -144,6 +194,19 @@ export default async function ProcessesPage({
     </>
   );
 }
+
+function countBy<T extends Record<K, string>, K extends keyof T>(
+  rows: T[],
+  key: K,
+) {
+  const counts = new Map<string, number>();
+  for (const row of rows) {
+    const value = row[key];
+    counts.set(value, (counts.get(value) ?? 0) + 1);
+  }
+  return counts;
+}
+
 function Status({ value }: { value: string }) {
   const copy: Record<string, [string, string]> = {
     draft: ["Draft", "bg-[#f1f3f6] text-[#667184]"],

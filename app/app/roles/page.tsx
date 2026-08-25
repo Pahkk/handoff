@@ -7,13 +7,34 @@ import { createClient } from "@/lib/supabase/server";
 export default async function RolesPage() {
   const context = await requireAppContext();
   const supabase = await createClient();
-  const { data: roles } = await supabase
-    .from("roles")
-    .select(
-      "id,name,description,responsibilities,organization_members(count),process_role_assignments(count)",
-    )
-    .eq("organization_id", context.organization.id)
-    .order("name");
+  const [rolesResult, membersResult, assignmentsResult] = await Promise.all([
+    supabase
+      .from("roles")
+      .select("id,name,description,responsibilities")
+      .eq("organization_id", context.organization.id)
+      .order("name"),
+    supabase
+      .from("organization_members")
+      .select("role_id")
+      .eq("organization_id", context.organization.id)
+      .not("role_id", "is", null),
+    supabase
+      .from("process_role_assignments")
+      .select("role_id")
+      .eq("organization_id", context.organization.id),
+  ]);
+  const loadError = [
+    rolesResult.error,
+    membersResult.error,
+    assignmentsResult.error,
+  ].find(Boolean);
+  if (loadError) {
+    console.error("Unable to load roles", { code: loadError.code });
+    throw new Error("Unable to load roles.");
+  }
+  const roles = rolesResult.data ?? [];
+  const memberCount = countByRole(membersResult.data ?? []);
+  const processCount = countByRole(assignmentsResult.data ?? []);
   return (
     <>
       <PageHeading
@@ -45,12 +66,8 @@ export default async function RolesPage() {
                   "Add responsibilities and assigned processes."}
               </p>
               <div className="mt-5 flex gap-4 border-t border-[#edf0f4] pt-4 text-xs text-[#7a8698]">
-                <span>
-                  {role.process_role_assignments?.[0]?.count ?? 0} processes
-                </span>
-                <span>
-                  {role.organization_members?.[0]?.count ?? 0} team members
-                </span>
+                <span>{processCount.get(role.id) ?? 0} processes</span>
+                <span>{memberCount.get(role.id) ?? 0} team members</span>
               </div>
             </Link>
           ))}
@@ -58,4 +75,13 @@ export default async function RolesPage() {
       )}
     </>
   );
+}
+
+function countByRole(rows: Array<{ role_id: string | null }>) {
+  const counts = new Map<string, number>();
+  for (const row of rows) {
+    if (row.role_id)
+      counts.set(row.role_id, (counts.get(row.role_id) ?? 0) + 1);
+  }
+  return counts;
 }

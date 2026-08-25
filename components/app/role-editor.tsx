@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Plus, Trash2 } from "lucide-react";
+import { Check, LoaderCircle, Plus, Trash2 } from "lucide-react";
 type Props = {
   role: {
     id: string;
@@ -21,19 +21,43 @@ export function RoleEditor({ role, processes, assigned }: Props) {
   const [data, setData] = useState({ ...role, processIds: assigned });
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
   async function save() {
-    const response = await fetch(`/api/roles/${role.id}`, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const body = await response.json();
-    if (!response.ok) {
-      setError(body.error);
-      return;
+    setSaving(true);
+    setError("");
+    setMessage("");
+    const cleaned = {
+      ...data,
+      responsibilities: {
+        every_morning: data.responsibilities.every_morning.filter((item) =>
+          item.trim(),
+        ),
+        every_customer: data.responsibilities.every_customer.filter((item) =>
+          item.trim(),
+        ),
+        requires_approval: data.responsibilities.requires_approval.filter(
+          (item) => item.trim(),
+        ),
+      },
+    };
+    try {
+      const response = await fetch(`/api/roles/${role.id}`, {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(cleaned),
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error ?? "Unable to save role.");
+      setData(cleaned);
+      setMessage("Role saved and training assignments updated.");
+      router.refresh();
+    } catch (caught) {
+      setError(
+        caught instanceof Error ? caught.message : "Unable to save role.",
+      );
+    } finally {
+      setSaving(false);
     }
-    setMessage("Role saved and training assignments updated.");
-    router.refresh();
   }
   function update(
     section: keyof Props["role"]["responsibilities"],
@@ -174,10 +198,12 @@ export function RoleEditor({ role, processes, assigned }: Props) {
       ) : null}
       <div className="flex justify-end">
         <button
+          disabled={saving}
           onClick={() => void save()}
-          className="min-h-11 rounded-xl bg-[#3158d8] px-5 text-sm font-semibold text-white"
+          className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#3158d8] px-5 text-sm font-semibold text-white disabled:cursor-wait disabled:opacity-60"
         >
-          Save Role
+          {saving ? <LoaderCircle className="size-4 animate-spin" /> : null}
+          {saving ? "Saving…" : "Save Role"}
         </button>
       </div>
     </div>

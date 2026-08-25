@@ -1,16 +1,16 @@
 # Graph Report - handoff  (2026-08-24)
 
 ## Corpus Check
-- 90 files · ~30,959 words
+- 90 files · ~31,402 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 325 nodes · 574 edges · 19 communities (17 shown, 2 thin omitted)
+- 327 nodes · 578 edges · 21 communities (18 shown, 3 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a96615a7`
+- Built from commit: `ff7ded82`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -27,6 +27,8 @@
 - [[_COMMUNITY_Community 14|Community 14]]
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Community 16|Community 16]]
+- [[_COMMUNITY_Community 19|Community 19]]
+- [[_COMMUNITY_Community 20|Community 20]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getRequestContext()` - 34 edges
@@ -47,19 +49,19 @@
   app/app/processes/[id]/page.tsx → lib/app-context.ts
 - `RolePage()` --calls--> `requireAdminContext()`  [INFERRED]
   app/app/roles/[id]/page.tsx → lib/app-context.ts
+- `InvitePage()` --calls--> `createClient()`  [EXTRACTED]
+  app/invite/[token]/page.tsx → lib/supabase/server.ts
 - `POST()` --calls--> `createClient()`  [EXTRACTED]
   app/api/invites/accept/route.ts → lib/supabase/server.ts
-- `POST()` --calls--> `createClient()`  [EXTRACTED]
-  app/api/onboarding/route.ts → lib/supabase/server.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (19 total, 2 thin omitted)
+## Communities (21 total, 3 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (40): AccountControls(), AuthContext, AuthContextValue, AuthProvider(), useAuth(), after, Audience(), audiences (+32 more)
+Cohesion: 0.06
+Nodes (41): AccountControls(), AuthContext, AuthContextValue, AuthProvider(), useAuth(), after, Audience(), audiences (+33 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.10
@@ -74,8 +76,8 @@ Cohesion: 0.07
 Nodes (45): getOpenAI(), companyAnswerSchema, ExtractedProcess, extractedProcessSchema, suggestedRuleSchema, answerCompanyQuestion(), embedKnowledge(), extractProcess() (+37 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.08
-Nodes (23): metadata, AskOpryn(), Message, prompts, ProductLayout(), DashboardPage(), EmployeeHome(), greeting() (+15 more)
+Cohesion: 0.22
+Nodes (5): Clarification, ProcessData, ProcessReview(), Rule, Step
 
 ### Community 5 - "Community 5"
 Cohesion: 0.10
@@ -90,27 +92,31 @@ Cohesion: 0.50
 Nodes (4): isSubmission(), POST(), requiredFields, Submission
 
 ### Community 15 - "Community 15"
-Cohesion: 0.08
-Nodes (28): POST(), schema, CreateRole(), OwnerAnswer(), EmptyState(), PageHeading(), Props, RoleEditor() (+20 more)
+Cohesion: 0.07
+Nodes (40): POST(), schema, metadata, AskOpryn(), Message, prompts, CreateRole(), ProductLayout() (+32 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.29
-Nodes (5): LegalDocument(), LegalSection(), Logo(), metadata, metadata
+Cohesion: 0.33
+Nodes (4): LegalDocument(), LegalSection(), metadata, metadata
+
+### Community 19 - "Community 19"
+Cohesion: 0.22
+Nodes (6): Invite, Member, Role, TeamManager(), InviteAccept(), InvitePage()
 
 ## Knowledge Gaps
 - **105 isolated node(s):** `schema`, `requiredFields`, `Submission`, `schema`, `schema` (+100 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `createClient()` connect `Community 15` to `Community 3`, `Community 4`?**
-  _High betweenness centrality (0.246) - this node is a cross-community bridge._
+- **Why does `createClient()` connect `Community 15` to `Community 19`, `Community 3`?**
+  _High betweenness centrality (0.247) - this node is a cross-community bridge._
 - **Why does `createClient()` connect `Community 5` to `Community 0`?**
-  _High betweenness centrality (0.143) - this node is a cross-community bridge._
+  _High betweenness centrality (0.142) - this node is a cross-community bridge._
 - **Why does `getRequestContext()` connect `Community 3` to `Community 15`?**
-  _High betweenness centrality (0.138) - this node is a cross-community bridge._
+  _High betweenness centrality (0.137) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `getRequestContext()` (e.g. with `DELETE()` and `PATCH()`) actually correct?**
   _`getRequestContext()` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 6 inferred relationships involving `apiError()` (e.g. with `DELETE()` and `PATCH()`) actually correct?**

@@ -397,7 +397,7 @@
       "label": "DELETE()",
       "file_type": "code",
       "source_file": "app/api/roles/[id]/route.ts",
-      "source_location": "L78",
+      "source_location": "L87",
       "_origin": "ast",
       "id": "app_api_roles_id_route_ts_id_route_delete",
       "community": 3,
@@ -580,7 +580,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ask_page",
-      "community": 4,
+      "community": 15,
       "norm_label": "page.tsx"
     },
     {
@@ -590,7 +590,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ask_page_askpage",
-      "community": 4,
+      "community": 15,
       "norm_label": "askpage()"
     },
     {
@@ -640,7 +640,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout",
-      "community": 4,
+      "community": 15,
       "norm_label": "layout.tsx"
     },
     {
@@ -650,7 +650,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout_metadata",
-      "community": 4,
+      "community": 15,
       "norm_label": "metadata"
     },
     {
@@ -660,7 +660,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_layout_productlayout",
-      "community": 4,
+      "community": 15,
       "norm_label": "productlayout()"
     },
     {
@@ -690,7 +690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_page_tsx_app_page",
-      "community": 4,
+      "community": 15,
       "norm_label": "page.tsx"
     },
     {
@@ -700,7 +700,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_page_dashboardpage",
-      "community": 4,
+      "community": 15,
       "norm_label": "dashboardpage()"
     },
     {
@@ -710,7 +710,7 @@
       "source_location": "L287",
       "_origin": "ast",
       "id": "app_page_employeehome",
-      "community": 4,
+      "community": 15,
       "norm_label": "employeehome()"
     },
     {
@@ -720,7 +720,7 @@
       "source_location": "L374",
       "_origin": "ast",
       "id": "app_page_metric",
-      "community": 4,
+      "community": 15,
       "norm_label": "metric()"
     },
     {
@@ -730,7 +730,7 @@
       "source_location": "L397",
       "_origin": "ast",
       "id": "app_page_mini",
-      "community": 4,
+      "community": 15,
       "norm_label": "mini()"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L405",
       "_origin": "ast",
       "id": "app_page_scorerow",
-      "community": 4,
+      "community": 15,
       "norm_label": "scorerow()"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L421",
       "_origin": "ast",
       "id": "app_page_greeting",
-      "community": 4,
+      "community": 15,
       "norm_label": "greeting()"
     },
     {
@@ -760,7 +760,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_processes_id_page_tsx_id_page",
-      "community": 4,
+      "community": 15,
       "norm_label": "page.tsx"
     },
     {
@@ -770,7 +770,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "id_page_processdetailpage",
-      "community": 4,
+      "community": 15,
       "norm_label": "processdetailpage()"
     },
     {
@@ -814,10 +814,20 @@
       "norm_label": "processespage()"
     },
     {
+      "label": "countBy()",
+      "file_type": "code",
+      "source_file": "app/app/processes/page.tsx",
+      "source_location": "L198",
+      "_origin": "ast",
+      "id": "processes_page_countby",
+      "community": 15,
+      "norm_label": "countby()"
+    },
+    {
       "label": "Status()",
       "file_type": "code",
       "source_file": "app/app/processes/page.tsx",
-      "source_location": "L147",
+      "source_location": "L210",
       "_origin": "ast",
       "id": "processes_page_status",
       "community": 15,
@@ -862,6 +872,16 @@
       "id": "roles_page_rolespage",
       "community": 15,
       "norm_label": "rolespage()"
+    },
+    {
+      "label": "countByRole()",
+      "file_type": "code",
+      "source_file": "app/app/roles/page.tsx",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "roles_page_countbyrole",
+      "community": 15,
+      "norm_label": "countbyrole()"
     },
     {
       "label": "page.tsx",
@@ -970,7 +990,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "token_page",
-      "community": 15,
+      "community": 19,
       "norm_label": "page.tsx"
     },
     {
@@ -980,7 +1000,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "token_page_invitepage",
-      "community": 15,
+      "community": 19,
       "norm_label": "invitepage()"
     },
     {
@@ -1060,7 +1080,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "onboarding_page",
-      "community": 4,
+      "community": 15,
       "norm_label": "page.tsx"
     },
     {
@@ -1070,7 +1090,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "onboarding_page_onboardingpage",
-      "community": 4,
+      "community": 15,
       "norm_label": "onboardingpage()"
     },
     {
@@ -1220,7 +1240,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_ask_opryn",
-      "community": 4,
+      "community": 15,
       "norm_label": "ask-opryn.tsx"
     },
     {
@@ -1230,7 +1250,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_ask_opryn_message",
-      "community": 4,
+      "community": 15,
       "norm_label": "message"
     },
     {
@@ -1240,7 +1260,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_ask_opryn_prompts",
-      "community": 4,
+      "community": 15,
       "norm_label": "prompts"
     },
     {
@@ -1250,7 +1270,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_ask_opryn_askopryn",
-      "community": 4,
+      "community": 15,
       "norm_label": "askopryn()"
     },
     {
@@ -1517,7 +1537,7 @@
       "label": "Responsibility()",
       "file_type": "code",
       "source_file": "components/app/role-editor.tsx",
-      "source_location": "L186",
+      "source_location": "L212",
       "_origin": "ast",
       "id": "app_role_editor_responsibility",
       "community": 15,
@@ -1530,7 +1550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_settings_form",
-      "community": 15,
+      "community": 20,
       "norm_label": "settings-form.tsx"
     },
     {
@@ -1540,7 +1560,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_settings_form_props",
-      "community": 15,
+      "community": 20,
       "norm_label": "props"
     },
     {
@@ -1550,7 +1570,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_settings_form_settingsform",
-      "community": 15,
+      "community": 20,
       "norm_label": "settingsform()"
     },
     {
@@ -1560,7 +1580,7 @@
       "source_location": "L176",
       "_origin": "ast",
       "id": "app_settings_form_section",
-      "community": 15,
+      "community": 20,
       "norm_label": "section()"
     },
     {
@@ -1570,7 +1590,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "app_settings_form_field",
-      "community": 15,
+      "community": 20,
       "norm_label": "field()"
     },
     {
@@ -1580,7 +1600,7 @@
       "source_location": "L215",
       "_origin": "ast",
       "id": "app_settings_form_toggle",
-      "community": 15,
+      "community": 20,
       "norm_label": "toggle()"
     },
     {
@@ -1590,7 +1610,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_team_manager",
-      "community": 15,
+      "community": 19,
       "norm_label": "team-manager.tsx"
     },
     {
@@ -1600,7 +1620,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_team_manager_role",
-      "community": 15,
+      "community": 19,
       "norm_label": "role"
     },
     {
@@ -1610,7 +1630,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_team_manager_member",
-      "community": 15,
+      "community": 19,
       "norm_label": "member"
     },
     {
@@ -1620,7 +1640,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_team_manager_invite",
-      "community": 15,
+      "community": 19,
       "norm_label": "invite"
     },
     {
@@ -1630,7 +1650,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_team_manager_teammanager",
-      "community": 15,
+      "community": 19,
       "norm_label": "teammanager()"
     },
     {
@@ -1640,7 +1660,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_training_button",
-      "community": 4,
+      "community": 15,
       "norm_label": "training-button.tsx"
     },
     {
@@ -1650,7 +1670,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_training_button_trainingbutton",
-      "community": 4,
+      "community": 15,
       "norm_label": "trainingbutton()"
     },
     {
@@ -2000,7 +2020,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_invite_accept",
-      "community": 15,
+      "community": 19,
       "norm_label": "invite-accept.tsx"
     },
     {
@@ -2010,7 +2030,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_invite_accept_inviteaccept",
-      "community": 15,
+      "community": 19,
       "norm_label": "inviteaccept()"
     },
     {
@@ -2090,7 +2110,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_onboarding_form",
-      "community": 4,
+      "community": 15,
       "norm_label": "onboarding-form.tsx"
     },
     {
@@ -2100,7 +2120,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_onboarding_form_onboardingform",
-      "community": 4,
+      "community": 15,
       "norm_label": "onboardingform()"
     },
     {
@@ -2110,7 +2130,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "components_onboarding_form_field",
-      "community": 4,
+      "community": 15,
       "norm_label": "field()"
     },
     {
@@ -2260,7 +2280,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_ui_logo",
-      "community": 16,
+      "community": 0,
       "norm_label": "logo()"
     },
     {
@@ -2520,7 +2540,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_app_context",
-      "community": 4,
+      "community": 15,
       "norm_label": "app-context.ts"
     },
     {
@@ -2530,7 +2550,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_app_context_permissionlevel",
-      "community": 4,
+      "community": 15,
       "norm_label": "permissionlevel"
     },
     {
@@ -2540,7 +2560,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "lib_app_context_appcontext",
-      "community": 4,
+      "community": 15,
       "norm_label": "appcontext"
     },
     {
@@ -2550,7 +2570,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "lib_app_context_getoptionalappcontext",
-      "community": 4,
+      "community": 15,
       "norm_label": "getoptionalappcontext"
     },
     {
@@ -2560,7 +2580,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "lib_app_context_requireuser",
-      "community": 4,
+      "community": 15,
       "norm_label": "requireuser()"
     },
     {
@@ -2570,7 +2590,7 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "lib_app_context_requireappcontext",
-      "community": 4,
+      "community": 15,
       "norm_label": "requireappcontext()"
     },
     {
@@ -5669,6 +5689,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/app/processes/page.tsx",
+      "source_location": "L198",
+      "weight": 1.0,
+      "source": "processes_page",
+      "target": "processes_page_countby",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/page.tsx",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5717,6 +5747,17 @@
       "weight": 1.0,
       "source": "processes_page_processespage",
       "target": "lib_app_context_requireappcontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/processes/page.tsx",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "processes_page_processespage",
+      "target": "processes_page_countby",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5919,6 +5960,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/app/roles/page.tsx",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "roles_page",
+      "target": "roles_page_countbyrole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/roles/page.tsx",
       "source_location": "L2",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5957,6 +6008,17 @@
       "weight": 1.0,
       "source": "roles_page_rolespage",
       "target": "lib_app_context_requireappcontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/app/roles/page.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "roles_page_rolespage",
+      "target": "roles_page_countbyrole",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -9327,5 +9389,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a96615a776492d4b2ad1f5846736f5665e176b19"
+  "built_at_commit": "ff7ded82f713b9e130c81535008c793c411455a9"
 }

@@ -8,20 +8,26 @@ export function CreateRole() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
   async function submit(event: FormEvent) {
     event.preventDefault();
-    const response = await fetch("/api/roles", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name, description }),
-    });
-    const body = await response.json();
-    if (!response.ok) {
-      setError(body.error);
-      return;
+    setSaving(true);
+    setError("");
+    try {
+      const response = await fetch("/api/roles", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name, description }),
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error ?? "Unable to create role.");
+      router.replace(`/app/roles/${body.id}`);
+    } catch (caught) {
+      setError(
+        caught instanceof Error ? caught.message : "Unable to create role.",
+      );
+      setSaving(false);
     }
-    router.push(`/app/roles/${body.id}`);
-    router.refresh();
   }
   return (
     <>
@@ -85,8 +91,11 @@ export function CreateRole() {
             {error ? (
               <p className="mt-3 text-sm text-[#a83f49]">{error}</p>
             ) : null}
-            <button className="mt-5 min-h-11 w-full rounded-xl bg-[#3158d8] text-sm font-semibold text-white">
-              Create Role
+            <button
+              disabled={saving}
+              className="mt-5 min-h-11 w-full rounded-xl bg-[#3158d8] text-sm font-semibold text-white disabled:cursor-wait disabled:opacity-60"
+            >
+              {saving ? "Creating…" : "Create Role"}
             </button>
           </form>
         </div>
