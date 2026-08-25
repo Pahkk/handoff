@@ -34,15 +34,27 @@ export async function POST(request: Request) {
       target_organization_id: membership.organization_id,
       query_embedding: embedding,
       target_role_id: membership.role_id,
-      match_threshold: settings?.confidence_threshold ?? 0.72,
-      match_count: 8,
+      // Vector similarity only decides which approved sources the model reads.
+      // Answer confidence is evaluated separately below.
+      match_threshold: 0.3,
+      match_count: 15,
     });
     if (searchError) throw searchError;
     const knowledge = (data ?? []) as RetrievedKnowledge[];
     const answer = knowledge.length
       ? await answerCompanyQuestion(parsed.data.question, knowledge)
-      : { can_answer: false, answer: "", cited_source_ids: [] };
-    if (!answer.can_answer || !answer.answer.trim()) {
+      : {
+          can_answer: false,
+          confidence: 0,
+          answer: "",
+          cited_source_ids: [],
+        };
+    const answerThreshold = settings?.confidence_threshold ?? 0.72;
+    if (
+      !answer.can_answer ||
+      answer.confidence < answerThreshold ||
+      !answer.answer.trim()
+    ) {
       const { data: question, error } = await supabase
         .from("employee_questions")
         .insert({

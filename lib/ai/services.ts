@@ -72,7 +72,7 @@ export async function answerCompanyQuestion(
   const response = await getOpenAI().responses.parse({
     model: "gpt-5.4-mini",
     instructions:
-      "You answer employees using only the supplied, approved company knowledge. Never use general knowledge to invent company policy. If the context does not directly and completely support an answer, set can_answer=false and leave answer empty. If sources conflict, set can_answer=false. When answering, use simple language and cite only source IDs that directly support the answer.",
+      "You answer employees using only the supplied, approved company knowledge. Never use general knowledge to invent company policy. Answer the supported part of the question when the sources clearly contain it; do not refuse merely because the employee used different wording. If the context does not support a useful answer, set can_answer=false and leave answer empty. If sources conflict, set can_answer=false. Set confidence from 0 to 1 based on how directly and completely the approved sources support the answer, not on writing style or general knowledge. When answering, use simple language and cite every source ID that directly supports the answer.",
     input: `EMPLOYEE QUESTION:\n${question}\n\nAPPROVED COMPANY KNOWLEDGE:\n${context || "No approved knowledge was found."}`,
     text: { format: zodTextFormat(companyAnswerSchema, "company_answer") },
   });

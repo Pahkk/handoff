@@ -29,8 +29,9 @@ export const extractedProcessSchema = z.object({
 
 export const companyAnswerSchema = z.object({
   can_answer: z.boolean(),
+  confidence: z.number().min(0).max(1),
   answer: z.string().max(10000),
-  cited_source_ids: z.array(z.string().uuid()).max(8),
+  cited_source_ids: z.array(z.string().uuid()).max(15),
 });
 
 export const suggestedRuleSchema = z.object({
