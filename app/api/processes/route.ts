@@ -2,7 +2,9 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { randomUUID } from "node:crypto";
 import { getRequestContext, apiError } from "@/lib/api";
-import { extractProcess } from "@/lib/ai/services";
+import { OPENAI_MODELS } from "@/lib/ai/config";
+import { ALLOWED_MEDIA_MIME_TYPES } from "@/lib/ai/media-types";
+import { extractProcessFromTranscript } from "@/lib/ai/services";
 import { replaceExtractedProcess } from "@/lib/processes";
 
 const schema = z.object({
@@ -24,20 +26,6 @@ const schema = z.object({
     })
     .optional(),
 });
-const allowed = new Set([
-  "video/mp4",
-  "video/quicktime",
-  "video/webm",
-  "audio/mpeg",
-  "audio/mp3",
-  "audio/wav",
-  "audio/x-wav",
-  "audio/mp4",
-  "audio/x-m4a",
-  "audio/webm",
-  "audio/ogg",
-]);
-
 export async function POST(request: Request) {
   const context = await getRequestContext({ admin: true });
   if ("error" in context) return context.error;
@@ -54,7 +42,7 @@ export async function POST(request: Request) {
     );
   if (
     parsed.data.inputType === "media" &&
-    (!parsed.data.file || !allowed.has(parsed.data.file.type))
+    (!parsed.data.file || !ALLOWED_MEDIA_MIME_TYPES.has(parsed.data.file.type))
   )
     return NextResponse.json(
       { error: "Upload an MP4, MOV, WEBM, MP3, WAV, or M4A file up to 25 MB." },
@@ -92,9 +80,13 @@ export async function POST(request: Request) {
       if (roleError) throw roleError;
     }
     if (parsed.data.inputType === "text") {
-      const extracted = await extractProcess(
+      const extracted = await extractProcessFromTranscript(
         parsed.data.explanation!,
         parsed.data.title,
+        {
+          organizationId: membership.organization_id,
+          processId: process.id,
+        },
       );
       await replaceExtractedProcess(
         supabase,
@@ -102,6 +94,7 @@ export async function POST(request: Request) {
         membership.organization_id,
         user.id,
         extracted,
+        { model: OPENAI_MODELS.text },
       );
       return NextResponse.json({ processId: process.id, ready: true });
     }

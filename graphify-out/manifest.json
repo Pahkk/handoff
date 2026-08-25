@@ -55,13 +55,13 @@
     "semantic_hash": ""
   },
   "next.config.ts": {
-    "mtime": 1787606985.6636837,
-    "ast_hash": "bdeb6beffd46994a763431ab0efeb54a",
+    "mtime": 1787622077.6375918,
+    "ast_hash": "9f2c97d906417d988f49c8f228ae5374",
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1787615973.1434615,
-    "ast_hash": "f86a22bcbd7744598cc0823658096441",
+    "mtime": 1787622438.5334103,
+    "ast_hash": "bd1f12a7df1217faa307f3781dab8ac9",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "app/api/processes/[id]/learn/route.ts": {
-    "mtime": 1787615977.8612168,
-    "ast_hash": "fe5005275b30253e83109dc032f1b348",
+    "mtime": 1787622707.8361282,
+    "ast_hash": "6c8039b72625505cfc3e72a043415354",
     "semantic_hash": ""
   },
   "app/api/processes/[id]/route.ts": {
@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "app/api/processes/route.ts": {
-    "mtime": 1787619204.3304706,
-    "ast_hash": "faf18bbef875f8f85c0e98c9a41d7217",
+    "mtime": 1787622429.3138695,
+    "ast_hash": "2da9a6f5d236de527a15ecc9a758937c",
     "semantic_hash": ""
   },
   "app/api/questions/[id]/answer/route.ts": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "components/app/capture-process.tsx": {
-    "mtime": 1787620429.1065323,
-    "ast_hash": "a65f90856ee76c73ffd60b52a3204462",
+    "mtime": 1787622121.1944375,
+    "ast_hash": "93784a04c792df81255b471498a94708",
     "semantic_hash": ""
   },
   "components/app/create-role.tsx": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "lib/ai/openai.ts": {
-    "mtime": 1787615978.0481837,
-    "ast_hash": "71af54d95070a601f0c535ca95120978",
+    "mtime": 1787622429.4023974,
+    "ast_hash": "39a8cc9184f5c6ba70a50ab7a5ea3b78",
     "semantic_hash": ""
   },
   "lib/ai/schemas.ts": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "lib/ai/services.ts": {
-    "mtime": 1787618974.5277777,
-    "ast_hash": "4c2491d9edeb9afd84611daa7fa7d6b1",
+    "mtime": 1787621970.217077,
+    "ast_hash": "ad16692361e84a0160a2cc5f214030ec",
     "semantic_hash": ""
   },
   "lib/api.ts": {
@@ -410,8 +410,8 @@
     "semantic_hash": ""
   },
   "lib/processes.ts": {
-    "mtime": 1787615978.0672386,
-    "ast_hash": "9b5ccac70f3c3d6b1c6370093945af19",
+    "mtime": 1787622153.3918214,
+    "ast_hash": "981b389fe2087b6a73ce31f92bac663c",
     "semantic_hash": ""
   },
   "supabase/migrations/20260824230000_opryn_v1.sql": {
@@ -497,6 +497,31 @@
   "lib/return-path.ts": {
     "mtime": 1787620488.3586545,
     "ast_hash": "37c2b527d31846687f6f5d49102e3a50",
+    "semantic_hash": ""
+  },
+  "lib/ai/config.ts": {
+    "mtime": 1787622661.257569,
+    "ast_hash": "46d7d1e5c66bfcff05747a756082c497",
+    "semantic_hash": ""
+  },
+  "lib/ai/media-types.ts": {
+    "mtime": 1787622429.2296672,
+    "ast_hash": "66cb2f5c3873fdfe6f441d0a727678a2",
+    "semantic_hash": ""
+  },
+  "lib/ai/media.ts": {
+    "mtime": 1787622429.270894,
+    "ast_hash": "4895176b4522361a2d473ea1f166a070",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260825003000_openai_model_pipeline.sql": {
+    "mtime": 1787622086.2194448,
+    "ast_hash": "0573d6354b39dbdaae44bf416fa926be",
+    "semantic_hash": ""
+  },
+  "docs/deployment.md": {
+    "mtime": 1787622077.596908,
+    "ast_hash": "1ceed15b6f12ba947c7ebd2134e76a29",
     "semantic_hash": ""
   }
 }

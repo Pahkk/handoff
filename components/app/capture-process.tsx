@@ -13,12 +13,6 @@ type InitialCapture = {
   coachingPrompt: string;
   recommendationId: string;
 };
-const mediaStages = [
-  "Uploading recording",
-  "Transcribing recording",
-  "Finding steps and rules",
-  "Preparing your process",
-];
 const textStages = [
   "Reading your explanation",
   "Finding steps and rules",
@@ -47,12 +41,84 @@ export function CaptureProcess({
   const [working, setWorking] = useState(false);
   const [stage, setStage] = useState(0);
   const [error, setError] = useState("");
+  const [retryJob, setRetryJob] = useState<{
+    processId: string;
+    mediaId: string;
+    isVideo: boolean;
+  } | null>(null);
+  const mediaStages = [
+    "Uploading recording",
+    ...(file?.type.startsWith("video/") ? ["Extracting audio"] : []),
+    "Transcribing recording",
+    "Finding steps and rules",
+    "Preparing your process",
+  ];
   const stages = mode === "media" ? mediaStages : textStages;
 
   function changeMode(nextMode: "media" | "text") {
     setMode(nextMode);
     setError("");
+    setRetryJob(null);
     if (nextMode === "text") setFile(null);
+  }
+
+  function finish(processId: string) {
+    showAppToast(
+      "Process ready for review!",
+      "Check the steps and approve it before your team uses it.",
+    );
+    router.replace(
+      `/app/processes/${processId}?returnTo=${encodeURIComponent(returnTo)}`,
+    );
+  }
+
+  async function learnRecording(job: {
+    processId: string;
+    mediaId: string;
+    isVideo: boolean;
+  }) {
+    const jobStages = [
+      "Uploading recording",
+      ...(job.isVideo ? ["Extracting audio"] : []),
+      "Transcribing recording",
+      "Finding steps and rules",
+      "Preparing your process",
+    ];
+    setStage(1);
+    const progress = window.setInterval(() => {
+      setStage((current) => Math.min(current + 1, jobStages.length - 2));
+    }, 2800);
+    try {
+      const response = await fetch(`/api/processes/${job.processId}/learn`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ mediaId: job.mediaId }),
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        if (body.canRetry) setRetryJob(job);
+        throw new Error(body.error ?? "Opryn could not learn this recording.");
+      }
+      setRetryJob(null);
+      setStage(jobStages.length - 1);
+      return body.processId as string;
+    } finally {
+      window.clearInterval(progress);
+    }
+  }
+
+  async function retryProcessing() {
+    if (!retryJob || working) return;
+    setError("");
+    setWorking(true);
+    try {
+      finish(await learnRecording(retryJob));
+    } catch (caught) {
+      setError(
+        caught instanceof Error ? caught.message : "Something went wrong.",
+      );
+      setWorking(false);
+    }
   }
 
   async function submit(event: FormEvent) {
@@ -82,13 +148,7 @@ export function CaptureProcess({
         throw new Error(body.error ?? "Unable to create process.");
       if (body.ready) {
         setStage(textStages.length - 1);
-        showAppToast(
-          "Process ready for review!",
-          "Check the steps and approve it before your team uses it.",
-        );
-        router.replace(
-          `/app/processes/${body.processId}?returnTo=${encodeURIComponent(returnTo)}`,
-        );
+        finish(body.processId);
         return;
       }
       setStage(0);
@@ -99,24 +159,12 @@ export function CaptureProcess({
           upsert: false,
         });
       if (uploadError) throw uploadError;
-      setStage(1);
-      const learn = await fetch(`/api/processes/${body.processId}/learn`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ mediaId: body.mediaId }),
-      });
-      const learned = await learn.json();
-      if (!learn.ok)
-        throw new Error(
-          learned.error ?? "Opryn could not learn this recording.",
-        );
-      setStage(3);
-      showAppToast(
-        "Process ready for review!",
-        "Check the steps and approve it before your team uses it.",
-      );
-      router.replace(
-        `/app/processes/${body.processId}?returnTo=${encodeURIComponent(returnTo)}`,
+      finish(
+        await learnRecording({
+          processId: body.processId,
+          mediaId: body.mediaId,
+          isVideo: file!.type.startsWith("video/"),
+        }),
       );
     } catch (caught) {
       setError(
@@ -229,7 +277,11 @@ export function CaptureProcess({
               className="sr-only"
               type="file"
               accept=".mp4,.mov,.webm,.mp3,.wav,.m4a,audio/*,video/*"
-              onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+              onChange={(event) => {
+                setFile(event.target.files?.[0] ?? null);
+                setRetryJob(null);
+                setError("");
+              }}
             />
             <button
               type="button"
@@ -267,12 +319,21 @@ export function CaptureProcess({
         )}
       </section>
       {error ? (
-        <p
+        <div
           role="alert"
-          className="rounded-xl bg-[#fff0f1] p-3 text-sm text-[#a83f49]"
+          className="rounded-xl bg-[#fff0f1] p-4 text-sm text-[#a83f49]"
         >
-          {error}
-        </p>
+          <p>{error}</p>
+          {retryJob ? (
+            <button
+              type="button"
+              onClick={() => void retryProcessing()}
+              className="mt-3 rounded-lg bg-[#a83f49] px-3.5 py-2 text-xs font-semibold text-white"
+            >
+              Retry processing
+            </button>
+          ) : null}
+        </div>
       ) : null}
       <div className="flex justify-end">
         <button className="flex min-h-12 items-center gap-2 rounded-xl bg-[#3158d8] px-6 text-sm font-semibold text-white shadow-[0_9px_22px_rgba(49,88,216,.2)] hover:bg-[#2446b8]">

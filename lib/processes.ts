@@ -8,6 +8,7 @@ export async function replaceExtractedProcess(
   organizationId: string,
   userId: string,
   extracted: ExtractedProcess,
+  generation?: { model: string; transcriptId?: string | null },
 ) {
   const { error: updateError } = await supabase
     .from("processes")
@@ -16,6 +17,8 @@ export async function replaceExtractedProcess(
       summary: extracted.summary,
       purpose: extracted.purpose,
       status: "needs_review",
+      generation_model: generation?.model ?? null,
+      transcript_id: generation?.transcriptId ?? null,
     })
     .eq("id", processId)
     .eq("organization_id", organizationId);
@@ -35,57 +38,49 @@ export async function replaceExtractedProcess(
     if (error) throw error;
   }
   if (extracted.steps.length) {
-    const { error } = await supabase
-      .from("process_steps")
-      .insert(
-        extracted.steps.map((step, index) => ({
-          process_id: processId,
-          organization_id: organizationId,
-          step_order: index + 1,
-          title: step.title,
-          description: step.description,
-        })),
-      );
+    const { error } = await supabase.from("process_steps").insert(
+      extracted.steps.map((step, index) => ({
+        process_id: processId,
+        organization_id: organizationId,
+        step_order: index + 1,
+        title: step.title,
+        description: step.description,
+      })),
+    );
     if (error) throw error;
   }
   if (extracted.rules.length) {
-    const { error } = await supabase
-      .from("process_rules")
-      .insert(
-        extracted.rules.map((rule) => ({
-          organization_id: organizationId,
-          process_id: processId,
-          title: rule.title,
-          text: rule.text,
-          status: "draft",
-          confidence: rule.confidence,
-          created_by: userId,
-        })),
-      );
+    const { error } = await supabase.from("process_rules").insert(
+      extracted.rules.map((rule) => ({
+        organization_id: organizationId,
+        process_id: processId,
+        title: rule.title,
+        text: rule.text,
+        status: "draft",
+        confidence: rule.confidence,
+        created_by: userId,
+      })),
+    );
     if (error) throw error;
   }
   if (extracted.exceptions.length) {
-    const { error } = await supabase
-      .from("process_exceptions")
-      .insert(
-        extracted.exceptions.map((text) => ({
-          organization_id: organizationId,
-          process_id: processId,
-          text,
-        })),
-      );
+    const { error } = await supabase.from("process_exceptions").insert(
+      extracted.exceptions.map((text) => ({
+        organization_id: organizationId,
+        process_id: processId,
+        text,
+      })),
+    );
     if (error) throw error;
   }
   if (extracted.clarification_questions.length) {
-    const { error } = await supabase
-      .from("clarification_questions")
-      .insert(
-        extracted.clarification_questions.map((question) => ({
-          organization_id: organizationId,
-          process_id: processId,
-          question,
-        })),
-      );
+    const { error } = await supabase.from("clarification_questions").insert(
+      extracted.clarification_questions.map((question) => ({
+        organization_id: organizationId,
+        process_id: processId,
+        question,
+      })),
+    );
     if (error) throw error;
   }
 }

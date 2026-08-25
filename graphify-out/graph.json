@@ -180,28 +180,78 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "learn_route",
-      "community": 3,
+      "community": 4,
       "norm_label": "route.ts"
     },
     {
       "label": "schema",
       "file_type": "code",
       "source_file": "app/api/processes/[id]/learn/route.ts",
-      "source_location": "L7",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "learn_route_schema",
-      "community": 3,
+      "community": 4,
       "norm_label": "schema"
+    },
+    {
+      "label": "ProcessingStage",
+      "file_type": "code",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "learn_route_processingstage",
+      "community": 4,
+      "norm_label": "processingstage"
     },
     {
       "label": "POST()",
       "file_type": "code",
       "source_file": "app/api/processes/[id]/learn/route.ts",
-      "source_location": "L8",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "learn_route_post",
-      "community": 3,
+      "community": 4,
       "norm_label": "post()"
+    },
+    {
+      "label": "updateMediaStatus()",
+      "file_type": "code",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L223",
+      "_origin": "ast",
+      "id": "learn_route_updatemediastatus",
+      "community": 4,
+      "norm_label": "updatemediastatus()"
+    },
+    {
+      "label": "processingErrorResponse()",
+      "file_type": "code",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L237",
+      "_origin": "ast",
+      "id": "learn_route_processingerrorresponse",
+      "community": 4,
+      "norm_label": "processingerrorresponse()"
+    },
+    {
+      "label": "safeStoredError()",
+      "file_type": "code",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L266",
+      "_origin": "ast",
+      "id": "learn_route_safestorederror",
+      "community": 4,
+      "norm_label": "safestorederror()"
+    },
+    {
+      "label": "safeErrorDetails()",
+      "file_type": "code",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L272",
+      "_origin": "ast",
+      "id": "learn_route_safeerrordetails",
+      "community": 4,
+      "norm_label": "safeerrordetails()"
     },
     {
       "label": "route.ts",
@@ -250,37 +300,27 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "processes_route",
-      "community": 3,
+      "community": 4,
       "norm_label": "route.ts"
     },
     {
       "label": "schema",
       "file_type": "code",
       "source_file": "app/api/processes/route.ts",
-      "source_location": "L8",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "processes_route_schema",
-      "community": 3,
+      "community": 4,
       "norm_label": "schema"
-    },
-    {
-      "label": "allowed",
-      "file_type": "code",
-      "source_file": "app/api/processes/route.ts",
-      "source_location": "L27",
-      "_origin": "ast",
-      "id": "processes_route_allowed",
-      "community": 3,
-      "norm_label": "allowed"
     },
     {
       "label": "POST()",
       "file_type": "code",
       "source_file": "app/api/processes/route.ts",
-      "source_location": "L41",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "processes_route_post",
-      "community": 3,
+      "community": 4,
       "norm_label": "post()"
     },
     {
@@ -650,7 +690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "learn_page",
-      "community": 15,
+      "community": 19,
       "norm_label": "page.tsx"
     },
     {
@@ -660,7 +700,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "learn_page_learnbusinesspage",
-      "community": 15,
+      "community": 19,
       "norm_label": "learnbusinesspage()"
     },
     {
@@ -710,7 +750,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout",
-      "community": 16,
+      "community": 15,
       "norm_label": "layout.tsx"
     },
     {
@@ -720,7 +760,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_app_layout_tsx_app_layout_metadata",
-      "community": 16,
+      "community": 15,
       "norm_label": "metadata"
     },
     {
@@ -730,7 +770,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_layout_productlayout",
-      "community": 16,
+      "community": 15,
       "norm_label": "productlayout()"
     },
     {
@@ -1270,7 +1310,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_app_shell",
-      "community": 16,
+      "community": 19,
       "norm_label": "app-shell.tsx"
     },
     {
@@ -1280,7 +1320,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "app_app_shell_items",
-      "community": 16,
+      "community": 19,
       "norm_label": "items"
     },
     {
@@ -1290,7 +1330,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "app_app_shell_props",
-      "community": 16,
+      "community": 19,
       "norm_label": "props"
     },
     {
@@ -1300,7 +1340,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "app_app_shell_appshell",
-      "community": 16,
+      "community": 15,
       "norm_label": "appshell()"
     },
     {
@@ -1310,7 +1350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_ask_opryn",
-      "community": 23,
+      "community": 19,
       "norm_label": "ask-opryn.tsx"
     },
     {
@@ -1320,7 +1360,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_ask_opryn_message",
-      "community": 23,
+      "community": 19,
       "norm_label": "message"
     },
     {
@@ -1330,7 +1370,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_ask_opryn_fallbackprompts",
-      "community": 23,
+      "community": 19,
       "norm_label": "fallbackprompts"
     },
     {
@@ -1340,7 +1380,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_ask_opryn_askopryn",
-      "community": 23,
+      "community": 19,
       "norm_label": "askopryn()"
     },
     {
@@ -1350,7 +1390,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_business_discovery_form",
-      "community": 15,
+      "community": 19,
       "norm_label": "business-discovery-form.tsx"
     },
     {
@@ -1360,7 +1400,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_business_discovery_form_businessdiscoveryform",
-      "community": 15,
+      "community": 19,
       "norm_label": "businessdiscoveryform()"
     },
     {
@@ -1370,7 +1410,7 @@
       "source_location": "L107",
       "_origin": "ast",
       "id": "app_business_discovery_form_question",
-      "community": 15,
+      "community": 19,
       "norm_label": "question()"
     },
     {
@@ -1380,7 +1420,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_capture_process",
-      "community": 25,
+      "community": 5,
       "norm_label": "capture-process.tsx"
     },
     {
@@ -1390,7 +1430,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_capture_process_role",
-      "community": 25,
+      "community": 5,
       "norm_label": "role"
     },
     {
@@ -1400,57 +1440,47 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_capture_process_initialcapture",
-      "community": 25,
+      "community": 5,
       "norm_label": "initialcapture"
-    },
-    {
-      "label": "mediaStages",
-      "file_type": "code",
-      "source_file": "components/app/capture-process.tsx",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "app_capture_process_mediastages",
-      "community": 25,
-      "norm_label": "mediastages"
     },
     {
       "label": "textStages",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L22",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "app_capture_process_textstages",
-      "community": 25,
+      "community": 5,
       "norm_label": "textstages"
     },
     {
       "label": "CaptureProcess()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L28",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "app_capture_process_captureprocess",
-      "community": 25,
+      "community": 5,
       "norm_label": "captureprocess()"
     },
     {
       "label": "ModeButton()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L285",
+      "source_location": "L346",
       "_origin": "ast",
       "id": "app_capture_process_modebutton",
-      "community": 25,
+      "community": 5,
       "norm_label": "modebutton()"
     },
     {
       "label": "Field()",
       "file_type": "code",
       "source_file": "components/app/capture-process.tsx",
-      "source_location": "L312",
+      "source_location": "L373",
       "_origin": "ast",
       "id": "app_capture_process_field",
-      "community": 25,
+      "community": 5,
       "norm_label": "field()"
     },
     {
@@ -1530,7 +1560,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_process_review",
-      "community": 4,
+      "community": 19,
       "norm_label": "process-review.tsx"
     },
     {
@@ -1540,7 +1570,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_process_review_step",
-      "community": 4,
+      "community": 19,
       "norm_label": "step"
     },
     {
@@ -1550,7 +1580,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_process_review_rule",
-      "community": 4,
+      "community": 19,
       "norm_label": "rule"
     },
     {
@@ -1560,7 +1590,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_process_review_clarification",
-      "community": 4,
+      "community": 19,
       "norm_label": "clarification"
     },
     {
@@ -1570,7 +1600,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_process_review_processdata",
-      "community": 4,
+      "community": 19,
       "norm_label": "processdata"
     },
     {
@@ -1580,7 +1610,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "app_process_review_processreview",
-      "community": 4,
+      "community": 19,
       "norm_label": "processreview()"
     },
     {
@@ -1590,7 +1620,7 @@
       "source_location": "L384",
       "_origin": "ast",
       "id": "app_process_review_textarea",
-      "community": 4,
+      "community": 19,
       "norm_label": "textarea()"
     },
     {
@@ -1600,7 +1630,7 @@
       "source_location": "L405",
       "_origin": "ast",
       "id": "app_process_review_iconbutton",
-      "community": 4,
+      "community": 19,
       "norm_label": "iconbutton()"
     },
     {
@@ -1610,7 +1640,7 @@
       "source_location": "L426",
       "_origin": "ast",
       "id": "app_process_review_editablelist",
-      "community": 4,
+      "community": 19,
       "norm_label": "editablelist()"
     },
     {
@@ -1620,7 +1650,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_role_editor",
-      "community": 24,
+      "community": 15,
       "norm_label": "role-editor.tsx"
     },
     {
@@ -1630,7 +1660,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_role_editor_props",
-      "community": 24,
+      "community": 15,
       "norm_label": "props"
     },
     {
@@ -1640,7 +1670,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_role_editor_roleeditor",
-      "community": 24,
+      "community": 15,
       "norm_label": "roleeditor()"
     },
     {
@@ -1650,7 +1680,7 @@
       "source_location": "L218",
       "_origin": "ast",
       "id": "app_role_editor_responsibility",
-      "community": 24,
+      "community": 15,
       "norm_label": "responsibility()"
     },
     {
@@ -2430,7 +2460,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_ui_logo",
-      "community": 26,
+      "community": 0,
       "norm_label": "logo()"
     },
     {
@@ -2504,13 +2534,173 @@
       "norm_label": "eslint.config.mjs"
     },
     {
+      "label": "config.ts",
+      "file_type": "code",
+      "source_file": "lib/ai/config.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ai_config",
+      "community": 4,
+      "norm_label": "config.ts"
+    },
+    {
+      "label": "configuredModel()",
+      "file_type": "code",
+      "source_file": "lib/ai/config.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "ai_config_configuredmodel",
+      "community": 4,
+      "norm_label": "configuredmodel()"
+    },
+    {
+      "label": "OPENAI_MODELS",
+      "file_type": "code",
+      "source_file": "lib/ai/config.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "ai_config_openai_models",
+      "community": 4,
+      "norm_label": "openai_models"
+    },
+    {
+      "label": "OPENAI_TEXT_REASONING",
+      "file_type": "code",
+      "source_file": "lib/ai/config.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "ai_config_openai_text_reasoning",
+      "community": 4,
+      "norm_label": "openai_text_reasoning"
+    },
+    {
+      "label": "media-types.ts",
+      "file_type": "code",
+      "source_file": "lib/ai/media-types.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ai_media_types",
+      "community": 4,
+      "norm_label": "media-types.ts"
+    },
+    {
+      "label": "AUDIO_MIME_TYPES",
+      "file_type": "code",
+      "source_file": "lib/ai/media-types.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "ai_media_types_audio_mime_types",
+      "community": 4,
+      "norm_label": "audio_mime_types"
+    },
+    {
+      "label": "VIDEO_MIME_TYPES",
+      "file_type": "code",
+      "source_file": "lib/ai/media-types.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "ai_media_types_video_mime_types",
+      "community": 4,
+      "norm_label": "video_mime_types"
+    },
+    {
+      "label": "ALLOWED_MEDIA_MIME_TYPES",
+      "file_type": "code",
+      "source_file": "lib/ai/media-types.ts",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "ai_media_types_allowed_media_mime_types",
+      "community": 4,
+      "norm_label": "allowed_media_mime_types"
+    },
+    {
+      "label": "media.ts",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ai_media",
+      "community": 4,
+      "norm_label": "media.ts"
+    },
+    {
+      "label": "inputExtensions",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "ai_media_inputextensions",
+      "community": 4,
+      "norm_label": "inputextensions"
+    },
+    {
+      "label": "UnsupportedRecordingError",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "ai_media_unsupportedrecordingerror",
+      "community": 4,
+      "norm_label": "unsupportedrecordingerror"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "ai_media_unsupportedrecordingerror_constructor",
+      "community": 4,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "PreparedAudio",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "ai_media_preparedaudio",
+      "community": 4,
+      "norm_label": "preparedaudio"
+    },
+    {
+      "label": "prepareTranscriptionAudio()",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "ai_media_preparetranscriptionaudio",
+      "community": 4,
+      "norm_label": "preparetranscriptionaudio()"
+    },
+    {
+      "label": "safeFileName()",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L103",
+      "_origin": "ast",
+      "id": "ai_media_safefilename",
+      "community": 4,
+      "norm_label": "safefilename()"
+    },
+    {
+      "label": "runFfmpeg()",
+      "file_type": "code",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L110",
+      "_origin": "ast",
+      "id": "ai_media_runffmpeg",
+      "community": 4,
+      "norm_label": "runffmpeg()"
+    },
+    {
       "label": "openai.ts",
       "file_type": "code",
       "source_file": "lib/ai/openai.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "ai_openai",
-      "community": 3,
+      "community": 4,
       "norm_label": "openai.ts"
     },
     {
@@ -2524,23 +2714,13 @@
       "norm_label": "getopenai()"
     },
     {
-      "label": "humanizeAIError()",
-      "file_type": "code",
-      "source_file": "lib/ai/openai.ts",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "ai_openai_humanizeaierror",
-      "community": 3,
-      "norm_label": "humanizeaierror()"
-    },
-    {
       "label": "schemas.ts",
       "file_type": "code",
       "source_file": "lib/ai/schemas.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "ai_schemas",
-      "community": 3,
+      "community": 4,
       "norm_label": "schemas.ts"
     },
     {
@@ -2550,7 +2730,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ai_schemas_extractedprocessschema",
-      "community": 3,
+      "community": 4,
       "norm_label": "extractedprocessschema"
     },
     {
@@ -2560,7 +2740,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "ai_schemas_companyanswerschema",
-      "community": 3,
+      "community": 4,
       "norm_label": "companyanswerschema"
     },
     {
@@ -2570,7 +2750,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "ai_schemas_suggestedruleschema",
-      "community": 3,
+      "community": 4,
       "norm_label": "suggestedruleschema"
     },
     {
@@ -2580,7 +2760,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "ai_schemas_processrecommendationsschema",
-      "community": 3,
+      "community": 4,
       "norm_label": "processrecommendationsschema"
     },
     {
@@ -2590,7 +2770,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "ai_schemas_extractedprocess",
-      "community": 3,
+      "community": 4,
       "norm_label": "extractedprocess"
     },
     {
@@ -2600,7 +2780,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "ai_schemas_processrecommendations",
-      "community": 3,
+      "community": 4,
       "norm_label": "processrecommendations"
     },
     {
@@ -2610,34 +2790,44 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ai_services",
-      "community": 3,
+      "community": 4,
       "norm_label": "services.ts"
     },
     {
-      "label": "transcribeMedia()",
+      "label": "AITrace",
       "file_type": "code",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast",
-      "id": "ai_services_transcribemedia",
-      "community": 3,
-      "norm_label": "transcribemedia()"
+      "id": "ai_services_aitrace",
+      "community": 4,
+      "norm_label": "aitrace"
     },
     {
-      "label": "extractProcess()",
+      "label": "transcribeAudio()",
       "file_type": "code",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L30",
+      "source_location": "L21",
       "_origin": "ast",
-      "id": "ai_services_extractprocess",
-      "community": 3,
-      "norm_label": "extractprocess()"
+      "id": "ai_services_transcribeaudio",
+      "community": 4,
+      "norm_label": "transcribeaudio()"
+    },
+    {
+      "label": "extractProcessFromTranscript()",
+      "file_type": "code",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "ai_services_extractprocessfromtranscript",
+      "community": 4,
+      "norm_label": "extractprocessfromtranscript()"
     },
     {
       "label": "embedKnowledge()",
       "file_type": "code",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L46",
+      "source_location": "L73",
       "_origin": "ast",
       "id": "ai_services_embedknowledge",
       "community": 3,
@@ -2647,17 +2837,17 @@
       "label": "RetrievedKnowledge",
       "file_type": "code",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L56",
+      "source_location": "L83",
       "_origin": "ast",
       "id": "ai_services_retrievedknowledge",
-      "community": 3,
+      "community": 4,
       "norm_label": "retrievedknowledge"
     },
     {
       "label": "answerCompanyQuestion()",
       "file_type": "code",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L67",
+      "source_location": "L94",
       "_origin": "ast",
       "id": "ai_services_answercompanyquestion",
       "community": 3,
@@ -2667,7 +2857,7 @@
       "label": "suggestRuleFromOwnerAnswer()",
       "file_type": "code",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L86",
+      "source_location": "L114",
       "_origin": "ast",
       "id": "ai_services_suggestrulefromowneranswer",
       "community": 3,
@@ -2677,11 +2867,21 @@
       "label": "recommendProcesses()",
       "file_type": "code",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L104",
+      "source_location": "L133",
       "_origin": "ast",
       "id": "ai_services_recommendprocesses",
       "community": 21,
       "norm_label": "recommendprocesses()"
+    },
+    {
+      "label": "logAI()",
+      "file_type": "code",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L161",
+      "_origin": "ast",
+      "id": "ai_services_logai",
+      "community": 4,
+      "norm_label": "logai()"
     },
     {
       "label": "api.ts",
@@ -2790,7 +2990,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_client_toast",
-      "community": 16,
+      "community": 19,
       "norm_label": "client-toast.ts"
     },
     {
@@ -2800,7 +3000,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_client_toast_apptoastmessage",
-      "community": 16,
+      "community": 19,
       "norm_label": "apptoastmessage"
     },
     {
@@ -2820,7 +3020,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "lib_client_toast_readapptoast",
-      "community": 16,
+      "community": 19,
       "norm_label": "readapptoast()"
     },
     {
@@ -2830,7 +3030,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_processes",
-      "community": 3,
+      "community": 4,
       "norm_label": "processes.ts"
     },
     {
@@ -2840,7 +3040,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_processes_replaceextractedprocess",
-      "community": 3,
+      "community": 4,
       "norm_label": "replaceextractedprocess()"
     },
     {
@@ -2900,7 +3100,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "supabase_client",
-      "community": 25,
+      "community": 5,
       "norm_label": "client.ts"
     },
     {
@@ -2910,7 +3110,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "supabase_client_createclient",
-      "community": 25,
+      "community": 5,
       "norm_label": "createclient()"
     },
     {
@@ -3124,10 +3324,20 @@
       "norm_label": "@supabase/supabase-js"
     },
     {
-      "label": "lucide-react",
+      "label": "ffmpeg-static",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L18",
+      "_origin": "ast",
+      "id": "package_dependencies_ffmpeg_static",
+      "community": 2,
+      "norm_label": "ffmpeg-static"
+    },
+    {
+      "label": "lucide-react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "package_dependencies_lucide_react",
       "community": 2,
@@ -3137,7 +3347,7 @@
       "label": "next",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L19",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "package_dependencies_next",
       "community": 2,
@@ -3147,7 +3357,7 @@
       "label": "openai",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "package_dependencies_openai",
       "community": 2,
@@ -3157,7 +3367,7 @@
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "package_dependencies_react",
       "community": 2,
@@ -3167,7 +3377,7 @@
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "package_dependencies_react_dom",
       "community": 2,
@@ -3177,7 +3387,7 @@
       "label": "zod",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "package_dependencies_zod",
       "community": 2,
@@ -3187,7 +3397,7 @@
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "package_devdependencies",
       "community": 2,
@@ -3197,7 +3407,7 @@
       "label": "@playwright/test",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "package_devdependencies_playwright_test",
       "community": 2,
@@ -3207,7 +3417,7 @@
       "label": "@tailwindcss/postcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L27",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "package_devdependencies_tailwindcss_postcss",
       "community": 2,
@@ -3217,7 +3427,7 @@
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "package_devdependencies_types_node",
       "community": 2,
@@ -3227,7 +3437,7 @@
       "label": "@types/react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "package_devdependencies_types_react",
       "community": 2,
@@ -3237,7 +3447,7 @@
       "label": "@types/react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "package_devdependencies_types_react_dom",
       "community": 2,
@@ -3247,7 +3457,7 @@
       "label": "eslint",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L31",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "package_devdependencies_eslint",
       "community": 2,
@@ -3257,7 +3467,7 @@
       "label": "eslint-config-next",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L32",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "package_devdependencies_eslint_config_next",
       "community": 2,
@@ -3267,7 +3477,7 @@
       "label": "prettier",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L33",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "package_devdependencies_prettier",
       "community": 2,
@@ -3277,7 +3487,7 @@
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L34",
+      "source_location": "L35",
       "_origin": "ast",
       "id": "package_devdependencies_tailwindcss",
       "community": 2,
@@ -3287,11 +3497,31 @@
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "package_devdependencies_typescript",
       "community": 2,
       "norm_label": "typescript"
+    },
+    {
+      "label": "allowScripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "package_allowscripts",
+      "community": 2,
+      "norm_label": "allowscripts"
+    },
+    {
+      "label": "ffmpeg-static@5.3.0",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "package_allowscripts_ffmpeg_static_5_3_0",
+      "community": 2,
+      "norm_label": "ffmpeg-static@5.3.0"
     },
     {
       "label": "playwright.config.ts",
@@ -3542,6 +3772,26 @@
       "id": "tsconfig_exclude",
       "community": 1,
       "norm_label": "exclude"
+    },
+    {
+      "label": "deployment.md",
+      "file_type": "document",
+      "source_file": "docs/deployment.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_deployment",
+      "community": 16,
+      "norm_label": "deployment.md"
+    },
+    {
+      "label": "Opryn deployment configuration",
+      "file_type": "document",
+      "source_file": "docs/deployment.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_deployment_opryn_deployment_configuration",
+      "community": 16,
+      "norm_label": "opryn deployment configuration"
     }
   ],
   "links": [
@@ -4046,6 +4296,72 @@
       "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "source": "learn_route",
+      "target": "ai_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "ai_config_openai_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "ai_media",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "ai_media_preparetranscriptionaudio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "ai_media_types_video_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "ai_media_unsupportedrecordingerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "learn_route",
       "target": "ai_services"
@@ -4055,22 +4371,22 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/api/processes/[id]/learn/route.ts",
-      "source_location": "L4",
+      "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_services_extractprocess"
+      "target": "ai_services_extractprocessfromtranscript",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/api/processes/[id]/learn/route.ts",
-      "source_location": "L4",
+      "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "learn_route",
-      "target": "ai_services_transcribemedia"
+      "target": "ai_services_transcribeaudio",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4086,11 +4402,61 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L237",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "learn_route_processingerrorresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "learn_route_processingstage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L272",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "learn_route_safeerrordetails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L266",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "learn_route_safestorederror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "learn_route",
       "target": "learn_route_schema"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L223",
+      "weight": 1.0,
+      "source": "learn_route",
+      "target": "learn_route_updatemediastatus",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4153,10 +4519,10 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/api/processes/[id]/learn/route.ts",
-      "source_location": "L24",
+      "source_location": "L151",
       "weight": 1.0,
       "source": "learn_route_post",
-      "target": "ai_services_extractprocess"
+      "target": "ai_media_preparetranscriptionaudio"
     },
     {
       "relation": "calls",
@@ -4164,10 +4530,54 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/api/processes/[id]/learn/route.ts",
-      "source_location": "L20",
+      "source_location": "L190",
       "weight": 1.0,
       "source": "learn_route_post",
-      "target": "ai_services_transcribemedia"
+      "target": "ai_services_extractprocessfromtranscript"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "learn_route_post",
+      "target": "ai_services_transcribeaudio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "learn_route_post",
+      "target": "learn_route_processingerrorresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L215",
+      "weight": 1.0,
+      "source": "learn_route_post",
+      "target": "learn_route_safestorederror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "learn_route_post",
+      "target": "learn_route_updatemediastatus",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4201,6 +4611,17 @@
       "weight": 1.0,
       "source": "learn_route_post",
       "target": "lib_processes_replaceextractedprocess"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/[id]/learn/route.ts",
+      "source_location": "L246",
+      "weight": 1.0,
+      "source": "learn_route_processingerrorresponse",
+      "target": "learn_route_safeerrordetails",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4316,6 +4737,50 @@
       "source_file": "app/api/processes/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "source": "processes_route",
+      "target": "ai_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "processes_route",
+      "target": "ai_config_openai_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/route.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "processes_route",
+      "target": "ai_media_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/route.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "processes_route",
+      "target": "ai_media_types_allowed_media_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/processes/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "processes_route",
       "target": "ai_services"
@@ -4325,11 +4790,11 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/api/processes/route.ts",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "processes_route",
-      "target": "ai_services_extractprocess"
+      "target": "ai_services_extractprocessfromtranscript",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4390,16 +4855,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/processes/route.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "processes_route",
-      "target": "processes_route_allowed"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/api/processes/route.ts",
       "source_location": "L16",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -4422,10 +4877,10 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/api/processes/route.ts",
-      "source_location": "L31",
+      "source_location": "L83",
       "weight": 1.0,
       "source": "processes_route_post",
-      "target": "ai_services_extractprocess"
+      "target": "ai_services_extractprocessfromtranscript"
     },
     {
       "relation": "calls",
@@ -7887,9 +8342,9 @@
       "source_file": "components/app/ask-opryn.tsx",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_ask_opryn",
-      "target": "app_ask_opryn_fallbackprompts",
-      "confidence_score": 1.0
+      "target": "app_ask_opryn_fallbackprompts"
     },
     {
       "relation": "contains",
@@ -7994,16 +8449,6 @@
       "confidence_score": 1.0,
       "source": "app_capture_process",
       "target": "app_capture_process_initialcapture"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "components/app/capture-process.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_capture_process",
-      "target": "app_capture_process_mediastages"
     },
     {
       "relation": "contains",
@@ -9428,22 +9873,241 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "lib/ai/config.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "ai_config",
+      "target": "ai_config_configuredmodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/config.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "ai_config",
+      "target": "ai_config_openai_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/config.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "ai_config",
+      "target": "ai_config_openai_text_reasoning",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "ai_services",
+      "target": "ai_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "ai_services",
+      "target": "ai_config_openai_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "ai_services",
+      "target": "ai_config_openai_text_reasoning",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media-types.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "ai_media_types",
+      "target": "ai_media_types_allowed_media_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media-types.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "ai_media_types",
+      "target": "ai_media_types_audio_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media-types.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "ai_media_types",
+      "target": "ai_media_types_video_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_types_audio_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "re-export",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_types_video_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_types_allowed_media_mime_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_inputextensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_preparedaudio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_preparetranscriptionaudio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L110",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_runffmpeg",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_safefilename",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "ai_media",
+      "target": "ai_media_unsupportedrecordingerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "ai_media_unsupportedrecordingerror",
+      "target": "ai_media_unsupportedrecordingerror_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "ai_media_preparetranscriptionaudio",
+      "target": "ai_media_runffmpeg",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/media.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "ai_media_preparetranscriptionaudio",
+      "target": "ai_media_safefilename",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "lib/ai/openai.ts",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "ai_openai",
       "target": "ai_openai_getopenai"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "lib/ai/openai.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ai_openai",
-      "target": "ai_openai_humanizeaierror"
     },
     {
       "relation": "imports_from",
@@ -9495,9 +10159,9 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/ai/services.ts",
-      "source_location": "L15",
+      "source_location": "L56",
       "weight": 1.0,
-      "source": "ai_services_extractprocess",
+      "source": "ai_services_extractprocessfromtranscript",
       "target": "ai_openai_getopenai"
     },
     {
@@ -9528,9 +10192,9 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/ai/services.ts",
-      "source_location": "L9",
+      "source_location": "L31",
       "weight": 1.0,
-      "source": "ai_services_transcribemedia",
+      "source": "ai_services_transcribeaudio",
       "target": "ai_openai_getopenai"
     },
     {
@@ -9718,6 +10382,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/ai/services.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "ai_services",
+      "target": "ai_services_aitrace",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/services.ts",
       "source_location": "L33",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -9738,11 +10412,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L14",
+      "source_location": "L48",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_services_extractprocess"
+      "target": "ai_services_extractprocessfromtranscript",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "ai_services",
+      "target": "ai_services_logai",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9778,11 +10462,33 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/ai/services.ts",
-      "source_location": "L7",
+      "source_location": "L21",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "ai_services",
-      "target": "ai_services_transcribemedia"
+      "target": "ai_services_transcribeaudio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "ai_services_transcribeaudio",
+      "target": "ai_services_logai",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/ai/services.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "ai_services_extractprocessfromtranscript",
+      "target": "ai_services_logai",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10078,6 +10784,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "package.json",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_allowscripts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
       "source_location": "L12",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -10213,6 +10929,16 @@
       "confidence_score": 1.0,
       "source": "package_scripts",
       "target": "package_scripts_typecheck"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_ffmpeg_static",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10393,6 +11119,16 @@
       "confidence_score": 1.0,
       "source": "package_devdependencies",
       "target": "package_devdependencies_typescript"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "package_allowscripts",
+      "target": "package_allowscripts_ffmpeg_static_5_3_0",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10593,8 +11329,18 @@
       "confidence_score": 1.0,
       "source": "tsconfig_compileroptions_paths",
       "target": "tsconfig_paths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/deployment.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_deployment",
+      "target": "docs_deployment_opryn_deployment_configuration",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a72c1f25bf3c9031c0ae6f2dda4334b5ad968627"
+  "built_at_commit": "1f3f42067f9e6834869d48fe265d404f16be1f8c"
 }
