@@ -6,6 +6,12 @@ import { FileText, LoaderCircle, Mic2, UploadCloud } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 type Role = { id: string; name: string };
+type InitialCapture = {
+  title: string;
+  description: string;
+  coachingPrompt: string;
+  recommendationId: string;
+};
 const mediaStages = [
   "Uploading recording",
   "Transcribing recording",
@@ -18,14 +24,20 @@ const textStages = [
   "Preparing your process",
 ];
 
-export function CaptureProcess({ roles }: { roles: Role[] }) {
+export function CaptureProcess({
+  roles,
+  initial,
+}: {
+  roles: Role[];
+  initial?: InitialCapture;
+}) {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [mode, setMode] = useState<"media" | "text">("media");
   const [file, setFile] = useState<File | null>(null);
   const [form, setForm] = useState({
-    title: "",
-    description: "",
+    title: initial?.title ?? "",
+    description: initial?.description ?? "",
     roleId: "",
     explanation: "",
   });
@@ -55,6 +67,7 @@ export function CaptureProcess({ roles }: { roles: Role[] }) {
           ...form,
           roleId: form.roleId || null,
           inputType: mode,
+          recommendationId: initial?.recommendationId ?? null,
           file:
             mode === "media" && file
               ? { name: file.name, type: file.type, size: file.size }
@@ -166,6 +179,16 @@ export function CaptureProcess({ roles }: { roles: Role[] }) {
           </label>
         </div>
       </section>
+      {initial?.coachingPrompt ? (
+        <section className="rounded-2xl border border-[#dce4f2] bg-[#f5f8ff] p-5 sm:p-6">
+          <p className="text-xs font-bold uppercase tracking-[.1em] text-[#3158d8]">
+            What to show or explain
+          </p>
+          <p className="mt-2 text-sm leading-6 text-[#53627a]">
+            {initial.coachingPrompt}
+          </p>
+        </section>
+      ) : null}
       <section className="rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-7">
         <h2 className="font-semibold">How do you want to teach Opryn?</h2>
         <div className="mt-4 grid grid-cols-2 gap-3">

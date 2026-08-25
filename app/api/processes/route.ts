@@ -9,6 +9,7 @@ const schema = z.object({
   title: z.string().trim().min(1).max(200),
   description: z.string().trim().max(3000).default(""),
   roleId: z.string().uuid().nullable().optional(),
+  recommendationId: z.string().uuid().nullable().optional(),
   inputType: z.enum(["text", "media"]),
   explanation: z.string().trim().max(100000).optional(),
   file: z
@@ -72,6 +73,14 @@ export async function POST(request: Request) {
       .select("id")
       .single();
     if (error) throw error;
+    if (parsed.data.recommendationId) {
+      const { error: recommendationError } = await supabase
+        .from("process_recommendations")
+        .update({ status: "started", process_id: process.id })
+        .eq("id", parsed.data.recommendationId)
+        .eq("organization_id", membership.organization_id);
+      if (recommendationError) throw recommendationError;
+    }
     if (parsed.data.roleId) {
       const { error: roleError } = await supabase
         .from("process_role_assignments")

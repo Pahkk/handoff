@@ -79,6 +79,11 @@ test("product APIs reject unauthenticated requests without leaking details", asy
         industry: "Services",
         employeeCount: 1,
         ownerRole: "Owner",
+        businessDescription: "A local service business.",
+        repeatedWork: "Customer intake and scheduling.",
+        hardestToHandoff: "Preparing estimates.",
+        commonQuestions: "Discount approvals.",
+        ownerGoal: "Delegate routine work.",
       },
     ],
     [
@@ -86,6 +91,14 @@ test("product APIs reject unauthenticated requests without leaking details", asy
       { title: "Test", inputType: "text", explanation: "First do the work." },
     ],
     ["/api/ask", { question: "What is our refund policy?" }],
+    [
+      "/api/recommendations",
+      {
+        businessDescription: "A local service business.",
+        repeatedWork: "Customer intake.",
+        hardestToHandoff: "Preparing estimates.",
+      },
+    ],
     ["/api/team/invites", { email: "employee@example.com" }],
   ] as const;
   for (const [url, data] of endpoints) {

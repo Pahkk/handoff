@@ -150,8 +150,8 @@
     "semantic_hash": ""
   },
   "app/api/onboarding/route.ts": {
-    "mtime": 1787615977.8490713,
-    "ast_hash": "da83fa0f62921d4f3b899c0d625bd037",
+    "mtime": 1787619349.6493115,
+    "ast_hash": "d5ab15351f132039c3c9347f02ba23c6",
     "semantic_hash": ""
   },
   "app/api/processes/[id]/approve/route.ts": {
@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "app/api/processes/route.ts": {
-    "mtime": 1787615977.8741777,
-    "ast_hash": "4ea9d398239e288c1378e01a70ff53e7",
+    "mtime": 1787619204.3304706,
+    "ast_hash": "faf18bbef875f8f85c0e98c9a41d7217",
     "semantic_hash": ""
   },
   "app/api/questions/[id]/answer/route.ts": {
@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "app/app/processes/new/page.tsx": {
-    "mtime": 1787615977.9397647,
-    "ast_hash": "18d05ad384f6dd217376d6a344e6cd22",
+    "mtime": 1787619204.2511113,
+    "ast_hash": "14431e8ad9f83db3bdba2af9cbffb9cb",
     "semantic_hash": ""
   },
   "app/app/processes/page.tsx": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "components/app/app-shell.tsx": {
-    "mtime": 1787615977.9734304,
-    "ast_hash": "c6ca2eafedc76cfe4e618958193e56b2",
+    "mtime": 1787619204.209683,
+    "ast_hash": "c8d15848c458b71fe196260f02b83a39",
     "semantic_hash": ""
   },
   "components/app/ask-opryn.tsx": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "components/app/capture-process.tsx": {
-    "mtime": 1787617776.8145957,
-    "ast_hash": "de948a420b523bab71062c71e4328310",
+    "mtime": 1787619204.2915835,
+    "ast_hash": "53a0c71d2b81601b17ce9a622e1e508d",
     "semantic_hash": ""
   },
   "components/app/create-role.tsx": {
@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "components/onboarding-form.tsx": {
-    "mtime": 1787615978.0460794,
-    "ast_hash": "87f973fed23e603e57227832593ea027",
+    "mtime": 1787619127.2647634,
+    "ast_hash": "1002a3223c1413939963e068e385ecb7",
     "semantic_hash": ""
   },
   "lib/ai/openai.ts": {
@@ -390,13 +390,13 @@
     "semantic_hash": ""
   },
   "lib/ai/schemas.ts": {
-    "mtime": 1787618381.3248987,
-    "ast_hash": "babe731470d2cc1dedb036e4ee59138a",
+    "mtime": 1787618974.4862912,
+    "ast_hash": "f8be89ad54d161ea90ac5f3486bac2dc",
     "semantic_hash": ""
   },
   "lib/ai/services.ts": {
-    "mtime": 1787618381.3648524,
-    "ast_hash": "7895172f0ff5760ff89a8c50eefc9887",
+    "mtime": 1787618974.5277777,
+    "ast_hash": "4c2491d9edeb9afd84611daa7fa7d6b1",
     "semantic_hash": ""
   },
   "lib/api.ts": {
@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "tests/product-public.spec.ts": {
-    "mtime": 1787615978.0742993,
-    "ast_hash": "6b16e24234a1f3fac9f78a1dfeefce98",
+    "mtime": 1787619388.9576561,
+    "ast_hash": "bcd297a5bd22a81d9b9bf0f55b08c84e",
     "semantic_hash": ""
   },
   "supabase/migrations/20260825001000_backfill_auth_profiles.sql": {
@@ -452,6 +452,41 @@
   "supabase/migrations/20260825001100_verify_legacy_profile_repair.sql": {
     "mtime": 1787616386.1907697,
     "ast_hash": "1bc6af07f5496c2bc5214a65ea2b1ff0",
+    "semantic_hash": ""
+  },
+  "app/api/recommendations/route.ts": {
+    "mtime": 1787619349.690555,
+    "ast_hash": "b1354e12ebf13e4297dd752e720729c9",
+    "semantic_hash": ""
+  },
+  "app/app/getting-started/learn/page.tsx": {
+    "mtime": 1787619332.0254781,
+    "ast_hash": "018afbe7a382733422ed623f1a83f910",
+    "semantic_hash": ""
+  },
+  "app/app/getting-started/page.tsx": {
+    "mtime": 1787619349.7330003,
+    "ast_hash": "30f08bf55b7502181288a76679ab8fc3",
+    "semantic_hash": ""
+  },
+  "components/app/business-discovery-form.tsx": {
+    "mtime": 1787619446.006128,
+    "ast_hash": "fc89b830888de9198f28ba049d910a01",
+    "semantic_hash": ""
+  },
+  "lib/recommendations.ts": {
+    "mtime": 1787619349.607769,
+    "ast_hash": "8e127f885462eeff564558cd976504f7",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260825002000_business_discovery_recommendations.sql": {
+    "mtime": 1787618983.0906487,
+    "ast_hash": "e4839b30d2c2e6d12464a5c64fe8dee2",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260825002100_verify_recommendation_rls.sql": {
+    "mtime": 1787619419.0234196,
+    "ast_hash": "ebbbbbdbdfc472280df149ef00db2745",
     "semantic_hash": ""
   }
 }

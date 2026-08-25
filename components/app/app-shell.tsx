@@ -8,6 +8,7 @@ import {
   BookOpenCheck,
   Building2,
   CircleHelp,
+  ClipboardList,
   FileText,
   Home,
   LogOut,
@@ -21,6 +22,12 @@ import { createClient } from "@/lib/supabase/client";
 
 const items = [
   { href: "/app", label: "Home", icon: Home },
+  {
+    href: "/app/getting-started",
+    label: "Starting Plan",
+    icon: ClipboardList,
+    admin: true,
+  },
   { href: "/app/processes", label: "Processes", icon: FileText },
   { href: "/app/roles", label: "Roles", icon: BookOpenCheck },
   { href: "/app/ask", label: "Ask Opryn", icon: MessageCircleQuestion },

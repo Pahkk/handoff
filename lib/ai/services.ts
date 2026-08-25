@@ -4,8 +4,10 @@ import { zodTextFormat } from "openai/helpers/zod";
 import {
   companyAnswerSchema,
   extractedProcessSchema,
+  processRecommendationsSchema,
   suggestedRuleSchema,
   type ExtractedProcess,
+  type ProcessRecommendations,
 } from "@/lib/ai/schemas";
 import { getOpenAI } from "@/lib/ai/openai";
 
@@ -97,4 +99,31 @@ export async function suggestRuleFromOwnerAnswer(
   if (!response.output_parsed)
     throw new Error("Opryn returned an invalid suggested rule.");
   return suggestedRuleSchema.parse(response.output_parsed);
+}
+
+export async function recommendProcesses(input: {
+  industry: string;
+  employeeCount: number;
+  businessDescription: string;
+  repeatedWork: string;
+  hardestToHandoff: string;
+  commonQuestions: string;
+  ownerGoal: string;
+}): Promise<ProcessRecommendations> {
+  const response = await getOpenAI().responses.parse({
+    model: "gpt-5.4-mini",
+    instructions:
+      "Create a practical starting plan for a small-business owner teaching Opryn how the company works. Recommend 4 to 6 specific processes worth capturing first. Prioritize work that is repeated, blocks delegation, causes employee questions, or depends on the owner. Do not recommend generic corporate documentation. Titles must describe real work. Each suggested_prompt should tell the owner what to demonstrate or explain naturally in one recording. Use plain language and only infer what is reasonably supported by the owner's answers.",
+    input: `INDUSTRY: ${input.industry}\nEMPLOYEES: ${input.employeeCount}\nWHAT THE BUSINESS DOES: ${input.businessDescription}\nREPEATED WORK: ${input.repeatedWork}\nHARDEST TO HAND OFF: ${input.hardestToHandoff}\nCOMMON TEAM QUESTIONS: ${input.commonQuestions || "Not provided"}\nOWNER'S GOAL: ${input.ownerGoal || "Not provided"}`,
+    text: {
+      format: zodTextFormat(
+        processRecommendationsSchema,
+        "process_recommendations",
+      ),
+    },
+  });
+  if (!response.output_parsed)
+    throw new Error("Opryn returned an invalid starting plan.");
+  return processRecommendationsSchema.parse(response.output_parsed)
+    .recommendations;
 }

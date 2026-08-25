@@ -39,4 +39,21 @@ export const suggestedRuleSchema = z.object({
   rule: z.string().min(1).max(10000),
 });
 
+export const processRecommendationsSchema = z.object({
+  recommendations: z
+    .array(
+      z.object({
+        title: z.string().min(1).max(200),
+        reason: z.string().min(1).max(2000),
+        suggested_prompt: z.string().min(1).max(5000),
+        priority: z.number().int().min(1).max(10),
+      }),
+    )
+    .min(4)
+    .max(6),
+});
+
 export type ExtractedProcess = z.infer<typeof extractedProcessSchema>;
+export type ProcessRecommendations = z.infer<
+  typeof processRecommendationsSchema
+>["recommendations"];
