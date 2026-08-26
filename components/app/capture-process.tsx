@@ -1,8 +1,17 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FileText, LoaderCircle, Mic2, UploadCloud } from "lucide-react";
+import {
+  CheckCircle2,
+  FileText,
+  LoaderCircle,
+  Mic,
+  Mic2,
+  RotateCcw,
+  Square,
+  UploadCloud,
+} from "lucide-react";
 import { showAppToast } from "@/lib/client-toast";
 import { createClient } from "@/lib/supabase/client";
 
@@ -30,8 +39,15 @@ export function CaptureProcess({
 }) {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
-  const [mode, setMode] = useState<"media" | "text">("media");
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const recordingTimerRef = useRef<number | null>(null);
+  const recordingChunksRef = useRef<Blob[]>([]);
+  const discardRecordingRef = useRef(false);
+  const [mode, setMode] = useState<"media" | "text" | "voice">("text");
   const [file, setFile] = useState<File | null>(null);
+  const [recording, setRecording] = useState(false);
+  const [recordingSeconds, setRecordingSeconds] = useState(0);
   const [form, setForm] = useState({
     title: initial?.title ?? "",
     description: initial?.description ?? "",
@@ -53,13 +69,106 @@ export function CaptureProcess({
     "Finding steps and rules",
     "Preparing your process",
   ];
-  const stages = mode === "media" ? mediaStages : textStages;
+  const stages = mode === "text" ? textStages : mediaStages;
 
-  function changeMode(nextMode: "media" | "text") {
+  useEffect(() => {
+    return () => releaseRecorder();
+  }, []);
+
+  function releaseRecorder() {
+    if (recordingTimerRef.current)
+      window.clearInterval(recordingTimerRef.current);
+    recordingTimerRef.current = null;
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+  }
+
+  function changeMode(nextMode: "media" | "text" | "voice") {
+    if (recording) cancelVoiceRecording();
     setMode(nextMode);
     setError("");
     setRetryJob(null);
-    if (nextMode === "text") setFile(null);
+    setFile(null);
+    setRecordingSeconds(0);
+  }
+
+  async function startVoiceRecording() {
+    setError("");
+    if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+      setError(
+        "Voice recording isn't supported in this browser. Upload an audio recording instead.",
+      );
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const preferredTypes = [
+        "audio/webm;codecs=opus",
+        "audio/mp4",
+        "audio/webm",
+      ];
+      const selectedType = preferredTypes.find((type) =>
+        MediaRecorder.isTypeSupported(type),
+      );
+      const recorder = new MediaRecorder(
+        stream,
+        selectedType ? { mimeType: selectedType } : undefined,
+      );
+      streamRef.current = stream;
+      recorderRef.current = recorder;
+      recordingChunksRef.current = [];
+      discardRecordingRef.current = false;
+      setFile(null);
+      setRecordingSeconds(0);
+      recorder.ondataavailable = (event) => {
+        if (event.data.size) recordingChunksRef.current.push(event.data);
+      };
+      recorder.onstop = () => {
+        const chunks = recordingChunksRef.current;
+        const discard = discardRecordingRef.current;
+        releaseRecorder();
+        setRecording(false);
+        if (discard || !chunks.length) return;
+        const mimeType = recorder.mimeType.split(";")[0] || "audio/webm";
+        const extension = mimeType === "audio/mp4" ? "m4a" : "webm";
+        const blob = new Blob(chunks, { type: mimeType });
+        setFile(
+          new File([blob], `voice-explanation.${extension}`, {
+            type: mimeType,
+            lastModified: Date.now(),
+          }),
+        );
+      };
+      recorder.onerror = () => {
+        releaseRecorder();
+        setRecording(false);
+        setError("Opryn couldn't finish this recording. Please try again.");
+      };
+      recorder.start(250);
+      setRecording(true);
+      recordingTimerRef.current = window.setInterval(
+        () => setRecordingSeconds((seconds) => seconds + 1),
+        1000,
+      );
+    } catch {
+      releaseRecorder();
+      setError(
+        "Microphone access was blocked. Allow microphone access, then try again.",
+      );
+    }
+  }
+
+  function stopVoiceRecording() {
+    if (recorderRef.current?.state === "recording") recorderRef.current.stop();
+  }
+
+  function cancelVoiceRecording() {
+    discardRecordingRef.current = true;
+    if (recorderRef.current?.state === "recording") recorderRef.current.stop();
+    else releaseRecorder();
+    setRecording(false);
+    setFile(null);
+    setRecordingSeconds(0);
   }
 
   function finish(processId: string) {
@@ -127,18 +236,22 @@ export function CaptureProcess({
     setWorking(true);
     setStage(0);
     try {
-      if (mode === "media" && !file)
-        throw new Error("Choose a recording to upload.");
+      if (mode !== "text" && !file)
+        throw new Error(
+          mode === "voice"
+            ? "Record your explanation before continuing."
+            : "Choose a recording to upload.",
+        );
       const response = await fetch("/api/processes", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           ...form,
           roleId: form.roleId || null,
-          inputType: mode,
+          inputType: mode === "text" ? "text" : "media",
           recommendationId: initial?.recommendationId ?? null,
           file:
-            mode === "media" && file
+            mode !== "text" && file
               ? { name: file.name, type: file.type, size: file.size }
               : undefined,
         }),
@@ -254,20 +367,30 @@ export function CaptureProcess({
       ) : null}
       <section className="rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-7">
         <h2 className="font-semibold">How do you want to teach Opryn?</h2>
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          <ModeButton
-            active={mode === "media"}
-            onClick={() => changeMode("media")}
-            icon={<UploadCloud className="size-5" />}
-            title="Upload recording"
-            note="Video or audio"
-          />
+        <p className="mt-1 text-sm text-[#718095]">
+          Type it, say it out loud, or upload a recording you already made.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
           <ModeButton
             active={mode === "text"}
             onClick={() => changeMode("text")}
             icon={<FileText className="size-5" />}
             title="Explain with text"
             note="Type it naturally"
+          />
+          <ModeButton
+            active={mode === "voice"}
+            onClick={() => changeMode("voice")}
+            icon={<Mic className="size-5" />}
+            title="Explain with voice"
+            note="Talk Opryn through it"
+          />
+          <ModeButton
+            active={mode === "media"}
+            onClick={() => changeMode("media")}
+            icon={<UploadCloud className="size-5" />}
+            title="Upload recording"
+            note="Video or audio"
           />
         </div>
         {mode === "media" ? (
@@ -302,7 +425,7 @@ export function CaptureProcess({
               ) : null}
             </button>
           </div>
-        ) : (
+        ) : mode === "text" ? (
           <label className="mt-5 block text-sm font-medium text-[#354157]">
             Explain how you do this
             <textarea
@@ -316,6 +439,80 @@ export function CaptureProcess({
               className="mt-2 w-full resize-y rounded-xl border border-[#d9e0e9] p-3.5 leading-6 outline-none focus:border-[#7190ee] focus:ring-4 focus:ring-[#3158d8]/10"
             />
           </label>
+        ) : (
+          <div className="mt-5 overflow-hidden rounded-2xl border border-[#dfe5ed] bg-[#f8fafd]">
+            <div className="flex flex-col items-center px-5 py-7 text-center sm:px-8">
+              <button
+                type="button"
+                onClick={() =>
+                  recording ? stopVoiceRecording() : void startVoiceRecording()
+                }
+                aria-label={recording ? "Stop recording" : "Start recording"}
+                className={`grid size-16 place-items-center rounded-full text-white shadow-[0_12px_28px_rgba(49,88,216,.24)] transition hover:scale-105 active:scale-95 ${recording ? "bg-[#c14c55]" : "bg-[#3158d8]"}`}
+              >
+                {recording ? (
+                  <Square className="size-5" fill="currentColor" />
+                ) : (
+                  <Mic className="size-6" />
+                )}
+              </button>
+              <p className="mt-4 text-sm font-semibold text-[#334055]">
+                {recording
+                  ? "Explain the process as if you were training someone"
+                  : file
+                    ? "Your voice explanation is ready"
+                    : "Tap to start explaining"}
+              </p>
+              <p className="mt-1 text-xs text-[#7a8698]">
+                {recording
+                  ? "Include the steps, decisions, exceptions, and approvals."
+                  : file
+                    ? "Opryn will transcribe this and prepare a process for review."
+                    : "Speak naturally. You do not need a script."}
+              </p>
+              <div className="mt-6 flex h-12 w-full max-w-lg items-center justify-center gap-[3px] overflow-hidden rounded-xl bg-white px-4 shadow-sm">
+                {Array.from({ length: 36 }).map((_, index) => (
+                  <i
+                    key={index}
+                    className={`w-[2px] rounded-full ${recording ? "animate-pulse bg-[#7189df]" : file ? "bg-[#9aace4]" : "bg-[#d8dee8]"}`}
+                    style={{
+                      height: `${recording || file ? 8 + ((index * 11) % 28) : 5}px`,
+                      animationDelay: `${(index % 8) * 70}ms`,
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="mt-4 flex items-center gap-3">
+                <span
+                  className={`font-mono text-xs font-semibold ${recording ? "text-[#c14c55]" : "text-[#687487]"}`}
+                >
+                  {formatDuration(recordingSeconds)}
+                </span>
+                {recording ? (
+                  <button
+                    type="button"
+                    onClick={cancelVoiceRecording}
+                    className="text-xs font-semibold text-[#718095] hover:text-[#344052]"
+                  >
+                    Cancel
+                  </button>
+                ) : file ? (
+                  <>
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#177257]">
+                      <CheckCircle2 className="size-3.5" /> Recorded
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => void startVoiceRecording()}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#718095] hover:text-[#344052]"
+                    >
+                      <RotateCcw className="size-3.5" /> Record again
+                    </button>
+                  </>
+                ) : null}
+              </div>
+            </div>
+          </div>
         )}
       </section>
       {error ? (
@@ -336,12 +533,21 @@ export function CaptureProcess({
         </div>
       ) : null}
       <div className="flex justify-end">
-        <button className="flex min-h-12 items-center gap-2 rounded-xl bg-[#3158d8] px-6 text-sm font-semibold text-white shadow-[0_9px_22px_rgba(49,88,216,.2)] hover:bg-[#2446b8]">
-          Teach Opryn
+        <button
+          disabled={recording}
+          className="flex min-h-12 items-center gap-2 rounded-xl bg-[#3158d8] px-6 text-sm font-semibold text-white shadow-[0_9px_22px_rgba(49,88,216,.2)] hover:bg-[#2446b8] disabled:cursor-not-allowed disabled:bg-[#aeb9d7]"
+        >
+          {recording ? "Finish recording first" : "Teach Opryn"}
         </button>
       </div>
     </form>
   );
+}
+
+function formatDuration(totalSeconds: number) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 function ModeButton({
   active,

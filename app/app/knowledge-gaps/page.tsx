@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CircleHelp, Network } from "lucide-react";
 import { EmptyState, PageHeading } from "@/components/app/page-heading";
 import { OwnerAnswer } from "@/components/app/owner-answer";
@@ -9,42 +10,48 @@ export default async function KnowledgeGraphPage() {
   const context = await requireAdminContext();
   const supabase = await createClient();
   const organizationId = context.organization.id;
-  const [processes, chunks, assignments, roles, questions] = await Promise.all([
-    supabase
-      .from("processes")
-      .select("id,title,summary")
-      .eq("organization_id", organizationId)
-      .eq("status", "approved")
-      .order("updated_at", { ascending: false }),
-    supabase
-      .from("knowledge_chunks")
-      .select("id,content,source_type,process_id")
-      .eq("organization_id", organizationId)
-      .eq("approved", true)
-      .order("created_at"),
-    supabase
-      .from("process_role_assignments")
-      .select("process_id,role_id")
-      .eq("organization_id", organizationId),
-    supabase
-      .from("roles")
-      .select("id,name")
-      .eq("organization_id", organizationId),
-    supabase
-      .from("employee_questions")
-      .select(
-        "id,question,created_at,escalated,profiles!employee_questions_asked_by_fkey(full_name,email)",
-      )
-      .eq("organization_id", organizationId)
-      .eq("status", "needs_owner")
-      .order("created_at", { ascending: false }),
-  ]);
+  const [processes, chunks, assignments, roles, questions, attachments] =
+    await Promise.all([
+      supabase
+        .from("processes")
+        .select("id,title,summary")
+        .eq("organization_id", organizationId)
+        .eq("status", "approved")
+        .order("updated_at", { ascending: false }),
+      supabase
+        .from("knowledge_chunks")
+        .select("id,content,source_type,process_id")
+        .eq("organization_id", organizationId)
+        .eq("approved", true)
+        .order("created_at"),
+      supabase
+        .from("process_role_assignments")
+        .select("process_id,role_id")
+        .eq("organization_id", organizationId),
+      supabase
+        .from("roles")
+        .select("id,name")
+        .eq("organization_id", organizationId),
+      supabase
+        .from("employee_questions")
+        .select(
+          "id,question,created_at,escalated,profiles!employee_questions_asked_by_fkey(full_name,email)",
+        )
+        .eq("organization_id", organizationId)
+        .eq("status", "needs_owner")
+        .order("created_at", { ascending: false }),
+      supabase
+        .from("question_attachments")
+        .select("id,question_id,storage_path,original_name")
+        .eq("organization_id", organizationId),
+    ]);
   const error = [
     processes.error,
     chunks.error,
     assignments.error,
     roles.error,
     questions.error,
+    attachments.error,
   ].find(Boolean);
   if (error) {
     console.error("Unable to load knowledge graph", { code: error.code });
@@ -65,6 +72,16 @@ export default async function KnowledgeGraphPage() {
       profile?.full_name || profile?.email || "a teammate",
     );
   }
+  const attachmentUrls = new Map<string, string>();
+  await Promise.all(
+    (attachments.data ?? []).map(async (attachment) => {
+      const { data } = await supabase.storage
+        .from("ask-images")
+        .createSignedUrl(attachment.storage_path, 60 * 60);
+      if (data?.signedUrl)
+        attachmentUrls.set(attachment.question_id, data.signedUrl);
+    }),
+  );
   const knowledgeProcesses = [
     ...(processes.data ?? []).map((process) => ({
       ...process,
@@ -94,6 +111,7 @@ export default async function KnowledgeGraphPage() {
     id: question.id,
     question: question.question,
     person: gapPeople.get(question.id) ?? "a teammate",
+    imageUrl: attachmentUrls.get(question.id),
   }));
 
   return (
@@ -154,6 +172,21 @@ export default async function KnowledgeGraphPage() {
                     </p>
                   </div>
                 </div>
+                {attachmentUrls.get(question.id) ? (
+                  <div className="mt-4 overflow-hidden rounded-xl border border-[#e3e7ed] bg-[#f7f9fc]">
+                    <Image
+                      src={attachmentUrls.get(question.id)!}
+                      alt={`Case attached by ${gapPeople.get(question.id) ?? "a teammate"}`}
+                      width={960}
+                      height={720}
+                      unoptimized
+                      className="max-h-80 w-full object-contain"
+                    />
+                    <p className="border-t border-[#e3e7ed] px-3 py-2 text-[10px] font-medium text-[#718095]">
+                      Photo attached by the employee
+                    </p>
+                  </div>
+                ) : null}
                 <OwnerAnswer questionId={question.id} />
               </section>
             ))}

@@ -37,6 +37,12 @@ export const companyAnswerSchema = z.object({
   cited_source_ids: z.array(z.string().uuid()).max(15),
 });
 
+export const employeeImageCaseSchema = z.object({
+  description: z.string().min(1).max(2000),
+  knowledge_search_query: z.string().min(3).max(1000),
+  visible_text: z.string().max(2000),
+});
+
 export const suggestedRuleSchema = z.object({
   title: z.string().min(1).max(200),
   rule: z.string().min(1).max(10000),

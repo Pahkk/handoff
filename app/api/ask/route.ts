@@ -1,20 +1,41 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { apiError, getRequestContext } from "@/lib/api";
 import {
   answerCompanyQuestion,
+  analyzeEmployeeQuestionImage,
   embedKnowledge,
+  type EmployeeQuestionImage,
   type RetrievedKnowledge,
 } from "@/lib/ai/services";
 
-const schema = z.object({ question: z.string().trim().min(3).max(4000) });
+const allowedImageTypes = z.enum([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+]);
+const imageSchema = z.object({
+  dataUrl: z.string().max(3_600_000),
+  mimeType: allowedImageTypes,
+  name: z.string().trim().min(1).max(255),
+  size: z.number().int().positive().max(2_621_440),
+});
+const schema = z.object({
+  question: z.string().trim().min(3).max(4000),
+  image: imageSchema.nullable().optional(),
+});
 export async function POST(request: Request) {
   const context = await getRequestContext();
   if ("error" in context) return context.error;
   const parsed = schema.safeParse(await request.json().catch(() => null));
   if (!parsed.success)
     return NextResponse.json(
-      { error: "Ask a complete question." },
+      {
+        error:
+          "Ask a complete question and attach a JPG, PNG, WEBP, or GIF under 2.5 MB.",
+      },
       { status: 400 },
     );
   const { supabase, user, membership } = context;
@@ -29,7 +50,16 @@ export async function POST(request: Request) {
       { status: 403 },
     );
   try {
-    const [embedding] = await embedKnowledge([parsed.data.question]);
+    const image = parsed.data.image
+      ? decodeImage(parsed.data.image)
+      : undefined;
+    const imageCase = image
+      ? await analyzeEmployeeQuestionImage(parsed.data.question, image)
+      : null;
+    const retrievalQuery = imageCase
+      ? `${parsed.data.question}\n${imageCase.knowledge_search_query}\n${imageCase.visible_text}`
+      : parsed.data.question;
+    const [embedding] = await embedKnowledge([retrievalQuery]);
     const { data, error: searchError } = await supabase.rpc("match_knowledge", {
       target_organization_id: membership.organization_id,
       query_embedding: embedding,
@@ -42,7 +72,17 @@ export async function POST(request: Request) {
     if (searchError) throw searchError;
     const knowledge = (data ?? []) as RetrievedKnowledge[];
     const answer = knowledge.length
-      ? await answerCompanyQuestion(parsed.data.question, knowledge)
+      ? await answerCompanyQuestion(
+          parsed.data.question,
+          knowledge,
+          image && imageCase
+            ? {
+                ...image,
+                description: imageCase.description,
+                visibleText: imageCase.visible_text,
+              }
+            : undefined,
+        )
       : {
           can_answer: false,
           confidence: 0,
@@ -72,10 +112,19 @@ export async function POST(request: Request) {
         .select("id")
         .single();
       if (error) throw error;
+      await saveQuestionImage({
+        supabase,
+        organizationId: membership.organization_id,
+        userId: user.id,
+        questionId: question.id,
+        image,
+        originalName: parsed.data.image?.name,
+      });
       return NextResponse.json({
         type: "unknown",
         questionId: question.id,
         canEscalate: settings?.allow_escalations ?? true,
+        imageAttached: Boolean(image),
         closest: knowledge[0]
           ? {
               content: knowledge[0].content,
@@ -104,6 +153,14 @@ export async function POST(request: Request) {
       .select("id")
       .single();
     if (questionError) throw questionError;
+    await saveQuestionImage({
+      supabase,
+      organizationId: membership.organization_id,
+      userId: user.id,
+      questionId: question.id,
+      image,
+      originalName: parsed.data.image?.name,
+    });
     const { error: answerError } = await supabase
       .from("question_answers")
       .insert({
@@ -142,6 +199,7 @@ export async function POST(request: Request) {
       answer: answer.answer,
       steps: answer.steps,
       importantNote: answer.important_note,
+      imageAttached: Boolean(image),
       sources: cited.map((item) => ({
         id: item.id,
         label: sourceLabel(item.source_type, item.content),
@@ -156,6 +214,73 @@ export async function POST(request: Request) {
     );
   }
 }
+
+function decodeImage(
+  input: z.infer<typeof imageSchema>,
+): EmployeeQuestionImage {
+  const prefix = `data:${input.mimeType};base64,`;
+  if (!input.dataUrl.startsWith(prefix))
+    throw new Error("The attached image data is invalid.");
+  const buffer = Buffer.from(input.dataUrl.slice(prefix.length), "base64");
+  if (
+    !buffer.length ||
+    buffer.length > 2_621_440 ||
+    buffer.length !== input.size
+  )
+    throw new Error("The attached image is too large or invalid.");
+  return { dataUrl: input.dataUrl, mimeType: input.mimeType };
+}
+
+async function saveQuestionImage({
+  supabase,
+  organizationId,
+  userId,
+  questionId,
+  image,
+  originalName,
+}: {
+  supabase: Awaited<
+    ReturnType<typeof import("@/lib/supabase/server").createClient>
+  >;
+  organizationId: string;
+  userId: string;
+  questionId: string;
+  image?: EmployeeQuestionImage;
+  originalName?: string;
+}) {
+  if (!image) return;
+  const extension: Record<EmployeeQuestionImage["mimeType"], string> = {
+    "image/jpeg": "jpg",
+    "image/png": "png",
+    "image/webp": "webp",
+    "image/gif": "gif",
+  };
+  const prefix = `data:${image.mimeType};base64,`;
+  const buffer = Buffer.from(image.dataUrl.slice(prefix.length), "base64");
+  const storagePath = `${organizationId}/${userId}/${randomUUID()}.${extension[image.mimeType]}`;
+  const { error: uploadError } = await supabase.storage
+    .from("ask-images")
+    .upload(storagePath, buffer, {
+      contentType: image.mimeType,
+      upsert: false,
+    });
+  if (uploadError) throw uploadError;
+  const { error: attachmentError } = await supabase
+    .from("question_attachments")
+    .insert({
+      organization_id: organizationId,
+      question_id: questionId,
+      storage_path: storagePath,
+      mime_type: image.mimeType,
+      original_name: originalName || "case-image",
+      size_bytes: buffer.length,
+    });
+  if (attachmentError) {
+    await supabase.storage.from("ask-images").remove([storagePath]);
+    throw attachmentError;
+  }
+}
+
 function sourceLabel(type: string, content: string) {
   const label: Record<string, string> = {
     process_summary: "Process overview",

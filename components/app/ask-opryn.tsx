@@ -1,5 +1,6 @@
 "use client";
 
+import NextImage from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import {
@@ -8,12 +9,20 @@ import {
   CheckCircle2,
   ChevronRight,
   CircleAlert,
+  ImagePlus,
   LoaderCircle,
   Send,
+  X,
 } from "lucide-react";
 import { showAppToast } from "@/lib/client-toast";
 
 type Prompt = { category: string; text: string };
+type AttachedImage = {
+  dataUrl: string;
+  mimeType: "image/jpeg" | "image/png" | "image/webp" | "image/gif";
+  name: string;
+  size: number;
+};
 type Message = {
   id: string;
   role: "user" | "opryn";
@@ -25,6 +34,7 @@ type Message = {
   questionId?: string;
   canEscalate?: boolean;
   sent?: boolean;
+  imageUrl?: string;
   sources?: Array<{
     id: string;
     label: string;
@@ -45,10 +55,14 @@ export function AskOpryn({
   const [question, setQuestion] = useState(initialQuestion);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState<AttachedImage | null>(null);
+  const [imageBusy, setImageBusy] = useState(false);
+  const [imageError, setImageError] = useState("");
   const [promptPage, setPromptPage] = useState(0);
   const [promptsVisible, setPromptsVisible] = useState(true);
   const promptTimer = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
   const pages = Math.max(1, Math.ceil(prompts.length / 4));
   const visiblePrompts = Array.from({ length: 4 }, (_, index) =>
     prompts.length
@@ -83,19 +97,32 @@ export function AskOpryn({
 
   async function ask(event?: FormEvent, prompt?: string) {
     event?.preventDefault();
-    const value = (prompt ?? question).trim();
-    if (!value || loading) return;
+    const selectedImage = image;
+    const value =
+      (prompt ?? question).trim() ||
+      (selectedImage
+        ? "What should I do about what is shown in this image?"
+        : "");
+    if (!value || loading || imageBusy) return;
     setQuestion("");
+    setImage(null);
+    setImageError("");
+    if (imageInputRef.current) imageInputRef.current.value = "";
     setMessages((current) => [
       ...current,
-      { id: crypto.randomUUID(), role: "user", text: value },
+      {
+        id: crypto.randomUUID(),
+        role: "user",
+        text: value,
+        imageUrl: selectedImage?.dataUrl,
+      },
     ]);
     setLoading(true);
     try {
       const response = await fetch("/api/ask", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ question: value }),
+        body: JSON.stringify({ question: value, image: selectedImage }),
       });
       const body = await response.json();
       if (!response.ok)
@@ -136,6 +163,24 @@ export function AskOpryn({
     } finally {
       setLoading(false);
       window.setTimeout(() => inputRef.current?.focus(), 0);
+    }
+  }
+
+  async function attachImage(file?: File) {
+    if (!file) return;
+    setImageError("");
+    setImageBusy(true);
+    try {
+      setImage(await prepareQuestionImage(file));
+    } catch (caught) {
+      setImage(null);
+      setImageError(
+        caught instanceof Error
+          ? caught.message
+          : "Opryn couldn't prepare that image.",
+      );
+    } finally {
+      setImageBusy(false);
     }
   }
 
@@ -232,9 +277,19 @@ export function AskOpryn({
               message.role === "user" ? (
                 <div
                   key={message.id}
-                  className="ml-auto max-w-[86%] rounded-2xl rounded-br-md bg-[#3158d8] px-4 py-3 text-sm leading-6 text-white shadow-[0_8px_20px_rgba(49,88,216,.16)]"
+                  className="ml-auto max-w-[86%] overflow-hidden rounded-2xl rounded-br-md bg-[#3158d8] text-sm leading-6 text-white shadow-[0_8px_20px_rgba(49,88,216,.16)]"
                 >
-                  {message.text}
+                  {message.imageUrl ? (
+                    <NextImage
+                      src={message.imageUrl}
+                      alt="Attached case"
+                      width={720}
+                      height={540}
+                      unoptimized
+                      className="max-h-72 w-full object-cover"
+                    />
+                  ) : null}
+                  <p className="px-4 py-3">{message.text}</p>
                 </div>
               ) : (
                 <AnswerCard
@@ -266,23 +321,85 @@ export function AskOpryn({
         onSubmit={(event) => void ask(event)}
         className="border-t border-[#e2e7ed] bg-white p-3 sm:p-4"
       >
-        <div className="mx-auto flex max-w-4xl items-end gap-2 rounded-xl border border-[#cfd7e2] bg-white p-2 shadow-[0_4px_18px_rgba(24,39,75,.04)] focus-within:border-[#718ee7] focus-within:ring-4 focus-within:ring-[#3158d8]/10">
-          <input
-            ref={inputRef}
-            type="text"
-            value={question}
-            onChange={(event) => setQuestion(event.target.value)}
-            placeholder="Ask about a process, policy, role, or decision"
-            className="h-10 min-w-0 flex-1 bg-transparent px-2 text-sm outline-none"
-          />
-          <button
-            disabled={!question.trim() || loading}
-            aria-label="Ask Opryn"
-            className="grid size-10 shrink-0 place-items-center rounded-lg bg-[#3158d8] text-white transition hover:bg-[#2446b8] disabled:bg-[#c5ccda]"
-          >
-            <ArrowUp className="size-4" />
-          </button>
+        <div className="mx-auto max-w-4xl rounded-xl border border-[#cfd7e2] bg-white p-2 shadow-[0_4px_18px_rgba(24,39,75,.04)] focus-within:border-[#718ee7] focus-within:ring-4 focus-within:ring-[#3158d8]/10">
+          {image ? (
+            <div className="mb-2 flex items-center gap-3 rounded-lg bg-[#f4f7fb] p-2 pr-3">
+              <NextImage
+                src={image.dataUrl}
+                alt="Image ready to send"
+                width={88}
+                height={66}
+                unoptimized
+                className="h-14 w-20 rounded-md object-cover"
+              />
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-xs font-semibold text-[#3f4d63]">
+                  {image.name}
+                </p>
+                <p className="mt-0.5 text-[10px] text-[#7c8797]">
+                  Ready for Opryn to review with company knowledge
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setImage(null);
+                  if (imageInputRef.current) imageInputRef.current.value = "";
+                }}
+                aria-label="Remove attached image"
+                className="grid size-8 shrink-0 place-items-center rounded-lg text-[#69758a] hover:bg-white hover:text-[#263348]"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+          ) : null}
+          <div className="flex items-end gap-2">
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              className="sr-only"
+              onChange={(event) => void attachImage(event.target.files?.[0])}
+            />
+            <button
+              type="button"
+              onClick={() => imageInputRef.current?.click()}
+              disabled={loading || imageBusy}
+              aria-label="Attach a photo"
+              title="Attach a photo"
+              className="grid size-10 shrink-0 place-items-center rounded-lg text-[#637087] transition hover:bg-[#edf2ff] hover:text-[#3158d8] disabled:opacity-50"
+            >
+              {imageBusy ? (
+                <LoaderCircle className="size-4 animate-spin" />
+              ) : (
+                <ImagePlus className="size-4" />
+              )}
+            </button>
+            <input
+              ref={inputRef}
+              type="text"
+              value={question}
+              onChange={(event) => setQuestion(event.target.value)}
+              placeholder="Ask Opryn or add a photo"
+              className="h-10 min-w-0 flex-1 bg-transparent px-1 text-sm outline-none"
+            />
+            <button
+              disabled={(!question.trim() && !image) || loading || imageBusy}
+              aria-label="Ask Opryn"
+              className="grid size-10 shrink-0 place-items-center rounded-lg bg-[#3158d8] text-white transition hover:bg-[#2446b8] disabled:bg-[#c5ccda]"
+            >
+              <ArrowUp className="size-4" />
+            </button>
+          </div>
         </div>
+        {imageError ? (
+          <p
+            role="alert"
+            className="mx-auto mt-2 max-w-4xl text-xs text-[#a83f49]"
+          >
+            {imageError}
+          </p>
+        ) : null}
         <p className="mt-2 text-center text-[10px] text-[#909aa8]">
           Opryn only answers from approved company knowledge. If it is not
           documented, Opryn asks instead of guessing.
@@ -290,6 +407,70 @@ export function AskOpryn({
       </form>
     </div>
   );
+}
+
+async function prepareQuestionImage(file: File): Promise<AttachedImage> {
+  const allowed = new Set([
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/gif",
+  ]);
+  if (!allowed.has(file.type))
+    throw new Error("Choose a JPG, PNG, WEBP, or GIF image.");
+  const maxBytes = 2_621_440;
+  let prepared: Blob = file;
+  let mimeType = file.type as AttachedImage["mimeType"];
+  let name = file.name;
+
+  if (file.type !== "image/gif") {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("This browser couldn't prepare the image.");
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close();
+    prepared = await canvasBlob(canvas, "image/jpeg", 0.82);
+    if (prepared.size > maxBytes)
+      prepared = await canvasBlob(canvas, "image/jpeg", 0.68);
+    mimeType = "image/jpeg";
+    name = `${file.name.replace(/\.[^.]+$/, "") || "case-photo"}.jpg`;
+  }
+  if (!prepared.size || prepared.size > maxBytes)
+    throw new Error("That image is too large. Choose one under 2.5 MB.");
+  return {
+    dataUrl: await readDataUrl(prepared),
+    mimeType,
+    name,
+    size: prepared.size,
+  };
+}
+
+function canvasBlob(canvas: HTMLCanvasElement, type: string, quality: number) {
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob(
+      (blob) =>
+        blob
+          ? resolve(blob)
+          : reject(new Error("Opryn couldn't prepare that image.")),
+      type,
+      quality,
+    );
+  });
+}
+
+function readDataUrl(blob: Blob) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error("Opryn couldn't read that image."));
+    reader.readAsDataURL(blob);
+  });
 }
 
 function AnswerCard({

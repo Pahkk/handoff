@@ -33,6 +33,7 @@ type KnowledgeGap = {
   id: string;
   question: string;
   person: string;
+  imageUrl?: string;
 };
 
 export function ProcessIdeas({
@@ -242,6 +243,7 @@ function KnowledgeGapBranch({ gaps }: { gaps: KnowledgeGap[] }) {
             </p>
             <p className="mt-1.5 text-[9px] uppercase tracking-[.07em] text-[#9b7d83]">
               Asked by {gap.person}
+              {gap.imageUrl ? " · Photo attached" : ""}
             </p>
           </Link>
         ))}

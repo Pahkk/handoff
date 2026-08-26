@@ -50,7 +50,7 @@
     "semantic_hash": ""
   },
   "next-env.d.ts": {
-    "mtime": 1787700965.452113,
+    "mtime": 1787702919.6497092,
     "ast_hash": "8195d2c60ce847a459ae9d308d6a5724",
     "semantic_hash": ""
   },
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "app/api/ask/route.ts": {
-    "mtime": 1787698456.5577538,
-    "ast_hash": "53822cbbb10a8e1c151431ec8a28fcf1",
+    "mtime": 1787702676.6535878,
+    "ast_hash": "729f378dc3f63b00e82170acae6a9229",
     "semantic_hash": ""
   },
   "app/api/invites/accept/route.ts": {
@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "app/app/knowledge-gaps/page.tsx": {
-    "mtime": 1787700702.9404569,
-    "ast_hash": "e32ad412ddf633eb17e7ee59c09cc4c1",
+    "mtime": 1787702676.6717796,
+    "ast_hash": "e32ca522217ef3006c1f89f60867b283",
     "semantic_hash": ""
   },
   "app/app/layout.tsx": {
@@ -320,13 +320,13 @@
     "semantic_hash": ""
   },
   "components/app/ask-opryn.tsx": {
-    "mtime": 1787700767.9101882,
-    "ast_hash": "7f3258c68fb7718c8f64187ebe157fe7",
+    "mtime": 1787702907.0368114,
+    "ast_hash": "1e6523b0a5f083e7c8c6c89ecee501dc",
     "semantic_hash": ""
   },
   "components/app/capture-process.tsx": {
-    "mtime": 1787622121.1944375,
-    "ast_hash": "93784a04c792df81255b471498a94708",
+    "mtime": 1787703002.0328581,
+    "ast_hash": "6c0223a31005f21d46e1af11f58a8c13",
     "semantic_hash": ""
   },
   "components/app/create-role.tsx": {
@@ -390,13 +390,13 @@
     "semantic_hash": ""
   },
   "lib/ai/schemas.ts": {
-    "mtime": 1787698456.4761155,
-    "ast_hash": "66cb9e0921e42146ff5bbb275afef30c",
+    "mtime": 1787702334.8900192,
+    "ast_hash": "37cac099621f5fc495f1cd7a73ae1360",
     "semantic_hash": ""
   },
   "lib/ai/services.ts": {
-    "mtime": 1787698456.5174334,
-    "ast_hash": "0ebd2f7ac1982a53e1970a5ff20c4547",
+    "mtime": 1787702334.958656,
+    "ast_hash": "60c12f781c46e699782ab546360ee984",
     "semantic_hash": ""
   },
   "lib/api.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "components/app/process-intelligence.tsx": {
-    "mtime": 1787700787.7909756,
-    "ast_hash": "0d7442df8260773da64544aff886d403",
+    "mtime": 1787702676.7265348,
+    "ast_hash": "719d6c6d61f0398199e35d174f3c885c",
     "semantic_hash": ""
   },
   "components/invite-session-bridge.tsx": {
@@ -552,6 +552,11 @@
   "components/app/training-manager.tsx": {
     "mtime": 1787700842.3191018,
     "ast_hash": "e07bac6b98240a38ff498182c27be0bc",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260825004000_question_image_attachments.sql": {
+    "mtime": 1787702585.058905,
+    "ast_hash": "f1a4b4f02cc28910602589742812044c",
     "semantic_hash": ""
   }
 }

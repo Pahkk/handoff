@@ -3,6 +3,7 @@ import { toFile } from "openai";
 import { zodTextFormat } from "openai/helpers/zod";
 import {
   companyAnswerSchema,
+  employeeImageCaseSchema,
   extractedProcessSchema,
   processRecommendationsSchema,
   suggestedRuleSchema,
@@ -91,9 +92,46 @@ export type RetrievedKnowledge = {
   similarity: number;
 };
 
+export type EmployeeQuestionImage = {
+  dataUrl: string;
+  mimeType: "image/jpeg" | "image/png" | "image/webp" | "image/gif";
+};
+
+export async function analyzeEmployeeQuestionImage(
+  question: string,
+  image: EmployeeQuestionImage,
+) {
+  const response = await getOpenAI().responses.parse({
+    model: OPENAI_MODELS.text,
+    reasoning: OPENAI_TEXT_REASONING,
+    instructions:
+      "Inspect an image attached to an employee's company question. Describe only concrete visible facts and legible text. Do not diagnose equipment, identify a person, infer hidden causes, or give advice. Create a concise semantic-search query that combines the employee's words with the visible objects, labels, error text, paperwork, or conditions most likely to match an approved company process or rule.",
+    input: [
+      {
+        role: "user",
+        content: [
+          { type: "input_text", text: `EMPLOYEE QUESTION:\n${question}` },
+          {
+            type: "input_image",
+            image_url: image.dataUrl,
+            detail: "high",
+          },
+        ],
+      },
+    ],
+    text: {
+      format: zodTextFormat(employeeImageCaseSchema, "employee_image_case"),
+    },
+  });
+  if (!response.output_parsed)
+    throw new Error("Opryn could not understand the attached image.");
+  return employeeImageCaseSchema.parse(response.output_parsed);
+}
+
 export async function answerCompanyQuestion(
   question: string,
   knowledge: RetrievedKnowledge[],
+  image?: EmployeeQuestionImage & { description: string; visibleText: string },
 ) {
   const context = knowledge
     .map((item) => `<source id="${item.id}">${item.content}</source>`)
@@ -102,8 +140,25 @@ export async function answerCompanyQuestion(
     model: OPENAI_MODELS.text,
     reasoning: OPENAI_TEXT_REASONING,
     instructions:
-      "You are Opryn, an assistant for one specific business. Answer employees only from the supplied, approved company knowledge. Never use general knowledge to invent company policies, procedures, limits, permissions, or exceptions. Answer the supported part when the sources clearly contain it; do not refuse merely because the employee used different wording. If the context is insufficient, set can_answer=false, leave answer/headline/important_note empty, and return no steps. If sources conflict, set can_answer=false. Set confidence from 0 to 1 based only on how directly and completely the approved sources support the answer. For supported answers, give a short useful headline, a direct explanation, actionable steps when the source supports an ordered workflow, and one important note only when the sources contain a warning, approval boundary, exception, or decision rule. Do not pad the response. Cite every source ID that directly supports the answer.",
-    input: `EMPLOYEE QUESTION:\n${question}\n\nAPPROVED COMPANY KNOWLEDGE:\n${context || "No approved knowledge was found."}`,
+      "You are Opryn, an assistant for one specific business. Answer employees only from the supplied, approved company knowledge. An attached image may establish visible situational facts, but it is never a source of company policy or permission. Never diagnose a hidden cause from an image. Never use general knowledge to invent company policies, procedures, limits, permissions, exceptions, repairs, or safety instructions. Answer the supported part when the approved sources clearly contain it. If the image is unclear, the context is insufficient, or the sources conflict, set can_answer=false, leave answer/headline/important_note empty, and return no steps. Set confidence from 0 to 1 based only on how directly and completely the approved sources support the answer for the visible situation. For supported answers, give a short useful headline, a direct explanation, actionable steps only when the source supports them, and one important note only when the sources contain a warning, approval boundary, exception, or decision rule. Cite every source ID that directly supports the answer.",
+    input: image
+      ? [
+          {
+            role: "user",
+            content: [
+              {
+                type: "input_text",
+                text: `EMPLOYEE QUESTION:\n${question}\n\nVISIBLE IMAGE OBSERVATION:\n${image.description}\n\nVISIBLE TEXT:\n${image.visibleText || "None detected"}\n\nAPPROVED COMPANY KNOWLEDGE:\n${context || "No approved knowledge was found."}`,
+              },
+              {
+                type: "input_image",
+                image_url: image.dataUrl,
+                detail: "high",
+              },
+            ],
+          },
+        ]
+      : `EMPLOYEE QUESTION:\n${question}\n\nAPPROVED COMPANY KNOWLEDGE:\n${context || "No approved knowledge was found."}`,
     text: { format: zodTextFormat(companyAnswerSchema, "company_answer") },
   });
   if (!response.output_parsed)
