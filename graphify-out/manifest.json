@@ -245,8 +245,8 @@
     "semantic_hash": ""
   },
   "app/app/page.tsx": {
-    "mtime": 1787774552.4749193,
-    "ast_hash": "c52a3db237eb589a8044680dcf61b3b9",
+    "mtime": 1787777632.9821713,
+    "ast_hash": "657becabe3270403216df171d41d2cf2",
     "semantic_hash": ""
   },
   "app/app/processes/[id]/page.tsx": {

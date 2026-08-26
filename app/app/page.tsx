@@ -4,7 +4,10 @@ import {
   BookOpenCheck,
   CircleHelp,
   FileText,
+  GraduationCap,
   MessageCircleQuestion,
+  MessageSquareText,
+  Target,
   Video,
   PhoneCall,
 } from "lucide-react";
@@ -117,6 +120,11 @@ export default async function DashboardPage() {
     ),
   );
   const firstName = context.user.fullName.split(" ")[0];
+  const nextMove = getNextOwnerMove({
+    processes: processes.count ?? 0,
+    gaps: gaps.count ?? 0,
+    totalTraining,
+  });
   if (!context.isAdmin)
     return (
       <EmployeeHome
@@ -128,40 +136,130 @@ export default async function DashboardPage() {
     );
   return (
     <>
-      <PageHeading
-        eyebrow="Owner dashboard"
-        title={`Good ${greeting()}, ${firstName}`}
-        description="See what your team can handle—and what still depends on you."
-        actions={
+      <header className="owner-dashboard-heading mb-7 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+        <div>
+          <div className="mb-3 flex items-center gap-2">
+            <span className="status-pulse size-2 rounded-full bg-[#1b8b69]" />
+            <p className="text-[11px] font-bold uppercase tracking-[.13em] text-[#5f6d82]">
+              {context.organization.name} · Owner view
+            </p>
+          </div>
+          <h1 className="text-[30px] font-semibold leading-tight tracking-[-.045em] sm:text-[36px]">
+            Good {greeting()}, {firstName}.
+          </h1>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[#69758a]">
+            Here&apos;s what your team can handle—and where you can remove
+            yourself next.
+          </p>
+        </div>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <Link
+            href="/app/ask"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#d8e0ea] bg-white px-4 text-sm font-semibold text-[#354156] shadow-sm transition hover:-translate-y-0.5 hover:border-[#c4cfdd]"
+          >
+            <MessageSquareText className="size-4 text-[#3158d8]" />
+            Ask Opryn
+          </Link>
           <Link
             href="/app/processes/new"
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#3158d8] px-4 text-sm font-semibold text-white"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#3158d8] px-4 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(49,88,216,.2)] transition hover:-translate-y-0.5 hover:bg-[#284abf]"
           >
             <FileText className="size-4" />
             Teach Opryn
           </Link>
-        }
-      />
-      <div className="grid gap-4 md:grid-cols-3">
+        </div>
+      </header>
+      <section className="owner-command-card relative overflow-hidden rounded-[24px] bg-[#101d34] p-5 text-white shadow-[0_24px_70px_rgba(16,29,52,.16)] sm:p-7">
+        <div className="pointer-events-none absolute -right-24 -top-32 size-[340px] rounded-full bg-[#3158d8]/30 blur-[90px]" />
+        <div className="relative grid gap-7 xl:grid-cols-[.95fr_1.05fr] xl:items-center">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+            <div
+              className="grid size-32 shrink-0 place-items-center rounded-full p-[9px]"
+              style={{
+                background:
+                  "conic-gradient(#6f8ef0 " +
+                  score +
+                  "%, rgba(255,255,255,.1) 0)",
+              }}
+            >
+              <div className="grid size-full place-items-center rounded-full bg-[#101d34]">
+                <div className="text-center">
+                  <strong className="metric block text-4xl font-semibold">
+                    {score}
+                  </strong>
+                  <span className="text-[10px] font-bold uppercase tracking-[.13em] text-[#93a2ba]">
+                    out of 100
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[.14em] text-[#8fa6fa]">
+                Owner independence
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-[-.035em]">
+                {independenceHeadline(score)}
+              </h2>
+              <p className="mt-3 max-w-lg text-sm leading-6 text-[#b5c0d2]">
+                Opryn uses approved knowledge, answered questions, and training
+                coverage to estimate how much can run without you.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <CommandScore
+              label="Process coverage"
+              value={processCoverage}
+              detail={(processes.count ?? 0) + " approved"}
+            />
+            <CommandScore
+              label="Questions handled"
+              value={reduction}
+              detail={answeredCount + " this week"}
+            />
+            <CommandScore
+              label="Training coverage"
+              value={trainingCoverage}
+              detail={completed + " of " + totalTraining}
+            />
+          </div>
+        </div>
+        <p className="relative mt-6 border-t border-white/10 pt-4 text-[10px] leading-5 text-[#8391a7]">
+          This is a directional estimate based on the knowledge currently
+          captured in Opryn.
+        </p>
+      </section>
+
+      <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Metric
           icon={<FileText />}
           label="Approved Processes"
           value={processes.count ?? 0}
+          href="/app/processes"
         />
         <Metric
           icon={<BookOpenCheck />}
           label="Approved Rules"
           value={rules.count ?? 0}
+          href="/app/knowledge-gaps"
         />
         <Metric
           icon={<CircleHelp />}
           label="Knowledge Gaps"
           value={gaps.count ?? 0}
           alert={Boolean(gaps.count)}
+          href="/app/knowledge-gaps"
+        />
+        <Metric
+          icon={<GraduationCap />}
+          label="Training Complete"
+          value={completed}
+          helper={"of " + totalTraining + " assignments"}
+          href="/app/training"
         />
       </div>
-      <div className="mt-5 grid min-w-0 gap-5 2xl:grid-cols-[1.2fr_.8fr]">
-        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
+      <div className="mt-5 grid min-w-0 gap-5 xl:grid-cols-[1.2fr_.8fr]">
+        <section className="dashboard-panel min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[.1em] text-[#718095]">
@@ -171,9 +269,14 @@ export default async function DashboardPage() {
                 Interruption Reduction
               </h2>
             </div>
-            <strong className="text-4xl font-semibold tracking-[-.05em] text-[#3158d8]">
-              {reduction}%
-            </strong>
+            <div className="flex items-end gap-2">
+              <strong className="text-4xl font-semibold tracking-[-.05em] text-[#3158d8]">
+                {reduction}%
+              </strong>
+              <span className="mb-1 text-xs font-medium text-[#8490a1]">
+                handled without you
+              </span>
+            </div>
           </div>
           <div className="mt-6 h-2 overflow-hidden rounded-full bg-[#edf0f4]">
             <div
@@ -194,28 +297,26 @@ export default async function DashboardPage() {
             <Mini label="Asked owner" value={escalated.count ?? 0} />
           </div>
         </section>
-        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-[#111d34] p-5 text-white sm:p-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-[.1em] text-[#aebbd2]">
-                Owner Independence
-              </p>
-              <p className="mt-2 text-sm text-[#c7d0e0]">V1 estimate</p>
-            </div>
-            <strong className="text-4xl font-semibold tracking-[-.05em]">
-              {score}
-              <span className="text-lg text-[#8796b0]"> / 100</span>
-            </strong>
-          </div>
-          <div className="mt-7 space-y-4">
-            <ScoreRow label="Process coverage" value={processCoverage} />
-            <ScoreRow label="Questions handled" value={reduction} />
-            <ScoreRow label="Role training coverage" value={trainingCoverage} />
-          </div>
-          <p className="mt-6 text-[11px] leading-5 text-[#9facc2]">
-            This is an estimate based on the knowledge currently captured in
-            Opryn.
+        <section className="next-move-card relative min-w-0 overflow-hidden rounded-2xl border border-[#dce6e1] bg-[#f3faf7] p-5 sm:p-6">
+          <div className="absolute right-0 top-0 size-28 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#caebdd]/55" />
+          <span className="relative grid size-10 place-items-center rounded-xl bg-[#dff3ea] text-[#177257]">
+            <Target className="size-5" />
+          </span>
+          <p className="relative mt-5 text-[10px] font-bold uppercase tracking-[.13em] text-[#177257]">
+            Your next best move
           </p>
+          <h2 className="relative mt-2 text-xl font-semibold tracking-[-.025em] text-[#20352f]">
+            {nextMove.title}
+          </h2>
+          <p className="relative mt-2 text-sm leading-6 text-[#60766e]">
+            {nextMove.description}
+          </p>
+          <Link
+            href={nextMove.href}
+            className="relative mt-6 inline-flex min-h-10 items-center gap-2 rounded-xl bg-[#177257] px-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#12634b]"
+          >
+            {nextMove.action} <ArrowRight className="size-4" />
+          </Link>
         </section>
       </div>
       {!hasFeature(subscription.plan, "advancedAnalytics") ? (
@@ -290,10 +391,15 @@ export default async function DashboardPage() {
           </div>
         </section>
       )}
-      <div className="mt-5 grid min-w-0 gap-5 2xl:grid-cols-2">
-        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
+      <div className="mt-5 grid min-w-0 gap-5 xl:grid-cols-[1.15fr_.85fr]">
+        <section className="dashboard-panel min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold">Recent activity</h2>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[.12em] text-[#8090a5]">
+                Live workspace
+              </p>
+              <h2 className="mt-1 font-semibold">Recent activity</h2>
+            </div>
           </div>
           {!recentQuestions.data?.length && !recentProcesses.data?.length ? (
             <p className="mt-6 rounded-xl bg-[#f8fafc] p-5 text-sm text-[#718095]">
@@ -334,9 +440,14 @@ export default async function DashboardPage() {
             </div>
           )}
         </section>
-        <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
+        <section className="dashboard-panel min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold">Questions waiting for you</h2>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[.12em] text-[#b26e18]">
+                Owner inbox
+              </p>
+              <h2 className="mt-1 font-semibold">Questions waiting for you</h2>
+            </div>
             <Link
               href="/app/knowledge-gaps"
               className="text-xs font-semibold text-[#3158d8]"
@@ -473,45 +584,136 @@ function Metric({
   label,
   value,
   alert,
+  helper,
+  href,
 }: {
   icon: React.ReactNode;
   label: string;
   value: number;
   alert?: boolean;
+  helper?: string;
+  href?: string;
 }) {
-  return (
-    <div className="rounded-2xl border border-[#dfe5ed] bg-white p-5">
-      <div
-        className={`grid size-9 place-items-center rounded-xl [&>svg]:size-4 ${alert ? "bg-[#fff4df] text-[#a46b18]" : "bg-[#edf2ff] text-[#3158d8]"}`}
-      >
-        {icon}
+  const content = (
+    <>
+      <div className="flex items-start justify-between">
+        <div
+          className={
+            "grid size-9 place-items-center rounded-xl [&>svg]:size-4 " +
+            (alert
+              ? "bg-[#fff4df] text-[#a46b18]"
+              : "bg-[#edf2ff] text-[#3158d8]")
+          }
+        >
+          {icon}
+        </div>
+        {href ? (
+          <ArrowRight className="size-4 text-[#a1aab7] transition-transform group-hover:translate-x-0.5 group-hover:text-[#3158d8]" />
+        ) : null}
       </div>
       <p className="mt-5 text-3xl font-semibold tracking-[-.04em]">{value}</p>
       <p className="mt-1 text-sm text-[#718095]">{label}</p>
+      {helper ? (
+        <p className="mt-1 text-[10px] font-medium text-[#96a0ae]">{helper}</p>
+      ) : null}
+    </>
+  );
+  return href ? (
+    <Link
+      href={href}
+      className="dashboard-metric group rounded-2xl border border-[#dfe5ed] bg-white p-5 transition hover:-translate-y-0.5 hover:border-[#cbd6e4] hover:shadow-[0_12px_30px_rgba(24,39,66,.07)]"
+    >
+      {content}
+    </Link>
+  ) : (
+    <div className="dashboard-metric rounded-2xl border border-[#dfe5ed] bg-white p-5">
+      {content}
     </div>
   );
+}
+function CommandScore({
+  label,
+  value,
+  detail,
+}: {
+  label: string;
+  value: number;
+  detail: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[.055] p-4 backdrop-blur">
+      <div className="flex items-end justify-between gap-2">
+        <strong className="metric text-2xl font-semibold">{value}%</strong>
+        <span className="text-[9px] text-[#8796ae]">{detail}</span>
+      </div>
+      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
+        <div
+          className="h-full rounded-full bg-[#6f8ef0]"
+          style={{ width: value + "%" }}
+        />
+      </div>
+      <p className="mt-3 text-[10px] font-semibold text-[#bac5d7]">{label}</p>
+    </div>
+  );
+}
+function getNextOwnerMove({
+  processes,
+  gaps,
+  totalTraining,
+}: {
+  processes: number;
+  gaps: number;
+  totalTraining: number;
+}) {
+  if (processes === 0) {
+    return {
+      title: "Capture your first process",
+      description:
+        "Start with one task you want someone else to handle. Explain it naturally and Opryn will structure it.",
+      href: "/app/processes/new",
+      action: "Teach first process",
+    };
+  }
+  if (gaps > 0) {
+    return {
+      title:
+        "Answer " +
+        gaps +
+        " waiting " +
+        (gaps === 1 ? "question" : "questions"),
+      description:
+        "Your answers close knowledge gaps and help Opryn handle the same questions automatically next time.",
+      href: "/app/knowledge-gaps",
+      action: "Open owner inbox",
+    };
+  }
+  if (totalTraining === 0) {
+    return {
+      title: "Assign the first training",
+      description:
+        "Turn an approved process into clear onboarding for the employee who needs it.",
+      href: "/app/training",
+      action: "Set up training",
+    };
+  }
+  return {
+    title: "Capture the next owner-only task",
+    description:
+      "Choose one recurring task or decision that still depends on you and teach it to Opryn.",
+    href: "/app/processes/new",
+    action: "Teach Opryn",
+  };
+}
+function independenceHeadline(score: number) {
+  if (score < 20) return "Start getting your business out of your head.";
+  if (score < 60) return "Your business is learning to run without you.";
+  return "Your business is becoming easier to hand off.";
 }
 function Mini({ label, value }: { label: string; value: number }) {
   return (
     <div>
       <strong className="text-xl font-semibold">{value}</strong>
       <p className="mt-1 text-[11px] text-[#7b8798]">{label}</p>
-    </div>
-  );
-}
-function ScoreRow({ label, value }: { label: string; value: number }) {
-  return (
-    <div>
-      <div className="flex justify-between text-xs">
-        <span className="text-[#c3cde0]">{label}</span>
-        <span>{value}%</span>
-      </div>
-      <div className="mt-2 h-1.5 rounded-full bg-white/10">
-        <div
-          className="h-full rounded-full bg-[#6f8ef0]"
-          style={{ width: `${value}%` }}
-        />
-      </div>
     </div>
   );
 }
