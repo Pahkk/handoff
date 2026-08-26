@@ -5,10 +5,14 @@ import {
   CircleHelp,
   FileText,
   MessageCircleQuestion,
+  Video,
+  PhoneCall,
 } from "lucide-react";
 import { EmptyState, PageHeading } from "@/components/app/page-heading";
 import { requireAppContext } from "@/lib/app-context";
 import { createClient } from "@/lib/supabase/server";
+import { getOrganizationPlan } from "@/lib/billing/subscription";
+import { hasFeature } from "@/lib/billing/plans";
 
 export default async function DashboardPage() {
   const context = await requireAppContext();
@@ -26,6 +30,9 @@ export default async function DashboardPage() {
     training,
     recentQuestions,
     recentProcesses,
+    subscription,
+    learningMedia,
+    calls,
   ] = await Promise.all([
     supabase
       .from("processes")
@@ -77,6 +84,15 @@ export default async function DashboardPage() {
       .eq("organization_id", org)
       .order("created_at", { ascending: false })
       .limit(4),
+    getOrganizationPlan(supabase, org),
+    supabase
+      .from("media_uploads")
+      .select("mime_type")
+      .eq("organization_id", org),
+    supabase
+      .from("call_recordings")
+      .select("id,status")
+      .eq("organization_id", org),
   ]);
   const askedCount = asked.count ?? 0;
   const answeredCount = answered.count ?? 0;
@@ -202,6 +218,78 @@ export default async function DashboardPage() {
           </p>
         </section>
       </div>
+      {!hasFeature(subscription.plan, "advancedAnalytics") ? (
+        <section className="mt-5 flex flex-col gap-5 overflow-hidden rounded-2xl border border-[#dce6e1] bg-[#f3faf7] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div>
+            <span className="rounded-full bg-[#dff3ea] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[.09em] text-[#177257]">
+              Premium
+            </span>
+            <h2 className="mt-3 text-lg font-semibold">
+              Opryn could learn more automatically.
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-[#60766e]">
+              Let Opryn learn from videos, screen recordings, and authorized
+              business calls.
+            </p>
+          </div>
+          <Link
+            href="/pricing"
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#177257] px-5 text-sm font-semibold text-white"
+          >
+            Explore Premium <ArrowRight className="size-4" />
+          </Link>
+        </section>
+      ) : (
+        <section className="mt-5 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[.1em] text-[#177257]">
+                Premium learning sources
+              </p>
+              <h2 className="mt-2 text-lg font-semibold">
+                How Opryn is learning
+              </h2>
+            </div>
+            <Link
+              href="/app/calls"
+              className="text-xs font-semibold text-[#3158d8]"
+            >
+              Open calls
+            </Link>
+          </div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            <Metric
+              icon={<FileText />}
+              label="Audio explanations"
+              value={
+                (learningMedia.data ?? []).filter((item) =>
+                  item.mime_type.startsWith("audio/"),
+                ).length
+              }
+            />
+            <Metric
+              icon={<Video />}
+              label="Videos"
+              value={
+                (learningMedia.data ?? []).filter((item) =>
+                  item.mime_type.startsWith("video/"),
+                ).length
+              }
+            />
+            <Metric
+              icon={<PhoneCall />}
+              label="Calls"
+              value={
+                (calls.data ?? []).filter(
+                  (item) =>
+                    item.status === "needs_review" ||
+                    item.status === "approved",
+                ).length
+              }
+            />
+          </div>
+        </section>
+      )}
       <div className="mt-5 grid min-w-0 gap-5 2xl:grid-cols-2">
         <section className="min-w-0 rounded-2xl border border-[#dfe5ed] bg-white p-5 sm:p-6">
           <div className="flex items-center justify-between">

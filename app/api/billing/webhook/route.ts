@@ -1,0 +1,141 @@
+import { NextResponse } from "next/server";
+import type Stripe from "stripe";
+import { getStripe, planFromStripePrice } from "@/lib/billing/stripe";
+import { createServiceClient } from "@/lib/supabase/service";
+
+export const runtime = "nodejs";
+
+export async function POST(request: Request) {
+  const signature = request.headers.get("stripe-signature");
+  const secret = process.env.STRIPE_WEBHOOK_SECRET?.trim();
+  if (!signature || !secret)
+    return NextResponse.json(
+      { error: "Webhook verification is not configured." },
+      { status: 400 },
+    );
+  let event: Stripe.Event;
+  try {
+    event = getStripe().webhooks.constructEvent(
+      await request.text(),
+      signature,
+      secret,
+    );
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid webhook signature." },
+      { status: 400 },
+    );
+  }
+
+  const service = createServiceClient();
+  const { data: previous } = await service
+    .from("stripe_webhook_events")
+    .select("processed_at")
+    .eq("event_id", event.id)
+    .maybeSingle();
+  if (previous?.processed_at) return NextResponse.json({ received: true });
+  await service.from("stripe_webhook_events").upsert(
+    {
+      event_id: event.id,
+      event_type: event.type,
+      error_message: null,
+    },
+    { onConflict: "event_id" },
+  );
+
+  try {
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as Stripe.Checkout.Session;
+      if (typeof session.subscription === "string") {
+        const subscription = await getStripe().subscriptions.retrieve(
+          session.subscription,
+        );
+        await syncSubscription(service, subscription);
+      }
+    }
+    if (
+      event.type === "customer.subscription.created" ||
+      event.type === "customer.subscription.updated" ||
+      event.type === "customer.subscription.deleted"
+    )
+      await syncSubscription(service, event.data.object as Stripe.Subscription);
+
+    await service
+      .from("stripe_webhook_events")
+      .update({ processed_at: new Date().toISOString(), error_message: null })
+      .eq("event_id", event.id);
+    return NextResponse.json({ received: true });
+  } catch (error) {
+    await service
+      .from("stripe_webhook_events")
+      .update({
+        error_message:
+          error instanceof Error ? error.message.slice(0, 1000) : "Unknown",
+      })
+      .eq("event_id", event.id);
+    console.error("[Opryn Billing] Webhook processing failed", {
+      eventId: event.id,
+      eventType: event.type,
+      error: error instanceof Error ? error.name : "UnknownError",
+    });
+    return NextResponse.json(
+      { error: "Webhook processing failed." },
+      { status: 500 },
+    );
+  }
+}
+
+async function syncSubscription(
+  service: ReturnType<typeof createServiceClient>,
+  subscription: Stripe.Subscription,
+) {
+  const customerId =
+    typeof subscription.customer === "string"
+      ? subscription.customer
+      : subscription.customer.id;
+  let organizationId = subscription.metadata.organization_id;
+  if (!organizationId) {
+    const { data } = await service
+      .from("organization_subscriptions")
+      .select("organization_id")
+      .eq("stripe_customer_id", customerId)
+      .maybeSingle();
+    organizationId = data?.organization_id;
+  }
+  if (!organizationId) throw new Error("Subscription organization not found.");
+  const item = subscription.items.data[0];
+  const mapped = planFromStripePrice(item?.price.id);
+  if (!mapped)
+    throw new Error("Subscription price is not mapped to an Opryn plan.");
+  const status = normalizeStatus(subscription.status);
+  const { data: existing } = await service
+    .from("organization_subscriptions")
+    .select("trial_used")
+    .eq("organization_id", organizationId)
+    .maybeSingle();
+  const { error } = await service.from("organization_subscriptions").upsert(
+    {
+      organization_id: organizationId,
+      stripe_customer_id: customerId,
+      stripe_subscription_id: subscription.id,
+      plan: mapped.plan,
+      billing_interval: mapped.interval,
+      status,
+      current_period_start: item?.current_period_start
+        ? new Date(item.current_period_start * 1000).toISOString()
+        : null,
+      current_period_end: item?.current_period_end
+        ? new Date(item.current_period_end * 1000).toISOString()
+        : null,
+      cancel_at_period_end: subscription.cancel_at_period_end,
+      trial_used: existing?.trial_used || mapped.plan === "premium",
+    },
+    { onConflict: "organization_id" },
+  );
+  if (error) throw error;
+}
+
+function normalizeStatus(status: Stripe.Subscription.Status) {
+  if (status === "incomplete_expired") return "canceled";
+  return status;
+}

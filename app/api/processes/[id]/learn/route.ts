@@ -4,15 +4,21 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { OPENAI_MODELS } from "@/lib/ai/config";
 import {
   prepareTranscriptionAudio,
+  extractVideoFrames,
   UnsupportedRecordingError,
   VIDEO_MIME_TYPES,
 } from "@/lib/ai/media";
 import {
   extractProcessFromTranscript,
+  analyzeVideoFrames,
   transcribeAudio,
 } from "@/lib/ai/services";
 import { getRequestContext } from "@/lib/api";
 import { replaceExtractedProcess } from "@/lib/processes";
+import {
+  FeatureUnavailableError,
+  requireFeature,
+} from "@/lib/billing/subscription";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -62,6 +68,18 @@ export async function POST(
       { error: "This process upload was not found." },
       { status: 404 },
     );
+  if (VIDEO_MIME_TYPES.has(media.mime_type)) {
+    try {
+      await requireFeature(supabase, organizationId, "videoLearning");
+    } catch (error) {
+      if (error instanceof FeatureUnavailableError)
+        return NextResponse.json(
+          { error: error.message, code: "premium_required" },
+          { status: 402 },
+        );
+      throw error;
+    }
+  }
 
   const trace = {
     organizationId,
@@ -133,6 +151,7 @@ export async function POST(
     );
 
   let transcript = savedTranscript;
+  let sourceBuffer: Buffer | null = null;
   try {
     if (transcript) {
       console.info("[Opryn AI] Reusing saved transcript", {
@@ -148,8 +167,9 @@ export async function POST(
       if (VIDEO_MIME_TYPES.has(media.mime_type)) {
         console.info("[Opryn AI] Starting audio extraction", trace);
       }
+      sourceBuffer = Buffer.from(await download.arrayBuffer());
       const prepared = await prepareTranscriptionAudio(
-        Buffer.from(await download.arrayBuffer()),
+        sourceBuffer,
         media.original_name,
         media.mime_type,
       );
@@ -187,10 +207,68 @@ export async function POST(
 
     stage = "generating_process";
     await updateMediaStatus(supabase, media.id, organizationId, stage);
+    let visualEvidence = "";
+    if (VIDEO_MIME_TYPES.has(media.mime_type)) {
+      const { data: cachedVisual } = await supabase
+        .from("video_analyses")
+        .select("observations")
+        .eq("organization_id", organizationId)
+        .eq("media_upload_id", media.id)
+        .maybeSingle();
+      let observations = cachedVisual?.observations as
+        | Array<{
+            type: string;
+            text: string;
+            confidence: number;
+            needs_confirmation: boolean;
+          }>
+        | undefined;
+      if (!observations) {
+        if (!sourceBuffer) {
+          const { data: download, error: downloadError } =
+            await supabase.storage
+              .from("process-media")
+              .download(media.storage_path);
+          if (downloadError) throw downloadError;
+          sourceBuffer = Buffer.from(await download.arrayBuffer());
+        }
+        const frames = await extractVideoFrames(
+          sourceBuffer,
+          media.mime_type,
+          8,
+        );
+        const analyzed = await analyzeVideoFrames(
+          transcript.transcript_text,
+          frames,
+          trace,
+        );
+        observations = analyzed.observations;
+        const { error: visualError } = await supabase
+          .from("video_analyses")
+          .upsert(
+            {
+              organization_id: organizationId,
+              media_upload_id: media.id,
+              frame_count: frames.length,
+              observations,
+              analysis_model: OPENAI_MODELS.text,
+            },
+            { onConflict: "media_upload_id" },
+          );
+        if (visualError) throw visualError;
+      }
+      visualEvidence = (observations ?? [])
+        .map(
+          (item) =>
+            `${item.type}: ${item.text}${item.needs_confirmation ? " (needs owner confirmation)" : ""}`,
+        )
+        .join("\n");
+    }
     const extracted = await extractProcessFromTranscript(
       transcript.transcript_text,
       process.title,
       trace,
+      visualEvidence,
     );
     await replaceExtractedProcess(
       supabase,

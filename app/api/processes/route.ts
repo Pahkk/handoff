@@ -6,6 +6,11 @@ import { OPENAI_MODELS } from "@/lib/ai/config";
 import { ALLOWED_MEDIA_MIME_TYPES } from "@/lib/ai/media-types";
 import { extractProcessFromTranscript } from "@/lib/ai/services";
 import { replaceExtractedProcess } from "@/lib/processes";
+import {
+  FeatureUnavailableError,
+  requireFeature,
+} from "@/lib/billing/subscription";
+import { VIDEO_MIME_TYPES } from "@/lib/ai/media-types";
 
 const schema = z.object({
   title: z.string().trim().min(1).max(200),
@@ -50,6 +55,16 @@ export async function POST(request: Request) {
     );
   const { supabase, user, membership } = context;
   try {
+    if (
+      parsed.data.inputType === "media" &&
+      parsed.data.file &&
+      VIDEO_MIME_TYPES.has(parsed.data.file.type)
+    )
+      await requireFeature(
+        supabase,
+        membership.organization_id,
+        "videoLearning",
+      );
     const { data: process, error } = await supabase
       .from("processes")
       .insert({
@@ -126,6 +141,11 @@ export async function POST(request: Request) {
       ready: false,
     });
   } catch (error) {
+    if (error instanceof FeatureUnavailableError)
+      return NextResponse.json(
+        { error: error.message, code: "premium_required" },
+        { status: 402 },
+      );
     return apiError(error, "Unable to create this process.");
   }
 }

@@ -17,7 +17,13 @@ const steps = [
   "What you want to hand off",
 ];
 
-export function OnboardingForm({ firstName }: { firstName: string }) {
+export function OnboardingForm({
+  firstName,
+  nextPath = "/app/getting-started",
+}: {
+  firstName: string;
+  nextPath?: string;
+}) {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
@@ -75,7 +81,7 @@ export function OnboardingForm({ firstName }: { firstName: string }) {
         throw new Error(body.error ?? "Unable to create your workspace.");
       setReady(true);
       window.setTimeout(() => {
-        window.location.replace("/app/getting-started");
+        window.location.replace(nextPath);
       }, 900);
     } catch (caught) {
       setError(

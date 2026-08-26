@@ -289,6 +289,7 @@ function sourceLabel(type: string, content: string) {
     exception: "Process exception",
     owner_answer: "Owner answer",
     role_instruction: "Role instruction",
+    call_finding: "Approved call learning",
   };
   return `${label[type] ?? "Company knowledge"} → ${content.split(/[.:]/)[0].slice(0, 80)}`;
 }

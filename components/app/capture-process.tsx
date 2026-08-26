@@ -5,13 +5,18 @@ import { useRouter } from "next/navigation";
 import {
   CheckCircle2,
   FileText,
+  Headphones,
+  Lock,
   LoaderCircle,
   Mic,
   Mic2,
+  MonitorUp,
   RotateCcw,
   Square,
-  UploadCloud,
+  Video,
 } from "lucide-react";
+import { hasFeature, type PlanId } from "@/lib/billing/plans";
+import { PremiumBadge, UpgradeModal } from "@/components/app/upgrade-modal";
 import { showAppToast } from "@/lib/client-toast";
 import { createClient } from "@/lib/supabase/client";
 
@@ -32,22 +37,28 @@ export function CaptureProcess({
   roles,
   initial,
   returnTo,
+  plan,
 }: {
   roles: Role[];
   initial?: InitialCapture;
   returnTo: string;
+  plan: PlanId;
 }) {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const secondaryStreamRef = useRef<MediaStream | null>(null);
   const recordingTimerRef = useRef<number | null>(null);
   const recordingChunksRef = useRef<Blob[]>([]);
   const discardRecordingRef = useRef(false);
-  const [mode, setMode] = useState<"media" | "text" | "voice">("text");
+  const [mode, setMode] = useState<
+    "text" | "voice" | "audio" | "video" | "screen"
+  >("text");
   const [file, setFile] = useState<File | null>(null);
   const [recording, setRecording] = useState(false);
   const [recordingSeconds, setRecordingSeconds] = useState(0);
+  const [upgradeOpen, setUpgradeOpen] = useState(false);
   const [form, setForm] = useState({
     title: initial?.title ?? "",
     description: initial?.description ?? "",
@@ -66,6 +77,9 @@ export function CaptureProcess({
     "Uploading recording",
     ...(file?.type.startsWith("video/") ? ["Extracting audio"] : []),
     "Transcribing recording",
+    ...(file?.type.startsWith("video/")
+      ? ["Understanding the visual workflow"]
+      : []),
     "Finding steps and rules",
     "Preparing your process",
   ];
@@ -80,10 +94,21 @@ export function CaptureProcess({
       window.clearInterval(recordingTimerRef.current);
     recordingTimerRef.current = null;
     streamRef.current?.getTracks().forEach((track) => track.stop());
+    secondaryStreamRef.current?.getTracks().forEach((track) => track.stop());
     streamRef.current = null;
+    secondaryStreamRef.current = null;
   }
 
-  function changeMode(nextMode: "media" | "text" | "voice") {
+  function changeMode(
+    nextMode: "text" | "voice" | "audio" | "video" | "screen",
+  ) {
+    if (
+      (nextMode === "video" && !hasFeature(plan, "videoLearning")) ||
+      (nextMode === "screen" && !hasFeature(plan, "screenRecording"))
+    ) {
+      setUpgradeOpen(true);
+      return;
+    }
     if (recording) cancelVoiceRecording();
     setMode(nextMode);
     setError("");
@@ -158,6 +183,89 @@ export function CaptureProcess({
     }
   }
 
+  async function startScreenRecording() {
+    setError("");
+    if (!navigator.mediaDevices?.getDisplayMedia || !window.MediaRecorder) {
+      setError(
+        "Screen recording isn't supported in this browser. Upload a video instead.",
+      );
+      return;
+    }
+    try {
+      const display = await navigator.mediaDevices.getDisplayMedia({
+        video: true,
+        audio: true,
+      });
+      let microphone: MediaStream | null = null;
+      if (!display.getAudioTracks().length) {
+        microphone = await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
+      streamRef.current = display;
+      secondaryStreamRef.current = microphone;
+      const combined = new MediaStream([
+        ...display.getVideoTracks(),
+        ...(display.getAudioTracks().length
+          ? display.getAudioTracks()
+          : (microphone?.getAudioTracks() ?? [])),
+      ]);
+      const preferredTypes = [
+        "video/webm;codecs=vp9,opus",
+        "video/webm;codecs=vp8,opus",
+        "video/mp4",
+        "video/webm",
+      ];
+      const selectedType = preferredTypes.find((type) =>
+        MediaRecorder.isTypeSupported(type),
+      );
+      const recorder = new MediaRecorder(
+        combined,
+        selectedType ? { mimeType: selectedType } : undefined,
+      );
+      recorderRef.current = recorder;
+      recordingChunksRef.current = [];
+      discardRecordingRef.current = false;
+      setFile(null);
+      setRecordingSeconds(0);
+      recorder.ondataavailable = (event) => {
+        if (event.data.size) recordingChunksRef.current.push(event.data);
+      };
+      recorder.onstop = () => {
+        const chunks = recordingChunksRef.current;
+        const discard = discardRecordingRef.current;
+        releaseRecorder();
+        setRecording(false);
+        if (discard || !chunks.length) return;
+        const mimeType = recorder.mimeType.split(";")[0] || "video/webm";
+        const extension = mimeType === "video/mp4" ? "mp4" : "webm";
+        setFile(
+          new File(chunks, `screen-workflow.${extension}`, {
+            type: mimeType,
+            lastModified: Date.now(),
+          }),
+        );
+      };
+      recorder.onerror = () => {
+        releaseRecorder();
+        setRecording(false);
+        setError("Opryn couldn't finish this screen recording. Try again.");
+      };
+      display.getVideoTracks()[0]?.addEventListener("ended", () => {
+        if (recorder.state === "recording") recorder.stop();
+      });
+      recorder.start(250);
+      setRecording(true);
+      recordingTimerRef.current = window.setInterval(
+        () => setRecordingSeconds((seconds) => seconds + 1),
+        1000,
+      );
+    } catch {
+      releaseRecorder();
+      setError(
+        "Screen or microphone access was canceled. Allow access, then try again.",
+      );
+    }
+  }
+
   function stopVoiceRecording() {
     if (recorderRef.current?.state === "recording") recorderRef.current.stop();
   }
@@ -190,6 +298,7 @@ export function CaptureProcess({
       "Uploading recording",
       ...(job.isVideo ? ["Extracting audio"] : []),
       "Transcribing recording",
+      ...(job.isVideo ? ["Understanding the visual workflow"] : []),
       "Finding steps and rules",
       "Preparing your process",
     ];
@@ -238,7 +347,7 @@ export function CaptureProcess({
     try {
       if (mode !== "text" && !file)
         throw new Error(
-          mode === "voice"
+          mode === "voice" || mode === "screen"
             ? "Record your explanation before continuing."
             : "Choose a recording to upload.",
         );
@@ -370,7 +479,7 @@ export function CaptureProcess({
         <p className="mt-1 text-sm text-[#718095]">
           Type it, say it out loud, or upload a recording you already made.
         </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <ModeButton
             active={mode === "text"}
             onClick={() => changeMode("text")}
@@ -386,20 +495,42 @@ export function CaptureProcess({
             note="Talk Opryn through it"
           />
           <ModeButton
-            active={mode === "media"}
-            onClick={() => changeMode("media")}
-            icon={<UploadCloud className="size-5" />}
-            title="Upload recording"
-            note="Video or audio"
+            active={mode === "audio"}
+            onClick={() => changeMode("audio")}
+            icon={<Headphones className="size-5" />}
+            title="Upload audio"
+            note="MP3, WAV, M4A, or WEBM"
+          />
+          <ModeButton
+            active={mode === "video"}
+            onClick={() => changeMode("video")}
+            icon={<Video className="size-5" />}
+            title="Upload video"
+            note="Let Opryn watch the workflow"
+            premium
+            locked={!hasFeature(plan, "videoLearning")}
+          />
+          <ModeButton
+            active={mode === "screen"}
+            onClick={() => changeMode("screen")}
+            icon={<MonitorUp className="size-5" />}
+            title="Record my screen"
+            note="Capture a workflow as it happens"
+            premium
+            locked={!hasFeature(plan, "screenRecording")}
           />
         </div>
-        {mode === "media" ? (
+        {mode === "audio" || mode === "video" ? (
           <div className="mt-5">
             <input
               ref={fileRef}
               className="sr-only"
               type="file"
-              accept=".mp4,.mov,.webm,.mp3,.wav,.m4a,audio/*,video/*"
+              accept={
+                mode === "video"
+                  ? ".mp4,.mov,.webm,video/mp4,video/quicktime,video/webm"
+                  : ".mp3,.wav,.m4a,.webm,audio/*"
+              }
               onChange={(event) => {
                 setFile(event.target.files?.[0] ?? null);
                 setRetryJob(null);
@@ -411,12 +542,22 @@ export function CaptureProcess({
               onClick={() => fileRef.current?.click()}
               className="flex min-h-40 w-full flex-col items-center justify-center rounded-xl border border-dashed border-[#bcc8d7] bg-[#fafbfd] px-5 text-center hover:border-[#7893e5] hover:bg-[#f7f9ff]"
             >
-              <Mic2 className="size-6 text-[#3158d8]" />
+              {mode === "video" ? (
+                <Video className="size-6 text-[#3158d8]" />
+              ) : (
+                <Mic2 className="size-6 text-[#3158d8]" />
+              )}
               <span className="mt-3 text-sm font-semibold">
-                {file ? file.name : "Choose a video or audio recording"}
+                {file
+                  ? file.name
+                  : mode === "video"
+                    ? "Choose a process video"
+                    : "Choose an audio explanation"}
               </span>
               <span className="mt-1 text-xs text-[#7a8698]">
-                MP4, MOV, WEBM, MP3, WAV, or M4A · up to 25 MB
+                {mode === "video"
+                  ? "MP4, MOV, or WEBM · up to 25 MB"
+                  : "MP3, WAV, M4A, or WEBM · up to 25 MB"}
               </span>
               {file ? (
                 <span className="mt-2 text-xs font-medium text-[#3158d8]">
@@ -445,13 +586,25 @@ export function CaptureProcess({
               <button
                 type="button"
                 onClick={() =>
-                  recording ? stopVoiceRecording() : void startVoiceRecording()
+                  recording
+                    ? stopVoiceRecording()
+                    : mode === "screen"
+                      ? void startScreenRecording()
+                      : void startVoiceRecording()
                 }
-                aria-label={recording ? "Stop recording" : "Start recording"}
+                aria-label={
+                  recording
+                    ? "Stop recording"
+                    : mode === "screen"
+                      ? "Start screen recording"
+                      : "Start recording"
+                }
                 className={`grid size-16 place-items-center rounded-full text-white shadow-[0_12px_28px_rgba(49,88,216,.24)] transition hover:scale-105 active:scale-95 ${recording ? "bg-[#c14c55]" : "bg-[#3158d8]"}`}
               >
                 {recording ? (
                   <Square className="size-5" fill="currentColor" />
+                ) : mode === "screen" ? (
+                  <MonitorUp className="size-6" />
                 ) : (
                   <Mic className="size-6" />
                 )}
@@ -460,15 +613,21 @@ export function CaptureProcess({
                 {recording
                   ? "Explain the process as if you were training someone"
                   : file
-                    ? "Your voice explanation is ready"
-                    : "Tap to start explaining"}
+                    ? mode === "screen"
+                      ? "Your screen recording is ready"
+                      : "Your voice explanation is ready"
+                    : mode === "screen"
+                      ? "Share a screen or browser tab"
+                      : "Tap to start explaining"}
               </p>
               <p className="mt-1 text-xs text-[#7a8698]">
                 {recording
                   ? "Include the steps, decisions, exceptions, and approvals."
                   : file
                     ? "Opryn will transcribe this and prepare a process for review."
-                    : "Speak naturally. You do not need a script."}
+                    : mode === "screen"
+                      ? "Explain what you are doing while Opryn watches the workflow."
+                      : "Speak naturally. You do not need a script."}
               </p>
               <div className="mt-6 flex h-12 w-full max-w-lg items-center justify-center gap-[3px] overflow-hidden rounded-xl bg-white px-4 shadow-sm">
                 {Array.from({ length: 36 }).map((_, index) => (
@@ -503,7 +662,11 @@ export function CaptureProcess({
                     </span>
                     <button
                       type="button"
-                      onClick={() => void startVoiceRecording()}
+                      onClick={() =>
+                        mode === "screen"
+                          ? void startScreenRecording()
+                          : void startVoiceRecording()
+                      }
                       className="inline-flex items-center gap-1 text-xs font-semibold text-[#718095] hover:text-[#344052]"
                     >
                       <RotateCcw className="size-3.5" /> Record again
@@ -540,6 +703,7 @@ export function CaptureProcess({
           {recording ? "Finish recording first" : "Teach Opryn"}
         </button>
       </div>
+      <UpgradeModal open={upgradeOpen} onClose={() => setUpgradeOpen(false)} />
     </form>
   );
 }
@@ -555,21 +719,26 @@ function ModeButton({
   icon,
   title,
   note,
+  premium = false,
+  locked = false,
 }: {
   active: boolean;
   onClick: () => void;
   icon: React.ReactNode;
   title: string;
   note: string;
+  premium?: boolean;
+  locked?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-xl border p-4 text-left transition ${active ? "border-[#7390e8] bg-[#f3f6ff] ring-2 ring-[#3158d8]/10" : "border-[#dfe5ed] hover:bg-[#fafbfd]"}`}
+      className={`relative rounded-xl border p-4 text-left transition ${active ? "border-[#7390e8] bg-[#f3f6ff] ring-2 ring-[#3158d8]/10" : "border-[#dfe5ed] hover:bg-[#fafbfd]"}`}
     >
+      {premium ? <PremiumBadge className="absolute right-3 top-3" /> : null}
       <span className={active ? "text-[#3158d8]" : "text-[#69758a]"}>
-        {icon}
+        {locked ? <Lock className="size-5" /> : icon}
       </span>
       <span className="mt-3 block text-sm font-semibold">{title}</span>
       <span className="mt-1 block text-xs text-[#7a8698]">{note}</span>

@@ -7,6 +7,8 @@ import {
   extractedProcessSchema,
   processRecommendationsSchema,
   suggestedRuleSchema,
+  callLearningSchema,
+  videoAnalysisSchema,
   type ExtractedProcess,
   type ProcessRecommendations,
 } from "@/lib/ai/schemas";
@@ -50,6 +52,7 @@ export async function extractProcessFromTranscript(
   transcript: string,
   preferredTitle?: string,
   trace: AITrace = {},
+  visualEvidence?: string,
 ): Promise<ExtractedProcess> {
   logAI("Starting process extraction", trace, {
     model: OPENAI_MODELS.text,
@@ -58,8 +61,8 @@ export async function extractProcessFromTranscript(
     model: OPENAI_MODELS.text,
     reasoning: OPENAI_TEXT_REASONING,
     instructions:
-      "Turn an owner's explanation into a practical company process. Extract only what they actually said. Never invent rules, thresholds, tools, or exceptions. Put every material uncertainty in clarification_questions. Keep language plain and useful to a small-business employee.",
-    input: `Preferred title: ${preferredTitle || "Choose a clear title"}\n\nOWNER EXPLANATION:\n${transcript}`,
+      "Turn an owner's explanation into a practical company process. Extract only what the transcript or supplied visual observations directly support. Never invent rules, thresholds, tools, or exceptions. Visual rule candidates are observations, not official policy: put them in clarification_questions instead of rules unless the owner explicitly states them. Put every material uncertainty in clarification_questions. Keep language plain and useful to a small-business employee.",
+    input: `Preferred title: ${preferredTitle || "Choose a clear title"}\n\nOWNER EXPLANATION:\n${transcript}\n\nSELECTED VISUAL OBSERVATIONS:\n${visualEvidence || "No visual observations supplied."}`,
     text: { format: zodTextFormat(extractedProcessSchema, "opryn_process") },
   });
   if (!response.output_parsed)
@@ -69,6 +72,80 @@ export async function extractProcessFromTranscript(
     model: OPENAI_MODELS.text,
   });
   return extracted;
+}
+
+export async function analyzeCallTranscript(
+  transcript: string,
+  callType: string,
+  trace: AITrace = {},
+) {
+  logAI("Starting call analysis", trace, { model: OPENAI_MODELS.text });
+  const response = await getOpenAI().responses.parse({
+    model: OPENAI_MODELS.text,
+    reasoning: OPENAI_TEXT_REASONING,
+    instructions:
+      "Analyze an authorized business-call transcript as a learning input for the business owner. Find reusable customer questions, sales objections, successful responses, possible company rules, processes, exceptions, repeated answers, and anonymized training examples. Never treat an observed behavior as approved policy. Do not include names, phone numbers, email addresses, account numbers, payment details, passwords, authentication codes, medical information, or unrelated personal details. Evidence must be a short paraphrase, not a long quote. Set needs_clarification when a possible rule, exception, identity, or context is uncertain. Return only findings genuinely supported by this call.",
+    input: `CALL TYPE: ${callType}\n\nREDACTED TRANSCRIPT:\n${redactSensitiveCallText(transcript)}`,
+    text: { format: zodTextFormat(callLearningSchema, "opryn_call_learning") },
+  });
+  if (!response.output_parsed)
+    throw new Error("Opryn returned invalid call findings.");
+  logAI("Call analysis complete", trace, { model: OPENAI_MODELS.text });
+  return callLearningSchema.parse(response.output_parsed);
+}
+
+export async function analyzeVideoFrames(
+  transcript: string,
+  frames: string[],
+  trace: AITrace = {},
+) {
+  if (!frames.length) return { observations: [] };
+  logAI("Starting visual workflow analysis", trace, {
+    model: OPENAI_MODELS.text,
+  });
+  const response = await getOpenAI().responses.parse({
+    model: OPENAI_MODELS.text,
+    reasoning: OPENAI_TEXT_REASONING,
+    instructions:
+      "Inspect selected frames from a business workflow recording alongside its transcript. Identify only visible software actions, decision points, possible exceptions, responsibilities, and possible rule candidates. Do not infer hidden actions. A visual pattern is an observation, never official company policy. Mark every rule candidate as needing confirmation. Keep observations concise and avoid personal or customer information.",
+    input: [
+      {
+        role: "user",
+        content: [
+          { type: "input_text", text: `TRANSCRIPT:\n${transcript}` },
+          ...frames.map((image_url) => ({
+            type: "input_image" as const,
+            image_url,
+            detail: "low" as const,
+          })),
+        ],
+      },
+    ],
+    text: {
+      format: zodTextFormat(videoAnalysisSchema, "opryn_video_analysis"),
+    },
+  });
+  if (!response.output_parsed)
+    throw new Error("Opryn returned invalid visual observations.");
+  logAI("Visual workflow analysis complete", trace, {
+    model: OPENAI_MODELS.text,
+  });
+  return videoAnalysisSchema.parse(response.output_parsed);
+}
+
+export function redactSensitiveCallText(value: string) {
+  return value
+    .replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[REDACTED SSN]")
+    .replace(/\b(?:\d[ -]*?){13,19}\b/g, "[REDACTED PAYMENT NUMBER]")
+    .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, "[REDACTED EMAIL]")
+    .replace(
+      /\b(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g,
+      "[REDACTED PHONE]",
+    )
+    .replace(
+      /\b(?:password|passcode|verification code|authentication code)\s*(?:is|:)?\s*\S+/gi,
+      "$1 [REDACTED]",
+    );
 }
 
 export async function embedKnowledge(contents: string[]) {

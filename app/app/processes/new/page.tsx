@@ -2,6 +2,7 @@ import { CaptureProcess } from "@/components/app/capture-process";
 import { PageHeading } from "@/components/app/page-heading";
 import { requireAdminContext } from "@/lib/app-context";
 import { safeAppReturnPath } from "@/lib/return-path";
+import { getOrganizationPlan } from "@/lib/billing/subscription";
 import { createClient } from "@/lib/supabase/server";
 export default async function NewProcessPage({
   searchParams,
@@ -10,6 +11,10 @@ export default async function NewProcessPage({
 }) {
   const context = await requireAdminContext();
   const supabase = await createClient();
+  const subscription = await getOrganizationPlan(
+    supabase,
+    context.organization.id,
+  );
   const { recommendation: recommendationId, returnTo } = await searchParams;
   const returnPath = safeAppReturnPath(
     returnTo,
@@ -39,6 +44,7 @@ export default async function NewProcessPage({
       />
       <CaptureProcess
         roles={roles ?? []}
+        plan={subscription.plan}
         returnTo={returnPath}
         initial={
           recommendation

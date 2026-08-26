@@ -62,7 +62,53 @@ export const processRecommendationsSchema = z.object({
     .max(6),
 });
 
+export const callLearningSchema = z.object({
+  summary: z.string().min(1).max(3000),
+  findings: z
+    .array(
+      z.object({
+        type: z.enum([
+          "customer_question",
+          "sales_objection",
+          "successful_response",
+          "company_rule",
+          "process",
+          "exception",
+          "training_example",
+          "repeated_answer",
+        ]),
+        title: z.string().min(1).max(250),
+        content: z.string().min(1).max(10000),
+        evidence: z.string().max(2000),
+        confidence: z.number().min(0).max(1),
+        needs_clarification: z.boolean(),
+      }),
+    )
+    .max(40),
+});
+
+export const videoAnalysisSchema = z.object({
+  observations: z
+    .array(
+      z.object({
+        type: z.enum([
+          "software_action",
+          "decision_point",
+          "rule_candidate",
+          "exception",
+          "responsibility",
+        ]),
+        text: z.string().min(1).max(2000),
+        confidence: z.number().min(0).max(1),
+        needs_confirmation: z.boolean(),
+      }),
+    )
+    .max(30),
+});
+
 export type ExtractedProcess = z.infer<typeof extractedProcessSchema>;
 export type ProcessRecommendations = z.infer<
   typeof processRecommendationsSchema
 >["recommendations"];
+export type CallLearning = z.infer<typeof callLearningSchema>;
+export type VideoAnalysis = z.infer<typeof videoAnalysisSchema>;

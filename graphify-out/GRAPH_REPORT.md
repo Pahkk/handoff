@@ -1,16 +1,16 @@
-# Graph Report - handoff  (2026-08-25)
+# Graph Report - handoff  (2026-08-26)
 
 ## Corpus Check
-- 111 files · ~45,954 words
+- 131 files · ~56,142 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 434 nodes · 809 edges · 30 communities (26 shown, 4 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 17 edges (avg confidence: 0.8)
+- 523 nodes · 1097 edges · 25 communities (22 shown, 3 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 36 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b5bbff8f`
+- Built from commit: `70cf9f0a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -31,66 +31,61 @@
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 22|Community 22]]
-- [[_COMMUNITY_Community 23|Community 23]]
-- [[_COMMUNITY_Community 24|Community 24]]
-- [[_COMMUNITY_Community 25|Community 25]]
-- [[_COMMUNITY_Community 26|Community 26]]
-- [[_COMMUNITY_Community 27|Community 27]]
 - [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `getRequestContext()` - 40 edges
-2. `createClient()` - 35 edges
-3. `apiError()` - 29 edges
-4. `requireAdminContext()` - 18 edges
-5. `requireAppContext()` - 16 edges
-6. `compilerOptions` - 16 edges
-7. `PageHeading()` - 14 edges
-8. `POST()` - 10 edges
-9. `showAppToast()` - 10 edges
-10. `getOpenAI()` - 9 edges
+1. `getRequestContext()` - 52 edges
+2. `createClient()` - 38 edges
+3. `apiError()` - 31 edges
+4. `requireAdminContext()` - 22 edges
+5. `getOrganizationPlan()` - 18 edges
+6. `requireFeature()` - 17 edges
+7. `PageHeading()` - 16 edges
+8. `requireAppContext()` - 16 edges
+9. `compilerOptions` - 16 edges
+10. `POST()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ProductLayout()` --calls--> `requireAppContext()`  [INFERRED]
-  app/app/layout.tsx → lib/app-context.ts
+- `POST()` --calls--> `getRequestContext()`  [INFERRED]
+  app/api/calls/[id]/learn/route.ts → lib/api.ts
+- `POST()` --calls--> `getRequestContext()`  [INFERRED]
+  app/api/processes/[id]/learn/route.ts → lib/api.ts
+- `CallReviewPage()` --calls--> `requireFeature()`  [INFERRED]
+  app/app/calls/[id]/page.tsx → lib/billing/subscription.ts
+- `DashboardPage()` --calls--> `hasFeature()`  [INFERRED]
+  app/app/page.tsx → lib/billing/plans.ts
 - `RolePage()` --calls--> `requireAdminContext()`  [INFERRED]
   app/app/roles/[id]/page.tsx → lib/app-context.ts
-- `InvitePage()` --calls--> `createClient()`  [EXTRACTED]
-  app/invite/[token]/page.tsx → lib/supabase/server.ts
-- `POST()` --calls--> `apiError()`  [EXTRACTED]
-  app/api/ask/route.ts → lib/api.ts
-- `POST()` --calls--> `getRequestContext()`  [EXTRACTED]
-  app/api/ask/route.ts → lib/api.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (30 total, 4 thin omitted)
+## Communities (25 total, 3 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (41): AccountControls(), AuthContext, AuthContextValue, AuthProvider(), useAuth(), after, Audience(), audiences (+33 more)
+Cohesion: 0.05
+Nodes (49): annualBillingConfigured(), billingConfigured(), AccountControls(), AuthContext, AuthContextValue, AuthProvider(), useAuth(), after (+41 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.06
-Nodes (35): allowScripts, ffmpeg-static@5.3.0, dependencies, ffmpeg-static, lucide-react, next, openai, react (+27 more)
+Cohesion: 0.05
+Nodes (36): allowScripts, ffmpeg-static@5.3.0, dependencies, ffmpeg-static, lucide-react, next, openai, react (+28 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.07
-Nodes (48): OPENAI_MODELS, OPENAI_TEXT_REASONING, extractProcessFromTranscript(), logAI(), suggestRuleFromOwnerAnswer(), transcribeAudio(), POST(), schema (+40 more)
+Nodes (45): analyzeEmployeeQuestionImage(), answerCompanyQuestion(), embedKnowledge(), EmployeeQuestionImage, RetrievedKnowledge, suggestRuleFromOwnerAnswer(), POST(), schema (+37 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.12
-Nodes (27): getOpenAI(), companyAnswerSchema, employeeImageCaseSchema, ExtractedProcess, extractedProcessSchema, ProcessRecommendations, processRecommendationsSchema, suggestedRuleSchema (+19 more)
+Cohesion: 0.07
+Nodes (54): OPENAI_MODELS, OPENAI_TEXT_REASONING, extractVideoFrames(), inputExtensions, PreparedAudio, prepareTranscriptionAudio(), runFfmpeg(), safeFileName() (+46 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.10
-Nodes (11): CaptureProcess(), formatDuration(), InitialCapture, Role, textStages, AuthForm(), Mode, InviteAccept() (+3 more)
+Cohesion: 0.08
+Nodes (18): CallPrivacy(), CallRow(), CallsLocked(), CallUploader(), CaptureProcess(), formatDuration(), InitialCapture, Role (+10 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.40
@@ -101,16 +96,20 @@ Cohesion: 0.50
 Nodes (4): isSubmission(), POST(), requiredFields, Submission
 
 ### Community 15 - "Community 15"
-Cohesion: 0.09
-Nodes (37): POST(), schema, metadata, AppShell(), ProductLayout(), DashboardPage(), EmployeeHome(), greeting() (+29 more)
+Cohesion: 0.08
+Nodes (42): POST(), schema, metadata, BusinessDiscoveryForm(), CallReview(), Finding, ProductLayout(), DashboardPage() (+34 more)
+
+### Community 16 - "Community 16"
+Cohesion: 0.50
+Nodes (3): Opryn deployment configuration, Stripe billing, Team invitation emails
 
 ### Community 19 - "Community 19"
-Cohesion: 0.20
-Nodes (7): Member, memberName(), MemberNode(), RankedMember, Role, TeamManager(), trainingPercent()
+Cohesion: 0.05
+Nodes (32): AppShell(), items, Props, AskOpryn(), AttachedImage, canvasBlob(), Message, prepareQuestionImage() (+24 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.24
-Nodes (9): inputExtensions, PreparedAudio, prepareTranscriptionAudio(), runFfmpeg(), safeFileName(), ALLOWED_MEDIA_MIME_TYPES, AUDIO_MIME_TYPES, VIDEO_MIME_TYPES (+1 more)
+Cohesion: 0.11
+Nodes (23): BillingSettings(), Props, BillingInterval, isPlanId(), PLAN_DETAILS, PLAN_FEATURES, PlanId, getAppUrl() (+15 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.18
@@ -120,49 +119,29 @@ Nodes (8): groupChunks(), KnowledgeChunk, KnowledgeGap, KnowledgeProcess, Proces
 Cohesion: 0.24
 Nodes (4): OnboardingForm(), steps, getOptionalAppContext, OnboardingPage()
 
-### Community 23 - "Community 23"
-Cohesion: 0.28
-Nodes (7): AskOpryn(), AttachedImage, canvasBlob(), Message, prepareQuestionImage(), Prompt, readDataUrl()
-
-### Community 24 - "Community 24"
-Cohesion: 0.22
-Nodes (5): BusinessDiscoveryForm(), CreateRole(), OwnerAnswer(), Invite, showAppToast()
-
-### Community 25 - "Community 25"
-Cohesion: 0.22
-Nodes (5): Clarification, ProcessData, ProcessReview(), Rule, Step
-
-### Community 26 - "Community 26"
-Cohesion: 0.33
-Nodes (4): LegalDocument(), LegalSection(), metadata, metadata
-
-### Community 27 - "Community 27"
-Cohesion: 0.29
-Nodes (4): Assignment, Person, Process, TrainingManager()
-
 ### Community 28 - "Community 28"
 Cohesion: 0.47
-Nodes (4): items, Props, AppToastMessage, readAppToast()
+Nodes (7): recommendProcesses(), fallbackRecommendations(), prepareRecommendations(), POST(), schema, POST(), schema
 
 ## Knowledge Gaps
-- **125 isolated node(s):** `allowedImageTypes`, `imageSchema`, `schema`, `requiredFields`, `Submission` (+120 more)
+- **140 isolated node(s):** `allowedImageTypes`, `imageSchema`, `schema`, `schema`, `schema` (+135 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `createClient()` connect `Community 15` to `Community 3`, `Community 4`, `Community 5`?**
-  _High betweenness centrality (0.260) - this node is a cross-community bridge._
-- **Why does `getRequestContext()` connect `Community 3` to `Community 4`, `Community 15`?**
-  _High betweenness centrality (0.143) - this node is a cross-community bridge._
-- **Why does `createClient()` connect `Community 5` to `Community 0`, `Community 28`?**
-  _High betweenness centrality (0.125) - this node is a cross-community bridge._
-- **Are the 6 inferred relationships involving `getRequestContext()` (e.g. with `DELETE()` and `PATCH()`) actually correct?**
-  _`getRequestContext()` has 6 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `createClient()` connect `Community 15` to `Community 3`, `Community 28`, `Community 5`?**
+  _High betweenness centrality (0.159) - this node is a cross-community bridge._
+- **Why does `getRequestContext()` connect `Community 3` to `Community 28`, `Community 4`, `Community 20`, `Community 15`?**
+  _High betweenness centrality (0.121) - this node is a cross-community bridge._
+- **Why does `createClient()` connect `Community 5` to `Community 0`, `Community 19`?**
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+- **Are the 8 inferred relationships involving `getRequestContext()` (e.g. with `POST()` and `POST()`) actually correct?**
+  _`getRequestContext()` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 6 inferred relationships involving `apiError()` (e.g. with `DELETE()` and `PATCH()`) actually correct?**
   _`apiError()` has 6 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 3 inferred relationships involving `requireAppContext()` (e.g. with `ProductLayout()` and `DashboardPage()`) actually correct?**
-  _`requireAppContext()` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `allowedImageTypes`, `imageSchema`, `schema` to the rest of the system?**
-  _125 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Are the 2 inferred relationships involving `requireAdminContext()` (e.g. with `CallReviewPage()` and `RolePage()`) actually correct?**
+  _`requireAdminContext()` has 2 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 2 inferred relationships involving `getOrganizationPlan()` (e.g. with `ProductLayout()` and `DashboardPage()`) actually correct?**
+  _`getOrganizationPlan()` has 2 INFERRED edges - model-reasoned connections that need verification._

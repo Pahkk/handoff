@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getRequestContext } from "@/lib/api";
 import { deliverWorkspaceInvite } from "@/lib/invitations";
+import { getTeamLimit } from "@/lib/billing/plans";
+import { getOrganizationPlan } from "@/lib/billing/subscription";
 const schema = z.object({
   email: z.string().trim().email().max(320),
   roleId: z.string().uuid().nullable().optional(),
@@ -19,6 +21,29 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   const organizationId = context.membership.organization_id;
+  const [subscription, members, invites] = await Promise.all([
+    getOrganizationPlan(context.supabase, organizationId),
+    context.supabase
+      .from("organization_members")
+      .select("id", { count: "exact", head: true })
+      .eq("organization_id", organizationId),
+    context.supabase
+      .from("organization_invites")
+      .select("id", { count: "exact", head: true })
+      .eq("organization_id", organizationId)
+      .eq("status", "pending"),
+  ]);
+  const employeeSeats =
+    Math.max(0, (members.count ?? 1) - 1) + (invites.count ?? 0);
+  const teamLimit = getTeamLimit(subscription.plan);
+  if (employeeSeats >= teamLimit)
+    return NextResponse.json(
+      {
+        error: `${subscription.plan === "premium" ? "Premium" : "Core"} includes up to ${teamLimit} employees. Upgrade or remove a pending invite to add another teammate.`,
+        code: "team_limit_reached",
+      },
+      { status: 402 },
+    );
   if (parsed.data.roleId) {
     const { data: role } = await context.supabase
       .from("roles")

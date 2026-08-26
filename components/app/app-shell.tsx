@@ -16,6 +16,7 @@ import {
   Menu,
   MessageCircleQuestion,
   Network,
+  PhoneCall,
   Settings,
   Users,
   X,
@@ -26,6 +27,7 @@ import {
   type AppToastMessage,
 } from "@/lib/client-toast";
 import { createClient } from "@/lib/supabase/client";
+import { hasFeature, type PlanId } from "@/lib/billing/plans";
 
 const items = [
   { href: "/app", label: "Home", icon: Home },
@@ -44,6 +46,13 @@ const items = [
   },
   { href: "/app/roles", label: "Roles", icon: BookOpenCheck },
   { href: "/app/ask", label: "Ask Opryn", icon: MessageCircleQuestion },
+  {
+    href: "/app/calls",
+    label: "Calls",
+    icon: PhoneCall,
+    admin: true,
+    premium: true,
+  },
   { href: "/app/team", label: "Team", icon: Users, admin: true },
   {
     href: "/app/knowledge-gaps",
@@ -60,6 +69,7 @@ type Props = {
   user: { fullName: string; email: string };
   isAdmin: boolean;
   unreadCount: number;
+  plan: PlanId;
 };
 export function AppShell({
   children,
@@ -67,6 +77,7 @@ export function AppShell({
   user,
   isAdmin,
   unreadCount,
+  plan,
 }: Props) {
   const pathname = usePathname();
   const router = useRouter();
@@ -167,6 +178,11 @@ export function AppShell({
               >
                 <Icon className="size-[17px]" />
                 {item.label}
+                {item.premium && !hasFeature(plan, "callLearning") ? (
+                  <span className="ml-auto rounded-full bg-[#eaf7f1] px-2 py-0.5 text-[9px] font-bold uppercase tracking-[.08em] text-[#177257]">
+                    Premium
+                  </span>
+                ) : null}
               </Link>
             );
           })}
@@ -225,6 +241,11 @@ export function AppShell({
                   >
                     <Icon className="size-[18px]" />
                     {item.label}
+                    {item.premium && !hasFeature(plan, "callLearning") ? (
+                      <span className="ml-auto rounded-full bg-[#eaf7f1] px-2 py-0.5 text-[9px] font-bold uppercase text-[#177257]">
+                        Premium
+                      </span>
+                    ) : null}
                   </Link>
                 );
               })}

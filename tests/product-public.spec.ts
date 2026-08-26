@@ -103,6 +103,17 @@ test("product APIs reject unauthenticated requests without leaking details", asy
       },
     ],
     ["/api/team/invites", { email: "employee@example.com" }],
+    ["/api/billing/checkout", { plan: "premium", interval: "month" }],
+    [
+      "/api/calls",
+      {
+        title: "Test call",
+        callType: "sales",
+        originalName: "call.mp3",
+        mimeType: "audio/mpeg",
+        sizeBytes: 1000,
+      },
+    ],
   ] as const;
   for (const [url, data] of endpoints) {
     const response = await request.post(url, { data });

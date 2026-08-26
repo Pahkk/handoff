@@ -1,7 +1,7 @@
 import "server-only";
 
 import { spawn } from "node:child_process";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import ffmpegPath from "ffmpeg-static";
@@ -95,6 +95,69 @@ export async function prepareTranscriptionAudio(
   } catch (error) {
     if (error instanceof UnsupportedRecordingError) throw error;
     throw new UnsupportedRecordingError();
+  } finally {
+    await rm(workingDirectory, { recursive: true, force: true });
+  }
+}
+
+export async function extractVideoFrames(
+  buffer: Buffer,
+  mimeType: string,
+  maxFrames = 8,
+) {
+  if (!buffer.length || !VIDEO_MIME_TYPES.has(mimeType) || !ffmpegPath)
+    throw new UnsupportedRecordingError();
+  const workingDirectory = await mkdtemp(path.join(tmpdir(), "opryn-frames-"));
+  const inputPath = path.join(
+    workingDirectory,
+    `input.${inputExtensions[mimeType] ?? "video"}`,
+  );
+  try {
+    await writeFile(inputPath, buffer);
+    await runFfmpeg([
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-nostdin",
+      "-i",
+      inputPath,
+      "-vf",
+      "select='gt(scene,0.22)',scale=960:-2",
+      "-vsync",
+      "vfr",
+      "-frames:v",
+      String(Math.min(maxFrames, 12)),
+      path.join(workingDirectory, "frame-%02d.jpg"),
+    ]);
+    let names = (await readdir(workingDirectory))
+      .filter((name) => name.endsWith(".jpg"))
+      .sort();
+    if (!names.length) {
+      await runFfmpeg([
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-i",
+        inputPath,
+        "-vf",
+        "fps=1/20,scale=960:-2",
+        "-frames:v",
+        String(Math.min(maxFrames, 12)),
+        path.join(workingDirectory, "frame-%02d.jpg"),
+      ]);
+      names = (await readdir(workingDirectory))
+        .filter((name) => name.endsWith(".jpg"))
+        .sort();
+    }
+    return Promise.all(
+      names
+        .slice(0, maxFrames)
+        .map(
+          async (name) =>
+            `data:image/jpeg;base64,${(await readFile(path.join(workingDirectory, name))).toString("base64")}`,
+        ),
+    );
   } finally {
     await rm(workingDirectory, { recursive: true, force: true });
   }

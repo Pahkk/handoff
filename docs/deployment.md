@@ -37,3 +37,32 @@ http://localhost:3000/invite/**
 For reliable production delivery, configure custom SMTP in Supabase. If email
 delivery is unavailable or rate limited, Opryn still returns a one-time secure
 link that an owner can copy and send manually.
+
+## Stripe billing
+
+Create recurring monthly Prices for Opryn Core ($99) and Opryn Premium ($249),
+then configure these server-side Vercel variables:
+
+```env
+STRIPE_SECRET_KEY=<secret>
+STRIPE_WEBHOOK_SECRET=<secret>
+STRIPE_CORE_MONTHLY_PRICE_ID=price_...
+STRIPE_PREMIUM_MONTHLY_PRICE_ID=price_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
+NEXT_PUBLIC_SITE_URL=https://www.opryn.app
+SUPABASE_SERVICE_ROLE_KEY=<secret>
+```
+
+Annual checkout stays hidden unless both annual Price IDs are configured:
+
+```env
+STRIPE_CORE_ANNUAL_PRICE_ID=price_...
+STRIPE_PREMIUM_ANNUAL_PRICE_ID=price_...
+```
+
+Register `https://www.opryn.app/api/billing/webhook` as a Stripe webhook and
+subscribe it to `checkout.session.completed`, `customer.subscription.created`,
+`customer.subscription.updated`, and `customer.subscription.deleted`.
+Subscription access is updated only by verified webhook events; returning from
+Checkout does not unlock Premium by itself. Configure the Stripe Customer
+Portal for payment methods, invoices, cancellation, and supported plan changes.
