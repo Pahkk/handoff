@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { ArrowRight, CheckCircle2, LoaderCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { OprynLogo } from "@/components/opryn-logo";
 
 type Mode = "login" | "signup" | "forgot" | "reset";
 
@@ -127,12 +128,10 @@ export function AuthForm({ mode }: { mode: Mode }) {
       <div className="mx-auto w-full max-w-[440px]">
         <Link
           href="/"
-          className="mb-8 flex items-center justify-center gap-2 text-xl font-semibold tracking-[-.04em] text-[#111b2e]"
+          className="mb-8 flex items-center justify-center"
+          aria-label="Opryn home"
         >
-          <span className="grid size-8 place-items-center rounded-[10px] bg-[#3158d8] text-sm font-bold text-white">
-            O
-          </span>
-          Opryn
+          <OprynLogo size="large" priority />
         </Link>
         <section
           className="rounded-[22px] border border-[#dfe5ed] bg-white p-6 shadow-[0_22px_60px_rgba(24,39,75,.08)] sm:p-8"

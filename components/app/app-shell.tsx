@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   ClipboardList,
   FileText,
+  Plus,
   GraduationCap,
   Home,
   LogOut,
@@ -28,6 +29,7 @@ import {
 } from "@/lib/client-toast";
 import { createClient } from "@/lib/supabase/client";
 import { hasFeature, type PlanId } from "@/lib/billing/plans";
+import { OprynLogo } from "@/components/opryn-logo";
 
 const items = [
   { href: "/app", label: "Home", icon: Home },
@@ -142,12 +144,10 @@ export function AppShell({
       <aside className="fixed inset-y-0 left-0 z-50 hidden w-[244px] border-r border-[#e1e6ed] bg-white lg:flex lg:flex-col">
         <Link
           href="/app"
-          className="flex h-[70px] items-center gap-2 border-b border-[#edf0f4] px-6 text-xl font-semibold tracking-[-.04em]"
+          className="flex h-[70px] items-center border-b border-[#edf0f4] px-6"
+          aria-label="Opryn dashboard"
         >
-          <span className="grid size-8 place-items-center rounded-[10px] bg-[#3158d8] text-sm font-bold text-white">
-            O
-          </span>
-          Opryn
+          <OprynLogo size="small" priority />
         </Link>
         <div className="mx-4 mt-5 flex items-center gap-3 rounded-xl border border-[#e2e7ed] p-3">
           <span className="grid size-9 place-items-center rounded-lg bg-[#edf2ff] text-[#3158d8]">
@@ -187,6 +187,22 @@ export function AppShell({
             );
           })}
         </nav>
+        {isAdmin ? (
+          <Link
+            href="/app/getting-started"
+            className="group mx-4 mb-4 rounded-2xl border border-[#dce6e1] bg-[#f3faf7] p-4 transition hover:-translate-y-0.5 hover:border-[#bcd9cc] hover:shadow-[0_10px_26px_rgba(34,104,80,.08)]"
+          >
+            <span className="rounded-full bg-[#dff3ea] px-2 py-1 text-[9px] font-bold uppercase tracking-[.09em] text-[#177257]">
+              Start here
+            </span>
+            <p className="mt-3 text-sm font-semibold text-[#27483d]">
+              Teach one process
+            </p>
+            <p className="mt-1 text-[11px] leading-5 text-[#6b8078]">
+              Capture the next task you want someone else to handle.
+            </p>
+          </Link>
+        ) : null}
         <div className="border-t border-[#edf0f4] p-4">
           <button
             onClick={() => void signOut()}
@@ -215,12 +231,13 @@ export function AppShell({
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between">
-              <span className="flex items-center gap-2 text-xl font-semibold">
-                <span className="grid size-8 place-items-center rounded-[10px] bg-[#3158d8] text-sm font-bold text-white">
-                  O
-                </span>
-                Opryn
-              </span>
+              <Link
+                href="/app"
+                onClick={() => setOpen(false)}
+                aria-label="Opryn dashboard"
+              >
+                <OprynLogo size="small" priority />
+              </Link>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
@@ -268,6 +285,14 @@ export function AppShell({
             </div>
           </div>
           <div className="relative flex items-center gap-2">
+            {isAdmin ? (
+              <Link
+                href="/app/processes/new"
+                className="mr-1 hidden min-h-10 items-center gap-2 rounded-xl bg-[#3158d8] px-4 text-xs font-semibold text-white shadow-[0_8px_20px_rgba(49,88,216,.18)] transition hover:-translate-y-0.5 hover:bg-[#2446b8] sm:inline-flex"
+              >
+                <Plus className="size-4" /> Teach Opryn
+              </Link>
+            ) : null}
             <Link
               href="/app"
               className="relative grid size-10 place-items-center rounded-lg text-[#6b7788] hover:bg-[#f2f4f7]"
@@ -306,7 +331,10 @@ export function AppShell({
             ) : null}
           </div>
         </header>
-        <main className="mx-auto w-full min-w-0 max-w-[1440px] p-4 sm:p-6 lg:p-8">
+        <main
+          key={pathname}
+          className="page-shell mx-auto w-full min-w-0 max-w-[1440px] p-4 sm:p-6 lg:p-8"
+        >
           {children}
         </main>
       </div>

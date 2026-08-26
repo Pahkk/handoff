@@ -10,6 +10,7 @@ import {
   LoaderCircle,
   Target,
 } from "lucide-react";
+import { OprynLogo } from "@/components/opryn-logo";
 
 const steps = [
   "Your business",
@@ -98,11 +99,8 @@ export function OnboardingForm({
   return (
     <main className="min-h-screen bg-[#f7f9fc] px-4 py-8 sm:py-12">
       <div className="mx-auto max-w-[720px]">
-        <div className="mb-7 flex items-center justify-center gap-2 text-xl font-semibold tracking-[-.04em]">
-          <span className="grid size-8 place-items-center rounded-[10px] bg-[#3158d8] text-sm font-bold text-white">
-            O
-          </span>
-          Opryn
+        <div className="mb-7 flex items-center justify-center">
+          <OprynLogo size="large" priority />
         </div>
         <section className="overflow-hidden rounded-[24px] border border-[#dfe5ed] bg-white shadow-[0_24px_70px_rgba(24,39,75,.08)]">
           <div className="border-b border-[#e8ecf1] bg-[#fbfcfe] px-6 py-5 sm:px-9">

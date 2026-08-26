@@ -20,13 +20,13 @@
     "semantic_hash": ""
   },
   "components/hero.tsx": {
-    "mtime": 1787610053.0417087,
-    "ast_hash": "6050940cf5a976833c9513747471a2da",
+    "mtime": 1787775905.046292,
+    "ast_hash": "d91bfb48285e6a0ce9c899f232fa98b0",
     "semantic_hash": ""
   },
   "components/navigation.tsx": {
-    "mtime": 1787774477.9372797,
-    "ast_hash": "3b2ff1bc45eeb66a3f71ef614dd36fc7",
+    "mtime": 1787775897.5491734,
+    "ast_hash": "3a1291e88dd7a2555ded7ce733c01e3c",
     "semantic_hash": ""
   },
   "components/product-sections.tsx": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "components/ui.tsx": {
-    "mtime": 1787613111.183157,
-    "ast_hash": "469bceb9c8b80c8572ac468bc3687916",
+    "mtime": 1787775904.994668,
+    "ast_hash": "bf8a84b49b814b79f1586e2d52577743",
     "semantic_hash": ""
   },
   "eslint.config.mjs": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "components/app/app-shell.tsx": {
-    "mtime": 1787774545.3819706,
-    "ast_hash": "136eb83e6febea15cfe5773d9cbf8dc1",
+    "mtime": 1787775897.4902258,
+    "ast_hash": "4a2bc70c638d660486817e1e328e0450",
     "semantic_hash": ""
   },
   "components/app/ask-opryn.tsx": {
@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "components/auth/auth-form.tsx": {
-    "mtime": 1787615978.0406077,
-    "ast_hash": "c2b3bbbf25405bb19e07640ec204da8c",
+    "mtime": 1787775798.8763642,
+    "ast_hash": "26142449ed5479d47b282cc16007a955",
     "semantic_hash": ""
   },
   "components/invite-accept.tsx": {
@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "components/onboarding-form.tsx": {
-    "mtime": 1787774477.9466872,
-    "ast_hash": "c601fe96f25b72ac7877472d28244265",
+    "mtime": 1787775798.9171782,
+    "ast_hash": "55506659772fc3e72f537c830367496e",
     "semantic_hash": ""
   },
   "lib/ai/openai.ts": {
@@ -657,6 +657,16 @@
   "supabase/migrations/20260826001000_premium_billing_and_call_learning.sql": {
     "mtime": 1787772869.0495088,
     "ast_hash": "117680d67bf5b2e7da9a94f5f7671a0c",
+    "semantic_hash": ""
+  },
+  "components/opryn-logo.tsx": {
+    "mtime": 1787775773.6382208,
+    "ast_hash": "8b414a4f9cc1726a743ae538b515e8a3",
+    "semantic_hash": ""
+  },
+  "public/opryn-logo.png": {
+    "mtime": 1787775708.9197142,
+    "ast_hash": "9b6d1d216ca3b5f16e5a46538a1141e0",
     "semantic_hash": ""
   }
 }

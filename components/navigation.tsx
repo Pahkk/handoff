@@ -37,7 +37,7 @@ export function Navbar() {
             <a
               key={href}
               href={href}
-              className="text-[13px] font-medium text-[#576274] transition-colors hover:text-[#111b2e]"
+              className="nav-link relative py-2 text-[13px] font-medium text-[#576274] transition-colors hover:text-[#111b2e]"
             >
               {label}
             </a>
@@ -65,7 +65,7 @@ export function Navbar() {
       </div>
       {menu && (
         <nav
-          className="border-t border-[#e4e8ee] bg-white px-5 py-4 shadow-lg lg:hidden"
+          className="mobile-menu-in border-t border-[#e4e8ee] bg-white px-5 py-4 shadow-lg lg:hidden"
           aria-label="Mobile navigation"
         >
           <div className="mx-auto flex max-w-[640px] flex-col">
