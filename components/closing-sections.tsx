@@ -34,7 +34,7 @@ const audiences = [
 
 export function Audience() {
   return (
-    <section id="who-its-for" className="section">
+    <section id="who-its-for" className="section section-wash">
       <div className="container-shell">
         <SectionIntro
           label="Who it's for"
@@ -45,8 +45,13 @@ export function Audience() {
           {audiences.map(([Icon, title, copy], i) => (
             <article
               key={title as string}
-              className="reveal soft-card group p-7 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(22,36,65,.09)]"
+              className="audience-card reveal soft-card group relative overflow-hidden p-7 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(22,36,65,.09)]"
             >
+              {i === 1 ? (
+                <span className="absolute right-5 top-5 rounded-full bg-[#eaf7f1] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#177257]">
+                  Recommended
+                </span>
+              ) : null}
               <span className="grid size-11 place-items-center rounded-xl bg-[#edf2ff] text-[#3158d8] transition-transform group-hover:scale-105">
                 <Icon size={19} />
               </span>
@@ -59,6 +64,9 @@ export function Audience() {
               <p className="mt-3 text-sm leading-6 text-[#687487]">
                 {copy as string}
               </p>
+              <div className="mt-7 flex items-center gap-2 text-xs font-semibold text-[#3158d8]">
+                See how Opryn helps <ArrowRight size={13} />
+              </div>
             </article>
           ))}
         </div>
@@ -90,7 +98,13 @@ export function Comparison() {
   return (
     <section className="section-tight bg-white">
       <div className="container-shell">
-        <div className="grid overflow-hidden rounded-[24px] border border-[#dfe5ec] lg:grid-cols-2">
+        <SectionIntro
+          label="The shift"
+          title="From constant interruption to a team that can move."
+          copy="Opryn turns the knowledge already inside your business into a system your team can rely on."
+          center
+        />
+        <div className="reveal mt-12 grid overflow-hidden rounded-[26px] border border-[#dfe5ec] shadow-[0_24px_65px_rgba(21,34,58,.08)] lg:grid-cols-2">
           <div className="bg-[#f6f7f9] p-7 sm:p-10">
             <div className="flex items-center gap-2 text-sm font-semibold text-[#657083]">
               <Minus size={16} /> Without Opryn
@@ -160,7 +174,7 @@ const plans = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="section">
+    <section id="pricing" className="section pricing-section">
       <div className="container-shell">
         <SectionIntro
           label="Pricing"

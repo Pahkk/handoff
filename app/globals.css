@@ -95,6 +95,178 @@ a:hover .brand-wordmark img {
 .section-tight {
   padding: 82px 0;
 }
+.hero-section {
+  padding: 142px 0 72px;
+  background:
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(255, 255, 255, 0.95),
+      transparent 34%
+    ),
+    linear-gradient(180deg, #fbfcfe 0%, #f7f9fd 100%);
+}
+.hero-emphasis {
+  position: relative;
+  color: #2446b8;
+}
+.hero-emphasis::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0.02em;
+  bottom: 0.02em;
+  left: 0.02em;
+  height: 0.18em;
+  border-radius: 99px;
+  background: rgba(93, 132, 244, 0.16);
+  transform: rotate(-1deg);
+}
+.hero-loop {
+  display: grid;
+  grid-template-columns: 1.25fr repeat(3, 1fr);
+  align-items: stretch;
+  margin-top: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(203, 213, 226, 0.86);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 18px 50px rgba(28, 43, 71, 0.07);
+  backdrop-filter: blur(16px);
+}
+.hero-loop-intro,
+.hero-loop-step {
+  min-height: 94px;
+  padding: 20px 22px;
+}
+.hero-loop-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(135deg, #f1f5ff, #f8faff);
+}
+.hero-loop-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 1px solid #e6eaf0;
+}
+.hero-loop-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 12px;
+  background: #edf2ff;
+  color: var(--blue);
+}
+.hero-loop-arrow {
+  position: absolute;
+  z-index: 1;
+  right: -9px;
+  padding: 3px;
+  border: 1px solid #dfe5ed;
+  border-radius: 99px;
+  background: white;
+  color: #8a95a5;
+}
+.section-wash {
+  background:
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(226, 234, 255, 0.46),
+      transparent 28%
+    ),
+    #f8fafc;
+}
+.interruption-panel {
+  box-shadow:
+    0 28px 70px rgba(23, 36, 58, 0.1),
+    0 2px 8px rgba(23, 36, 58, 0.04);
+}
+.process-rail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 880px;
+  margin-inline: auto;
+}
+.process-rail::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 12.5%;
+  left: 12.5%;
+  height: 1px;
+  background: linear-gradient(90deg, #c9d5f8, #89a0ea, #c9d5f8);
+}
+.process-rail-item {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #6e7a8c;
+  font-size: 11px;
+  font-weight: 650;
+}
+.process-rail-item span {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border: 1px solid #cbd7f5;
+  border-radius: 99px;
+  background: white;
+  color: #3158d8;
+  box-shadow: 0 3px 10px rgba(49, 88, 216, 0.08);
+}
+.how-step {
+  overflow: hidden;
+}
+.how-step:nth-child(2),
+.how-step:nth-child(4) {
+  transform: translateY(18px);
+}
+.learning-board {
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.24),
+    inset 0 1px rgba(255, 255, 255, 0.04);
+}
+.audience-card::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  bottom: -80px;
+  width: 150px;
+  height: 150px;
+  border-radius: 99px;
+  background: rgba(49, 88, 216, 0.04);
+  transition: transform 0.4s ease;
+}
+.audience-card:hover::after {
+  transform: scale(1.25);
+}
+.pricing-section {
+  border-top: 1px solid #e7ebf1;
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(226, 233, 255, 0.6),
+      transparent 30%
+    ),
+    #f7f9fc;
+}
+.vacation-card {
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.45s ease;
+}
+.vacation-card:hover {
+  transform: rotate(-0.6deg) translateY(-4px);
+  box-shadow: 0 32px 76px rgba(22, 34, 58, 0.13);
+}
 .section-label {
   display: inline-flex;
   align-items: center;
@@ -450,6 +622,37 @@ a:hover .brand-wordmark img {
   .section-tight {
     padding: 64px 0;
   }
+  .hero-section {
+    padding: 118px 0 54px;
+  }
+  .hero-loop {
+    grid-template-columns: 1fr;
+    margin-top: 4px;
+  }
+  .hero-loop-intro,
+  .hero-loop-step {
+    min-height: auto;
+    padding: 16px 18px;
+  }
+  .hero-loop-step {
+    border-top: 1px solid #e6eaf0;
+    border-left: 0;
+  }
+  .hero-loop-arrow {
+    top: auto;
+    right: 20px;
+    transform: rotate(90deg);
+  }
+  .process-rail {
+    display: none;
+  }
+  .how-grid {
+    margin-top: 42px;
+  }
+  .how-step:nth-child(2),
+  .how-step:nth-child(4) {
+    transform: none;
+  }
   .lead {
     font-size: 17px;
     line-height: 1.6;
@@ -461,7 +664,8 @@ a:hover .brand-wordmark img {
     animation: none;
   }
   .app-window:hover,
-  .product-card:hover {
+  .product-card:hover,
+  .vacation-card:hover {
     transform: none;
   }
 }

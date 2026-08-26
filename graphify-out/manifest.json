@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "components/closing-sections.tsx": {
-    "mtime": 1787774477.9338741,
-    "ast_hash": "1a1b44f29bdfc878e6dc7363ebdd7701",
+    "mtime": 1787776701.8761673,
+    "ast_hash": "630f26d299da339ea1d88bf0358e1916",
     "semantic_hash": ""
   },
   "components/early-access.tsx": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "components/hero.tsx": {
-    "mtime": 1787775905.046292,
-    "ast_hash": "d91bfb48285e6a0ce9c899f232fa98b0",
+    "mtime": 1787776624.070263,
+    "ast_hash": "69cd51fc5d04521b970b90fcc57598f6",
     "semantic_hash": ""
   },
   "components/navigation.tsx": {
@@ -30,13 +30,13 @@
     "semantic_hash": ""
   },
   "components/product-sections.tsx": {
-    "mtime": 1787620065.8188949,
-    "ast_hash": "05efa4fa0669fbc8d605cd6c3e1d8c4f",
+    "mtime": 1787776751.0702345,
+    "ast_hash": "53a89d90ed3d1c3dd274ea2a6e4b53ff",
     "semantic_hash": ""
   },
   "components/story-sections.tsx": {
-    "mtime": 1787610122.3247054,
-    "ast_hash": "ab8565c27296efc78e1c750bf446507a",
+    "mtime": 1787776688.6499555,
+    "ast_hash": "996594f13c144b4da61b113c5f921fe5",
     "semantic_hash": ""
   },
   "components/ui.tsx": {

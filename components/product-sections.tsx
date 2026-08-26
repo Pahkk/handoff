@@ -32,8 +32,12 @@ const roleGroups = [
 
 export function RoleBuilder() {
   return (
-    <section id="product" className="section bg-white">
-      <div className="container-shell grid items-center gap-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+    <section
+      id="product"
+      className="product-story section relative overflow-hidden bg-white"
+    >
+      <div className="pointer-events-none absolute left-[-220px] top-20 size-[440px] rounded-full bg-[#edf2ff] blur-[110px]" />
+      <div className="container-shell relative grid items-center gap-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
         <div className="reveal">
           <SectionIntro
             label="Role builder"
@@ -127,7 +131,7 @@ export function RoleBuilder() {
 
 export function Independence() {
   return (
-    <section className="section bg-[#f5f7fa]">
+    <section className="section border-y border-[#e5eaf0] bg-[#f3f6fa]">
       <div className="container-shell">
         <SectionIntro
           label="Owner independence"
@@ -263,7 +267,7 @@ export function VacationReadiness() {
     <section className="section bg-white">
       <div className="container-shell grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
         <div className="reveal order-2 lg:order-1">
-          <div className="mx-auto max-w-[520px] rounded-[24px] border border-[#dee4eb] bg-[#f9fafc] p-5 shadow-[0_24px_60px_rgba(22,34,58,.09)] sm:p-8">
+          <div className="vacation-card mx-auto max-w-[520px] rounded-[26px] border border-[#dee4eb] bg-[#f9fafc] p-5 shadow-[0_24px_60px_rgba(22,34,58,.09)] sm:p-8">
             <div className="flex items-center justify-between">
               <div>
                 <p className="app-kicker">Vacation readiness</p>

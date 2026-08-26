@@ -1,6 +1,13 @@
 "use client";
 
-import { ArrowDown, ArrowRight, TrendingUp } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  CheckCircle2,
+  MessageCircleQuestion,
+  Mic2,
+  TrendingUp,
+} from "lucide-react";
 import { useEarlyAccess } from "./early-access";
 import { AppWindow, Insight, ProductButton, Progress } from "./ui";
 import { OprynLogo } from "./opryn-logo";
@@ -13,23 +20,36 @@ const areas = [
   ["Payroll", 12, "red"],
 ] as const;
 
+const heroLoopSteps = [
+  { icon: Mic2, title: "Teach", copy: "Explain work naturally" },
+  {
+    icon: MessageCircleQuestion,
+    title: "Ask",
+    copy: "Your team gets answers",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Learn",
+    copy: "New answers become knowledge",
+  },
+] as const;
+
 export function Hero() {
   const { openEarlyAccess } = useEarlyAccess();
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden pb-24 pt-[138px] sm:pb-28 sm:pt-[154px]"
-    >
-      <div className="grid-noise pointer-events-none absolute inset-x-0 top-0 h-[760px]" />
-      <div className="pointer-events-none absolute left-[12%] top-[-180px] size-[520px] rounded-full bg-[#dfe7ff]/55 blur-[100px]" />
-      <div className="container-shell relative grid items-center gap-16 lg:grid-cols-[.93fr_1.07fr] lg:gap-14">
+    <section id="top" className="hero-section relative overflow-hidden">
+      <div className="grid-noise pointer-events-none absolute inset-x-0 top-0 h-[820px]" />
+      <div className="pointer-events-none absolute left-[8%] top-[-220px] size-[560px] rounded-full bg-[#dfe7ff]/60 blur-[110px]" />
+      <div className="pointer-events-none absolute right-[-180px] top-[180px] size-[480px] rounded-full bg-[#e9f6f1]/70 blur-[120px]" />
+      <div className="container-shell relative grid items-center gap-14 lg:grid-cols-[.9fr_1.1fr] lg:gap-16">
         <div className="hero-copy">
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#d9e0ec] bg-white/80 px-3 py-1.5 text-xs font-semibold text-[#536075] shadow-sm backdrop-blur">
-            <span className="size-1.5 rounded-full bg-[#3158d8]" />
-            Your business shouldn&apos;t stop when you do.
+            <span className="status-pulse size-1.5 rounded-full bg-[#1b8b69]" />
+            Built for owners ready to delegate
           </div>
           <h1 className="display-title balance">
-            Build a business that doesn&apos;t depend on you.
+            Build a business that{" "}
+            <span className="hero-emphasis">doesn&apos;t depend on you.</span>
           </h1>
           <p className="lead mt-7 max-w-[610px]">
             Opryn learns how you run your business, turns what you know into
@@ -51,27 +71,15 @@ export function Hero() {
               See How It Works <ArrowDown size={15} />
             </a>
           </div>
-          <p className="mt-6 flex max-w-[500px] items-center gap-2 text-xs leading-5 text-[#788393]">
-            <span className="status-pulse size-1.5 shrink-0 rounded-full bg-[#42a583]" />
-            Built for owners going from doing everything themselves to building
-            a real team.
-          </p>
-          <div
-            className="mt-6 flex flex-wrap gap-2"
-            aria-label="Opryn product benefits"
-          >
-            {[
-              "Teach naturally",
-              "Answers with sources",
-              "Asks when unsure",
-            ].map((benefit) => (
-              <span
-                key={benefit}
-                className="rounded-full border border-[#dfe5ed] bg-white/75 px-3 py-1.5 text-[11px] font-semibold text-[#58667a] shadow-sm backdrop-blur"
-              >
-                {benefit}
-              </span>
-            ))}
+          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-[#6b7789]">
+            <span className="flex items-center gap-2">
+              <CheckCircle2 size={14} className="text-[#1b8b69]" /> No manual to
+              write
+            </span>
+            <span className="flex items-center gap-2">
+              <CheckCircle2 size={14} className="text-[#1b8b69]" /> Answers show
+              their source
+            </span>
           </div>
         </div>
         <div className="hero-visual relative lg:translate-x-3">
@@ -154,6 +162,33 @@ export function Hero() {
               <p className="text-sm font-semibold">72% this month</p>
             </div>
           </div>
+        </div>
+        <div
+          className="hero-loop reveal lg:col-span-2"
+          aria-label="How Opryn helps"
+        >
+          <div className="hero-loop-intro">
+            <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#3158d8]">
+              One simple loop
+            </p>
+            <p className="mt-1 text-sm font-semibold text-[#263247]">
+              Your company gets smarter every time you teach it.
+            </p>
+          </div>
+          {heroLoopSteps.map(({ icon: Icon, title, copy }, index) => (
+            <div className="hero-loop-step" key={title}>
+              <span className="hero-loop-icon">
+                <Icon size={17} />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-[#202b3e]">{title}</p>
+                <p className="mt-0.5 text-[11px] text-[#7a8595]">{copy}</p>
+              </div>
+              {index < heroLoopSteps.length - 1 ? (
+                <ArrowRight className="hero-loop-arrow" size={16} />
+              ) : null}
+            </div>
+          ))}
         </div>
       </div>
     </section>
